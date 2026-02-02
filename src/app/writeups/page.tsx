@@ -1,3 +1,25 @@
+import Link from "next/link";
+import { Calendar, Lock } from "lucide-react";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+const writeups = [
+  {
+    slug: "signed",
+    title: "Signed",
+    platform: "HackTheBox",
+    difficulty: "Medium",
+    date: "2025-12-19",
+    excerpt:
+      "Windows, MSSQL. Capture NTLM (xp_dirtree), crack du hash mssqlsvc, Silver Ticket pour devenir sysadmin et lire user.txt / root.txt.",
+  },
+];
+
 export const metadata = {
   title: "Writeups | 0xbbuddha",
   description: "Writeups de machines HackTheBox, TryHackMe et CTF.",
@@ -14,9 +36,34 @@ export default function WriteupsPage() {
           Résolutions détaillées de machines et challenges (HTB, THM, Root-Me, CTF).
         </p>
       </div>
-      <p className="text-muted-foreground">
-        Aucun writeup pour le moment. À venir.
-      </p>
+
+      <div className="space-y-6">
+        {writeups.map((w) => (
+          <Card key={w.slug} className="overflow-hidden">
+            <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <span className="font-mono text-primary">{w.platform}</span>
+                  <span>·</span>
+                  <span>{w.difficulty}</span>
+                  <span className="flex items-center gap-1">
+                    <Calendar className="size-3.5" />
+                    {w.date}
+                  </span>
+                </div>
+                <CardTitle className="mt-2">{w.title}</CardTitle>
+                <CardDescription className="mt-1">{w.excerpt}</CardDescription>
+              </div>
+              <Button variant="outline" size="sm" asChild className="shrink-0">
+                <Link href={`/writeups/${w.slug}`} className="gap-2">
+                  <Lock className="size-3.5" />
+                  Lire le writeup
+                </Link>
+              </Button>
+            </CardHeader>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }
