@@ -49,5 +49,5 @@ Le fichier `components.json` est déjà configuré pour ce projet.
    À chaque push sur la branche `main`, le workflow construit le site (export statique) et le déploie sur GitHub Pages.
 
 3. **URL du site**  
-   - Projet : `https://<ton-username>.github.io/0xbbuddha.fr/`  
-   - Si tu utilises un **domaine personnalisé** (ex. `0xbbuddha.fr`), configure-le dans **Settings** → **Pages** → **Custom domain**, puis mets `basePath` à `""` dans `next.config.ts` (ou retire la variable `basePath` pour le build de prod).
+   - **Domaine perso** (ex. `0xbbuddha.fr`) : le workflow utilise déjà `BASE_PATH: ""` pour que le CSS/JS se chargent à la racine. Configure **Settings** → **Pages** → **Custom domain** avec ton domaine.  
+   - **Sans domaine perso** (projet uniquement) : `https://<username>.github.io/0xbbuddha.fr/` — retire ou commente la ligne `BASE_PATH: ""` dans `.github/workflows/deploy.yml` et laisse Next.js utiliser le nom du repo comme basePath.

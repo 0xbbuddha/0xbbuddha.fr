@@ -33,6 +33,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
+          # Domaine perso 0xbbuddha.fr = tout à la racine, pas de basePath
+          BASE_PATH: ""
           GITHUB_REPOSITORY: ${{ github.repository }}
           NEXT_SKIP_SWC_CHECK: "1"
 
