@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import { ExternalLink } from "lucide-react";
 import {
   Card,
@@ -8,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { PortfolioProjects } from "@/components/PortfolioProjects";
 
 const projects = [
   {
@@ -105,48 +107,51 @@ export default function PortfolioPage() {
       </div>
 
       <section className="mb-16">
-        <h2 className="mb-6 font-mono text-2xl font-semibold">
-          Projets
-        </h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <Card key={project.title} className="flex flex-col">
-              <CardHeader className="flex flex-row items-start justify-between gap-2">
-                <div>
-                  <CardTitle>{project.title}</CardTitle>
-                  <CardDescription className="mt-1">
-                    {project.description}
-                  </CardDescription>
-                </div>
-              </CardHeader>
-              <CardContent className="flex-1">
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-md bg-primary/10 px-2 py-0.5 font-mono text-xs text-primary"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-              <CardContent className="pt-0">
-                <Button variant="outline" size="sm" asChild>
-                  <Link
-                    href={project.href}
-                    target={project.external ? "_blank" : undefined}
-                    rel={project.external ? "noopener noreferrer" : undefined}
-                    className="gap-2"
-                  >
-                    Voir le projet
-                    {project.external && <ExternalLink className="size-3" />}
-                  </Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <Suspense
+          fallback={
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {projects.map((project) => (
+                <Card key={project.title} className="flex flex-col">
+                  <CardHeader className="flex flex-row items-start justify-between gap-2">
+                    <div>
+                      <CardTitle>{project.title}</CardTitle>
+                      <CardDescription className="mt-1">
+                        {project.description}
+                      </CardDescription>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex-1">
+                    <div className="flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="rounded-md bg-primary/10 px-2 py-0.5 font-mono text-xs text-primary"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                  <CardContent className="pt-0">
+                    <Button variant="outline" size="sm" asChild>
+                      <Link
+                        href={project.href}
+                        target={project.external ? "_blank" : undefined}
+                        rel={project.external ? "noopener noreferrer" : undefined}
+                        className="gap-2"
+                      >
+                        Voir le projet
+                        {project.external && <ExternalLink className="size-3" />}
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          }
+        >
+          <PortfolioProjects projects={projects} />
+        </Suspense>
       </section>
 
       <section>
