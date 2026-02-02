@@ -31,8 +31,9 @@ export default function RootLayout({
     <html
       lang="fr"
       className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      suppressHydrationWarning
     >
-      <body className="min-h-screen font-sans flex flex-col">
+      <body className="min-h-screen font-sans flex flex-col" suppressHydrationWarning>
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

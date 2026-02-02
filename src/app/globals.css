@@ -8,18 +8,19 @@
     --foreground: 210 40% 98%;
     --card: 222 47% 8%;
     --card-foreground: 210 40% 98%;
-    --primary: 142 76% 36%;
+    /* Red team / Purple team : violet & magenta */
+    --primary: 270 65% 55%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 217 33% 17%;
+    --secondary: 265 35% 18%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
+    --muted: 265 30% 18%;
     --muted-foreground: 215 20% 65%;
-    --accent: 142 76% 36%;
+    --accent: 280 60% 50%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62% 50%;
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 142 76% 36%;
+    --border: 265 30% 18%;
+    --input: 265 30% 18%;
+    --ring: 270 65% 55%;
   }
 }
 
@@ -32,7 +33,7 @@
   }
 }
 
-/* Terminal / cybersec accent */
+/* Red / Purple team accent */
 .glow {
-  box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+  box-shadow: 0 0 20px hsl(var(--primary) / 0.35);
 }
