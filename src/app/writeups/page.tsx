@@ -14,7 +14,7 @@ const writeups = [
     title: "Signed",
     platform: "HackTheBox",
     difficulty: "Medium",
-    date: "2025-12-19",
+    date: "2026-02-02",
     excerpt:
       "Windows, MSSQL. Capture NTLM (xp_dirtree), crack du hash mssqlsvc, Silver Ticket pour devenir sysadmin et lire user.txt / root.txt.",
   },
