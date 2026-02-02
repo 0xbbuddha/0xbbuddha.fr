@@ -18,7 +18,7 @@ export default function HomePage() {
           />
         </div>
         <p className="mb-4 font-mono text-sm text-primary">
-          Cybersécurité · Pentest · Red Team
+          SOC · Pentest · Red Team
         </p>
         <h1 className="mb-6 font-mono text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
           Killian &apos;0xbbuddha&apos; Prin-Abeil
