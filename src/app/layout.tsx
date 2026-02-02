@@ -17,9 +17,25 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "0xbbuddha | Cybersécurité & Pentest",
+  metadataBase: new URL("https://0xbbuddha.fr"),
+  title: "Home | 0xbbuddha",
   description:
-    "Portfolio, writeups et blog d'un passionné de cybersécurité et pentest.",
+    "Portfolio, writeups et blog d'un étudiant en cybersécurité et alternant en SOC Engineer chez Aukfood.",
+  icons: {
+    icon: "/avatar_rounded.png",
+    apple: "/avatar_rounded.png",
+  },
+  openGraph: {
+    title: "Home | 0xbbuddha",
+    description:
+      "Portfolio, writeups et blog d'un étudiant en cybersécurité et alternant en SOC Engineer chez Aukfood.",
+    images: ["/avatar.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "Home | 0xbbuddha",
+    images: ["/avatar.png"],
+  },
 };
 
 export default function RootLayout({
