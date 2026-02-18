@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Calendar, Lock } from "lucide-react";
+import { Calendar, Lock, Eye } from "lucide-react";
 import {
   Card,
   CardDescription,
@@ -14,9 +14,19 @@ const writeups = [
     title: "Signed",
     platform: "HackTheBox",
     difficulty: "Medium",
-    date: "2026-02-02",
+    date: "2026-02-18",
     excerpt:
       "Windows, MSSQL. Capture NTLM (xp_dirtree), crack du hash mssqlsvc, Silver Ticket pour devenir sysadmin et lire user.txt / root.txt.",
+  },
+  {
+    slug: "overwatch",
+    title: "Overwatch",
+    platform: "HackTheBox",
+    difficulty: "Medium",
+    date: "2026-02-17",
+    excerpt:
+      "Windows AD. SMB guest, extraction credentials depuis overwatch.exe, MSSQL linked server, capture credentials via DNS, injection PowerShell dans service SOAP.",
+    spoiler: true,
   },
 ];
 
@@ -42,7 +52,7 @@ export default function WriteupsPage() {
           <Card key={w.slug} className="overflow-hidden">
             <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
               <div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2 text-sm text-muted-foreground flex-wrap">
                   <span className="font-mono text-primary">{w.platform}</span>
                   <span>·</span>
                   <span>{w.difficulty}</span>
@@ -50,14 +60,32 @@ export default function WriteupsPage() {
                     <Calendar className="size-3.5" />
                     {w.date}
                   </span>
+                  {w.spoiler && (
+                    <>
+                      <span>·</span>
+                      <span className="rounded-md bg-primary/10 px-2 py-0.5 font-mono text-xs text-primary flex items-center gap-1">
+                        <Eye className="size-3" />
+                        Spoiler
+                      </span>
+                    </>
+                  )}
                 </div>
                 <CardTitle className="mt-2">{w.title}</CardTitle>
                 <CardDescription className="mt-1">{w.excerpt}</CardDescription>
               </div>
               <Button variant="outline" size="sm" asChild className="shrink-0">
                 <Link href={`/writeups/${w.slug}`} className="gap-2">
-                  <Lock className="size-3.5" />
-                  Lire le writeup
+                  {w.spoiler ? (
+                    <>
+                      <Eye className="size-3.5" />
+                      Voir le writeup
+                    </>
+                  ) : (
+                    <>
+                      <Lock className="size-3.5" />
+                      Lire le writeup
+                    </>
+                  )}
                 </Link>
               </Button>
             </CardHeader>
