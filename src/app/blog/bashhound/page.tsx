@@ -7,7 +7,6 @@ import {
   Database,
   Cpu,
   Layers,
-  Package,
   GitBranch,
   Code2,
   FileJson,
@@ -20,12 +19,10 @@ function CodeBlock({
   children,
   title,
   result,
-  lang,
 }: {
   children: string;
   title?: string;
   result?: boolean;
-  lang?: string;
 }) {
   const label = result ? "Résultat" : title;
   return (
@@ -358,8 +355,8 @@ ZIP → Import dans BloodHound`}
           <p className="text-muted-foreground">
             Les données sont stockées temporairement dans des fichiers{" "}
             <code className="rounded bg-muted px-1">/tmp/bashhound_*_$$</code>{" "}
-            (le <code className="rounded bg-muted px-1">$$</code> étant le PID du processus, pour éviter les collisions en cas d'exécutions parallèles).
-            La phase d'export lit ces fichiers et génère les JSON finaux.
+            (le <code className="rounded bg-muted px-1">$$</code> étant le PID du processus, pour éviter les collisions en cas d&apos;exécutions parallèles).
+            La phase d&apos;export lit ces fichiers et génère les JSON finaux.
           </p>
         </section>
 
@@ -676,7 +673,7 @@ Résultat : 82 012c
           <p className="text-muted-foreground mb-3">
             Pour écrire sur le socket :{" "}
             <code className="rounded bg-muted px-1">{"printf '%s' \"$hex\" | xxd -r -p >&3"}</code>{" "}
-            convertit la chaîne hex en binaire et l'envoie. Pour lire :{" "}
+            convertit la chaîne hex en binaire et l&apos;envoie. Pour lire :{" "}
             <code className="rounded bg-muted px-1">dd bs=1 count=N {"<"}&3</code>{" "}
             lit exactement N octets depuis le socket.
           </p>
@@ -926,7 +923,7 @@ ${"$"}{filter_encoded}${"$"}{attrs_encoded}"
             BashHound-CE implémente également une <strong>reconnexion automatique</strong> :
             si la connexion LDAPS est perdue en milieu de collecte (timeout, DC
             qui recoupe la connexion), le client se reconnecte et re-bind
-            automatiquement avant de réessayer l'envoi du message.
+            automatiquement avant de réessayer l&apos;envoi du message.
           </p>
         </section>
 
@@ -1117,7 +1114,7 @@ f4010000      ← 500 (little-endian) = Administrator RID`}
             permissions offensives utilisables par BloodHound.
           </p>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            Structure d'un Security Descriptor
+            Structure d&apos;un Security Descriptor
           </h3>
           <CodeBlock title="Structure SECURITY_DESCRIPTOR Windows">
 {`Offset  Taille  Champ
@@ -1136,7 +1133,7 @@ Control flags importants :
 0x8000  SE_SELF_RELATIVE    Offsets relatifs au début du SD`}
           </CodeBlock>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            Structure d'une ACL et d'une ACE
+            Structure d&apos;une ACL et d&apos;une ACE
           </h3>
           <CodeBlock title="Structure ACL + ACE">
 {`ACL Header:
@@ -1241,10 +1238,10 @@ Types d'ACE :
             </li>
             <li>
               <strong>WriteDacl</strong> / <strong>WriteOwner</strong> sur un
-              objet → peut modifier ses ACLs pour s'octroyer d'autres droits
+              objet → peut modifier ses ACLs pour s&apos;octroyer d&apos;autres droits
             </li>
             <li>
-              <strong>AddMember</strong> sur un groupe admin → peut s'ajouter
+              <strong>AddMember</strong> sur un groupe admin → peut s&apos;ajouter
               au groupe
             </li>
             <li>
@@ -1252,7 +1249,7 @@ Types d'ACE :
             </li>
           </ul>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            Flags d'héritage des ACEs
+            Flags d&apos;héritage des ACEs
           </h3>
           <CodeBlock title="lib/acl_parser.sh — ACE Flags">
 {`declare -gA ACE_FLAGS=(
@@ -1391,7 +1388,7 @@ $last_logon|$last_logon_ts|$pwd_last_set|$uac|$admin_count|$spns" \
           </CodeBlock>
           <InfoBox>
             <strong>Piège rencontré :</strong> pendant le développement,
-            BloodHound CE retournait "NO DATA RETURNED FROM QUERY" sur tous les
+            BloodHound CE retournait &quot;NO DATA RETURNED FROM QUERY&quot; sur tous les
             trusts. Après investigation, j&apos;avais encodé{" "}
             <code className="rounded bg-muted px-1">TrustDirection</code> et{" "}
             <code className="rounded bg-muted px-1">TrustType</code> comme des
@@ -1461,14 +1458,14 @@ collect_issuancepolicies()`}
           <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
             <li>
               <strong>ESC1</strong> : enrollment disponible pour tout le monde,
-              SAN arbitraire → demander un certificat au nom d'un admin
+              SAN arbitraire → demander un certificat au nom d&apos;un admin
             </li>
             <li>
               <strong>ESC3</strong> : Certificate Request Agent → enrollment on
               behalf of another user
             </li>
             <li>
-              <strong>ESC4</strong> : droits d'écriture sur le template → modifier
+              <strong>ESC4</strong> : droits d&apos;écriture sur le template → modifier
               les flags pour créer ESC1
             </li>
             <li>
@@ -1883,7 +1880,7 @@ local object_id=$(echo -n "$dn_upper" | md5sum \
           <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground">
             <li>
               <strong>LDAP se sérialise vraiment en ASN.1 BER</strong>. Avant
-              ce projet je savais que LDAP était "du binaire". Maintenant je
+              ce projet je savais que LDAP était &quot;du binaire&quot;. Maintenant je
               sais exactement comment un BindRequest de 47 octets est construit,
               tag par tag.
             </li>
@@ -1933,7 +1930,7 @@ local object_id=$(echo -n "$dn_upper" | md5sum \
               messages, opérations Bind/Search, contrôles étendus
             </li>
             <li>
-              L'<strong>encodage ASN.1 BER/DER</strong> : format TLV, longueurs
+              L&apos;<strong>encodage ASN.1 BER/DER</strong> : format TLV, longueurs
               variables, types universels et applicatifs
             </li>
             <li>
@@ -1942,11 +1939,11 @@ local object_id=$(echo -n "$dn_upper" | md5sum \
               signification offensive
             </li>
             <li>
-              Le <strong>format interne d'Active Directory</strong> : SIDs
+              Le <strong>format interne d&apos;Active Directory</strong> : SIDs
               binaires, FILETIME, UserAccountControl, attributs multivalués
             </li>
             <li>
-              L'<strong>écosystème BloodHound</strong> : format JSON v5/v6,
+              L&apos;<strong>écosystème BloodHound</strong> : format JSON v5/v6,
               structure des nœuds, arêtes, ACLs, AD CS
             </li>
           </ul>
