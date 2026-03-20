@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowLeft,
@@ -370,6 +371,18 @@ children = [
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div className="my-6">
+            <Image
+              src="/notion-db-example.png"
+              alt="Base de données Notion — exemple d'une page créée avec direction=out"
+              width={1536}
+              height={300}
+              className="rounded-lg border border-border w-full"
+            />
+            <p className="mt-2 text-xs text-muted-foreground font-mono text-center">
+              Vue de la base de données Notion avec une page <code className="rounded bg-muted px-1">direction=out</code> créée par le serveur
+            </p>
           </div>
           <p className="text-muted-foreground mb-3">
             La propriété{" "}
