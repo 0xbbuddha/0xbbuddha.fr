@@ -10,6 +10,15 @@ import { Button } from "@/components/ui/button";
 
 const articles = [
   {
+    slug: "notion-c2",
+    title: "Quand Notion devient un canal C2",
+    category: "Red Team",
+    tags: ["Mythic", "C2", "LoTS", "Python"],
+    date: "2026-03-20",
+    excerpt:
+      "Création d'un profil C2 Mythic qui détourne l'API Notion comme canal de communication covert. Living off Trusted Sites, pages de base de données comme vecteur de transport, et intégration complète dans le framework Mythic.",
+  },
+  {
     slug: "bashhound",
     title: "Et si on recodait un collecteur AD en pur Bash ?",
     category: "Tools",
