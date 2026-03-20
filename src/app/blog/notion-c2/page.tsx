@@ -943,7 +943,7 @@ mythic_container.mythic_service.start_and_run_forever()`}
           <p className="text-muted-foreground">
             Le code est disponible sur{" "}
             <a
-              href="https://github.com/0xbbuddha/notion-c2"
+              href="https://github.com/0xbbuddha/notion"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary underline underline-offset-4 hover:no-underline"
