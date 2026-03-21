@@ -10,6 +10,15 @@ import { Button } from "@/components/ui/button";
 
 const writeups = [
   {
+    slug: "insomnihack-escape",
+    title: "Escape - Insomni'hack 2026",
+    platform: "Insomni'hack",
+    difficulty: "CTF",
+    date: "2026-03-21",
+    excerpt:
+      "Pwn, seccomp bypass. Fuite mémoire avant filtre, overflow après, pas de write. Oracle aveugle avec ret2csu, __strverscmp et timeout vs crash.",
+  },
+  {
     slug: "signed",
     title: "Signed",
     platform: "HackTheBox",
