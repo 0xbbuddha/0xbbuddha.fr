@@ -81,7 +81,7 @@ const skillCategories = [
   },
   {
     title: "Langages & Outils",
-    items: ["Python", "C", "Bash", "Go", "CMake","Git"],
+    items: ["Python", "C", "Bash", "Powershell", "Go", "CMake", "Git"],
   },
 ];
 
