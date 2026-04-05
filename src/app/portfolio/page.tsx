@@ -76,10 +76,6 @@ const skillCategories = [
     items: ["Reconnaissance", "Énumération AD", "Accès initial", "Privesc", "Persistance"],
   },
   {
-    title: "Web3",
-    items: ["Smart contracts", "Solidity", "Audit", "EVM"],
-  },
-  {
     title: "Système & Réseau",
     items: ["Linux", "Shell", "Docker", "Vagrant", "Ansible", "Réseau"],
   },
