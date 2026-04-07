@@ -10,6 +10,15 @@ import { Button } from "@/components/ui/button";
 
 const articles = [
   {
+    slug: "aphrodite",
+    title: "J'ai codé mon propre agent Mythic en Nim",
+    category: "Red Team",
+    tags: ["Mythic", "C2", "Nim", "Agent"],
+    date: "2026-04-07",
+    excerpt:
+      "Inspiré par Athena, j'ai voulu comprendre comment un agent C2 fonctionne vraiment de l'intérieur. Résultat : Aphrodite, un agent Mythic cross-platform en Nim. Binaire natif, chiffrement AES-256 + EKE RSA-2048, obfuscation des strings à la compilation, EarlyBird APC, SOCKS5 et 42 commandes.",
+  },
+  {
     slug: "notion-c2",
     title: "Quand Notion devient un canal C2",
     category: "Red Team",
