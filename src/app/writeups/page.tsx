@@ -10,9 +10,27 @@ import { Button } from "@/components/ui/button";
 
 const writeups = [
   {
+    slug: "pipehop",
+    title: "PipeHop",
+    platform: "Hack'In 2K26",
+    difficulty: "CTF",
+    date: "2026-04-11",
+    excerpt:
+      "Gitea ouvert, faux actions/checkout, PR sur ci-actions pour réveiller les secrets, puis un runner partagé qui garde ma règle Git : le token privé finit dans mon webhook.",
+  },
+  {
+    slug: "hardback",
+    title: "Hardback",
+    platform: "Hack'In 2K26",
+    difficulty: "CTF",
+    date: "2026-04-11",
+    excerpt:
+      "Pas de shell, juste MariaDB en lecture seule… jusqu'à ce qu'un vieux log révèle dba, que le rôle migration réécrive les privilèges, et que \\e + PAM me donnent enfin un sh root.",
+  },
+  {
     slug: "insomnihack-escape",
-    title: "Escape - Insomni'hack 2026",
-    platform: "Insomni'hack",
+    title: "Escape",
+    platform: "Insomni'hack 2K26",
     difficulty: "CTF",
     date: "2026-03-21",
     excerpt:
