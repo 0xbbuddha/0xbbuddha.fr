@@ -1,89 +1,88 @@
+"use client";
+
 import Link from "next/link";
-import { Calendar } from "lucide-react";
-import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-
-const articles = [
-  {
-    slug: "aphrodite",
-    title: "J'ai codé mon propre agent Mythic en Nim",
-    category: "Red Team",
-    tags: ["Mythic", "C2", "Nim", "Agent"],
-    date: "2026-04-07",
-    excerpt:
-      "Inspiré par Athena, j'ai voulu comprendre comment un agent C2 fonctionne vraiment de l'intérieur. Résultat : Aphrodite, un agent Mythic cross-platform en Nim. Binaire natif, chiffrement AES-256 + EKE RSA-2048, obfuscation des strings à la compilation, EarlyBird APC, SOCKS5 et 42 commandes.",
-  },
-  {
-    slug: "notion-c2",
-    title: "Quand Notion devient un canal C2",
-    category: "Red Team",
-    tags: ["Mythic", "C2", "LoTS", "Python"],
-    date: "2026-03-20",
-    excerpt:
-      "Création d'un profil C2 Mythic qui détourne l'API Notion comme canal de communication covert. Living off Trusted Sites, pages de base de données comme vecteur de transport, et intégration complète dans le framework Mythic.",
-  },
-  {
-    slug: "bashhound",
-    title: "Et si on recodait un collecteur AD en pur Bash ?",
-    category: "Tools",
-    tags: ["Active Directory", "BloodHound", "Bash"],
-    date: "2026-03-18",
-    excerpt:
-      "Conception et implémentation d'un collecteur Active Directory pour BloodHound en Bash pur : protocole LDAP, ASN.1, parsing Security Descriptors, export JSON v5/v6.",
-  },
-];
-
-export const metadata = {
-  title: "Blog | 0xbbuddha",
-  description: "Articles et réflexions sur la cybersécurité.",
-};
+import { ArrowRight } from "lucide-react";
+import { articles } from "@/lib/site-data";
+import { useLanguage } from "@/components/LanguageProvider";
 
 export default function BlogPage() {
-  return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="mb-12">
-        <h1 className="font-mono text-3xl font-bold tracking-tight sm:text-4xl">
-          Blog
-        </h1>
-        <p className="mt-2 text-muted-foreground">
-          Articles, tutoriels et notes sur la cybersécurité et le pentest.
-        </p>
-      </div>
+  const { t } = useLanguage();
 
-      <div className="space-y-6">
-        {articles.map((a) => (
-          <Card key={a.slug} className="overflow-hidden">
-            <CardHeader className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <div className="flex items-center gap-2 text-sm text-muted-foreground flex-wrap">
-                  <span className="font-mono text-primary">{a.category}</span>
-                  {a.tags.map((tag) => (
-                    <span key={tag} className="rounded-md bg-muted px-2 py-0.5 font-mono text-xs">
-                      {tag}
-                    </span>
-                  ))}
-                  <span className="flex items-center gap-1">
-                    <Calendar className="size-3.5" />
-                    {a.date}
-                  </span>
-                </div>
-                <CardTitle className="mt-2">{a.title}</CardTitle>
-                <CardDescription className="mt-1">{a.excerpt}</CardDescription>
+  return (
+    <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
+      <header className="mb-8 border-b border-border pb-6" id="archive">
+        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">
+          {t.blog.eyebrow}
+        </p>
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+          {t.blog.title}
+        </h1>
+        <p className="mt-3 text-sm leading-7 text-muted-foreground">
+          {t.blog.description}
+        </p>
+        <div className="mt-4 flex flex-wrap gap-4 text-xs text-muted-foreground">
+          <span>
+            {articles.length} {t.common.entries}
+          </span>
+          <span>·</span>
+          <span>C2 · AD · Tooling</span>
+        </div>
+      </header>
+
+      <div className="divide-y divide-border">
+        {articles.map((article) => (
+          <Link
+            key={article.slug}
+            href={`/blog/${article.slug}`}
+            className="group flex items-start gap-4 py-5"
+          >
+            <div className="min-w-0 flex-1">
+              <div className="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-muted-foreground">
+                <span className="font-mono text-primary">{article.category}</span>
+                <span>·</span>
+                <span>{article.focus}</span>
+                <span>·</span>
+                <span>{article.date}</span>
               </div>
-              <Button variant="outline" size="sm" asChild className="shrink-0">
-                <Link href={`/blog/${a.slug}`}>
-                  Lire l&apos;article
-                </Link>
-              </Button>
-            </CardHeader>
-          </Card>
+              <h2 className="text-sm font-semibold text-foreground transition-colors group-hover:text-primary">
+                {article.title}
+              </h2>
+              <p className="mt-1.5 text-xs leading-6 text-muted-foreground">
+                {article.excerpt}
+              </p>
+              <div className="mt-2 flex flex-wrap gap-1.5">
+                {article.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded border border-border px-2 py-0.5 font-mono text-[10px] text-muted-foreground"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <ArrowRight className="mt-1 size-3.5 shrink-0 text-muted-foreground/30 transition-colors group-hover:text-primary" />
+          </Link>
         ))}
       </div>
+
+      <section className="mt-10 border-t border-border pt-8" id="topics">
+        <h2 className="mb-3 text-[11px] font-mono uppercase tracking-widest text-muted-foreground/50">
+          {t.blog.topics}
+        </h2>
+        <div className="flex flex-wrap gap-2">
+          {["C2 engineering", "AD & offensive paths", "Toolsmithing", "Mythic", "Bash", "Nim"].map(
+            (topic) => (
+              <span
+                key={topic}
+                className="rounded border border-border px-2.5 py-1 text-xs text-muted-foreground"
+              >
+                {topic}
+              </span>
+            )
+          )}
+        </div>
+      </section>
     </div>
   );
 }

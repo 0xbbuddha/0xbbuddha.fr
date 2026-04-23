@@ -12,17 +12,30 @@ export default {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        card: "hsl(var(--card))",
-        cardForeground: "hsl(var(--card-foreground))",
-        primary: "hsl(var(--primary))",
-        primaryForeground: "hsl(var(--primary-foreground))",
-        secondary: "hsl(var(--secondary))",
-        secondaryForeground: "hsl(var(--secondary-foreground))",
-        muted: "hsl(var(--muted))",
-        mutedForeground: "hsl(var(--muted-foreground))",
-        accent: "hsl(var(--accent))",
-        accentForeground: "hsl(var(--accent-foreground))",
-        destructive: "hsl(var(--destructive))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

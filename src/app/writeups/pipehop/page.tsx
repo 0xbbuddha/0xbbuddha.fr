@@ -1,14 +1,6 @@
-import Link from "next/link";
-import {
-  ArrowLeft,
-  Terminal,
-  GitBranch,
-  Workflow,
-  Key,
-  ShieldAlert,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Terminal, GitBranch, Workflow, Key, ShieldAlert } from "lucide-react";
 import { RevealFlagBlock } from "@/components/RevealFlag";
+import { PageHeader } from "@/components/PageHeader";
 
 function CodeBlock({
   children,
@@ -44,36 +36,28 @@ export const metadata = {
 
 export default function WriteupPipeHopPage() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12">
-      <Button variant="ghost" size="sm" asChild className="mb-8 gap-2">
-        <Link href="/writeups">
-          <ArrowLeft className="size-4" />
-          Retour aux writeups
-        </Link>
-      </Button>
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
+      <PageHeader
+        eyebrow="Writeup"
+        title="PipeHop"
+        description="Sur cette instance Gitea, tout le monde peut s'inscrire. Un squat du namespace actions, un workflow en pull_request_target, et un runner partagé qui garde la mémoire entre les jobs suffisent à enchaîner jusqu'au dépôt caché."
+        breadcrumbs={[
+          { label: "README", href: "/" },
+          { label: "Writeups", href: "/writeups" },
+          { label: "PipeHop" },
+        ]}
+        stats={[
+          { label: "Platform", value: "Hack'In 2K26" },
+          { label: "Focus", value: "CI/CD abuse" },
+          { label: "Date", value: "2026-04-11" },
+        ]}
+      />
 
-      <article className="space-y-10">
-        <header>
-          <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-            <span className="font-mono text-primary">HackNight</span>
-            <span>·</span>
-            <span>CI/CD / Git / Privilege pivot</span>
-          </div>
-          <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight sm:text-4xl">
-            PipeHop
-          </h1>
-          <p className="mt-3 text-muted-foreground">
-            Sur cette instance Gitea, tout le monde peut s&apos;inscrire. Les dépôts publics sont
-            visibles, mais le pipeline CI/CD tape aussi sur du privé. Le scénario, c&apos;est le
-            classique &quot;on croit avoir séparé les mondes&quot; : en pratique, un squat du namespace{" "}
-            <strong>actions</strong>, un workflow en <strong>pull_request_target</strong>, et un runner
-            partagé qui garde la mémoire entre les jobs suffisent à enchaîner jusqu&apos;au dépôt caché.
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            L&apos;URL du lab (indicatif, l&apos;instance peut être éteinte) :{" "}
-            <span className="font-mono">http://34.155.191.36:32783</span>
-          </p>
-        </header>
+      <article className="mt-8 space-y-10">
+        <p className="text-sm text-muted-foreground">
+          URL du lab (indicatif, l&apos;instance peut être éteinte) :{" "}
+          <span className="font-mono">http://34.155.191.36:32783</span>
+        </p>
 
         <section>
           <h2 className="mb-4 font-mono text-xl font-semibold">Énoncé</h2>

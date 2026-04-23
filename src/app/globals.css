@@ -4,23 +4,23 @@
 
 @layer base {
   :root {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
-    /* Red team / Purple team : violet & magenta */
-    --primary: 270 65% 55%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 265 35% 18%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 265 30% 18%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 280 60% 50%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62% 50%;
-    --border: 265 30% 18%;
-    --input: 265 30% 18%;
-    --ring: 270 65% 55%;
+    --background: 272 20% 5%;
+    --foreground: 272 8% 93%;
+    --card: 272 15% 8%;
+    --card-foreground: 272 8% 93%;
+    --primary: 326 68% 62%;
+    --primary-foreground: 326 15% 8%;
+    --secondary: 272 12% 11%;
+    --secondary-foreground: 272 8% 93%;
+    --muted: 272 12% 11%;
+    --muted-foreground: 272 5% 66%;
+    --accent: 326 68% 62%;
+    --accent-foreground: 326 15% 8%;
+    --destructive: 0 72% 56%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 272 12% 15%;
+    --input: 272 12% 15%;
+    --ring: 326 68% 62%;
   }
 }
 
@@ -28,12 +28,43 @@
   * {
     @apply border-border;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
   }
+
+  a {
+    @apply transition-colors;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
+  }
 }
 
-/* Red / Purple team accent */
-.glow {
-  box-shadow: 0 0 20px hsl(var(--primary) / 0.35);
+.text-balance {
+  text-wrap: balance;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 9999px;
+  background: hsl(var(--border));
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
 }

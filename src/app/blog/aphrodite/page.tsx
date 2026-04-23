@@ -1,7 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
-  ArrowLeft,
   Heart,
   Layers,
   Terminal,
@@ -15,7 +13,7 @@ import {
   Eye,
   AlertTriangle,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/PageHeader";
 
 function CodeBlock({
   children,
@@ -61,39 +59,24 @@ export const metadata = {
 
 export default function ArticleAphroditePage() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12">
-      <Button variant="ghost" size="sm" asChild className="mb-8 gap-2">
-        <Link href="/blog">
-          <ArrowLeft className="size-4" />
-          Retour au blog
-        </Link>
-      </Button>
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
+      <PageHeader
+        eyebrow="Article · Red Team"
+        title="J'ai codé mon propre agent Mythic en Nim"
+        description="Inspiré par Athena, j'ai voulu comprendre comment un agent C2 fonctionne vraiment de l'intérieur. Résultat : Aphrodite, un agent Mythic cross-platform en Nim. Binaire natif, chiffrement AES-256 + EKE RSA-2048, obfuscation des strings à la compilation, EarlyBird APC, SOCKS5 et 42 commandes."
+        breadcrumbs={[
+          { label: "README", href: "/" },
+          { label: "Blog", href: "/blog" },
+          { label: "Aphrodite" },
+        ]}
+        stats={[
+          { label: "Category", value: "Red Team" },
+          { label: "Tags", value: "Mythic · C2 · Nim" },
+          { label: "Date", value: "2026-04-07" },
+        ]}
+      />
 
-      <article className="space-y-12">
-        {/* Header */}
-        <header>
-          <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-            <span className="font-mono text-primary">Red Team</span>
-            <span>·</span>
-            <span>Mythic</span>
-            <span>·</span>
-            <span>C2</span>
-            <span>·</span>
-            <span>Nim</span>
-            <span>·</span>
-            <span>2026-04-07</span>
-          </div>
-          <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight sm:text-4xl">
-            J&apos;ai codé mon propre agent Mythic en Nim
-          </h1>
-          <p className="mt-3 text-lg text-muted-foreground">
-            Inspiré par Athena, j&apos;ai voulu comprendre comment un agent C2
-            fonctionne vraiment de l&apos;intérieur. Résultat : Aphrodite, un
-            agent Mythic cross-platform en Nim. Binaire natif, chiffrement
-            AES-256 avec échange de clé RSA-2048, obfuscation des strings à la
-            compilation, EarlyBird APC, SOCKS5 et 42 commandes.
-          </p>
-        </header>
+      <article className="mt-8 space-y-12">
 
         {/* L'idée */}
         <section className="rounded-lg border border-primary/20 bg-primary/5 p-6">
@@ -431,7 +414,7 @@ nim c -d:c2ProfileWs src/aphrodite.nim`}
             Toutes les communications suivantes utilisent cette clé AES
             négociée.
           </p>
-          <CodeBlock title="core/agent.nim — séquence EKE (staging_rsa)">
+          <CodeBlock title="core/agent.nim : séquence EKE (staging_rsa)">
 {`// 1. Générer la paire RSA-2048
 var ctx = ekaGenerate()
 
@@ -482,7 +465,7 @@ let aesKey = ctx.ekaDecryptSessionKey(resp["session_key"])
             utilisation. Aucune string en clair n&apos;apparaît dans le binaire
             compilé.
           </p>
-          <CodeBlock title="crypto/strenc.nim — macro hidstr">
+          <CodeBlock title="crypto/strenc.nim : macro hidstr">
 {"macro hidstr*(s: static string): string =\n  ## Rolling key: k(i) = 0x5F xor byte((i * 7) and 0xFF)\n  ## Chaque byte XOR'd au compile-time, décodé au runtime.\n  let n = s.len\n  var arrNode = nnkBracket.newTree()\n  for i in 0..<n:\n    let k = byte(0x5F) xor byte((i * 7) and 0xFF)\n    arrNode.add(newLit(byte(s[i]) xor k))\n  result = quote do:\n    block:\n      const enc: array[`nLit`, byte] = `arrNode`\n      var dec = newString(`nLit`)\n      for i in 0..<`nLit`:\n        dec[i] = char(enc[i] xor (byte(0x5F) xor byte((i * 7) and 0xFF)))\n      dec"}
           </CodeBlock>
           <p className="text-muted-foreground mb-3">
@@ -818,7 +801,7 @@ socks stop       // arrêter le proxy`}
             premier datagram reçu par l&apos;agent est déjà la requête CONNECT
             parsée.
           </p>
-          <CodeBlock title="proxy/socks5.nim — types d'adresses supportés">
+          <CodeBlock title="proxy/socks5.nim : types d'adresses supportés">
 {`case atyp
 of 0x01:  # IPv4, 4 bytes addr + 2 bytes port
   let ip = $byte(data[4]) & "." & $byte(data[5]) & "." & ...
@@ -958,7 +941,7 @@ of 0x04:  # IPv6, 16 bytes addr + 2 bytes port
             aléatoire de ±6 secondes, suffisant pour casser les patterns de
             timing réguliers qu&apos;une détection comportementale chercherait.
           </p>
-          <CodeBlock title="core/agent.nim — calcul du sleep avec jitter">
+          <CodeBlock title="core/agent.nim : calcul du sleep avec jitter">
 {`proc sleepWithJitter(ag: AphroditeAgent) =
   var ms = ag.state.sleepInterval * 1000
   if ag.state.jitter > 0:

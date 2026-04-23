@@ -1,14 +1,6 @@
-import Link from "next/link";
-import {
-  ArrowLeft,
-  Terminal,
-  Database,
-  Key,
-  Shield,
-  Server,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Terminal, Database, Key, Shield, Server } from "lucide-react";
 import { RevealFlagBlock } from "@/components/RevealFlag";
+import { PageHeader } from "@/components/PageHeader";
 
 function CodeBlock({
   children,
@@ -44,34 +36,24 @@ export const metadata = {
 
 export default function WriteupHardbackPage() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12">
-      <Button variant="ghost" size="sm" asChild className="mb-8 gap-2">
-        <Link href="/writeups">
-          <ArrowLeft className="size-4" />
-          Retour aux writeups
-        </Link>
-      </Button>
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
+      <PageHeader
+        eyebrow="Writeup"
+        title="Hardback"
+        description="Pas de shell classique : SSH ouvre directement le client MariaDB en lecture seule. Des traces de migration dans audit_log, un rôle trop permissif, et la commande \e oubliée dans la sandbox cliente — on finit en root sans jamais avoir eu de prompt shell."
+        breadcrumbs={[
+          { label: "README", href: "/" },
+          { label: "Writeups", href: "/writeups" },
+          { label: "Hardback" },
+        ]}
+        stats={[
+          { label: "Platform", value: "Hack'In 2K26" },
+          { label: "Focus", value: "Linux privesc" },
+          { label: "Date", value: "2026-04-11" },
+        ]}
+      />
 
-      <article className="space-y-10">
-        <header>
-          <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-            <span className="font-mono text-primary">HackNight</span>
-            <span>·</span>
-            <span>Pwn / Privesc / Misconfiguration</span>
-          </div>
-          <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight sm:text-4xl">
-            Hardback
-          </h1>
-          <p className="mt-3 text-muted-foreground">
-            Ici, pas de shell classique : dès que je me connecte en SSH, je me retrouve dans le client
-            MariaDB avec l&apos;utilisateur <strong>viewer</strong>, qui ne peut que lire la base{" "}
-            <strong>app</strong>. Au premier abord ça a l&apos;air verrouillé. Sauf qu&apos;il reste des
-            traces de migration dans <strong>audit_log</strong>, un rôle <strong>migration</strong>{" "}
-            trop permissif, et une sandbox cliente qui oublie un détail : la commande{" "}
-            <strong>\e</strong>. Ajoutez un peu de PAM sur <strong>/root</strong>, et on finit en
-            root sans jamais avoir eu un vrai prompt shell au départ.
-          </p>
-        </header>
+      <article className="mt-8 space-y-10">
 
         <section>
           <h2 className="mb-4 font-mono text-xl font-semibold">Énoncé</h2>

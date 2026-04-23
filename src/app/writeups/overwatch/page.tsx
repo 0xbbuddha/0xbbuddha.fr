@@ -1,8 +1,7 @@
-import Link from "next/link";
-import { ArrowLeft, Terminal, Key, Database, Shield, Network } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Terminal, Key, Database, Shield, Network } from "lucide-react";
 import { RevealFlagBlock } from "@/components/RevealFlag";
 import { SpoilerWrapper } from "@/components/SpoilerWrapper";
+import { PageHeader } from "@/components/PageHeader";
 
 function CodeBlock({
   children,
@@ -35,31 +34,25 @@ export const metadata = {
 
 export default function WriteupOverwatchPage() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12">
-      <Button variant="ghost" size="sm" asChild className="mb-8 gap-2">
-        <Link href="/writeups">
-          <ArrowLeft className="size-4" />
-          Retour aux writeups
-        </Link>
-      </Button>
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
+      <PageHeader
+        eyebrow="Writeup"
+        title="Overwatch"
+        description="Machine Windows Server 2022 Active Directory. Accès initial via SMB guest, extraction de credentials depuis un binaire, puis élévation via injection PowerShell dans un service SOAP."
+        breadcrumbs={[
+          { label: "README", href: "/" },
+          { label: "Writeups", href: "/writeups" },
+          { label: "Overwatch" },
+        ]}
+        stats={[
+          { label: "Platform", value: "HackTheBox" },
+          { label: "Difficulty", value: "Medium" },
+          { label: "Date", value: "2026-02-17" },
+        ]}
+      />
 
       <SpoilerWrapper machineName="Overwatch" unlockCodeHash="5de9842503165bbcdee71f9107ba5f519211bb041cd2b1b0b683a65725535420">
-      <article className="space-y-10">
-        <header>
-          <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-            <span className="font-mono text-primary">HackTheBox</span>
-            <span>·</span>
-            <span>Medium</span>
-            <span>·</span>
-            <span>Windows</span>
-          </div>
-          <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight sm:text-4xl">
-            Overwatch
-          </h1>
-          <p className="mt-3 text-muted-foreground">
-            Machine Windows Server 2022 Active Directory. Accès initial via SMB guest, extraction de credentials depuis un binaire, puis élévation via injection PowerShell dans un service SOAP.
-          </p>
-        </header>
+      <article className="mt-8 space-y-10">
 
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">

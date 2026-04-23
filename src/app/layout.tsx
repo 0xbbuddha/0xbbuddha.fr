@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { SiteShell } from "@/components/SiteShell";
+import { LanguageProvider } from "@/components/LanguageProvider";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -10,30 +10,31 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-mono",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://0xbbuddha.fr"),
-  title: "Home | 0xbbuddha",
+  title: "0xbbuddha | Knowledge Base",
   description:
-    "Portfolio, writeups et blog d'un étudiant en cybersécurité et alternant en SOC Engineer chez Aukfood.",
+    "Portfolio, writeups et blog d'un étudiant en cybersécurité, organisé comme une base de connaissances personnelle.",
   icons: {
     icon: "/avatar_rounded.png",
     apple: "/avatar_rounded.png",
   },
   openGraph: {
-    title: "Home | 0xbbuddha",
+    title: "0xbbuddha | Knowledge Base",
     description:
-      "Portfolio, writeups et blog d'un étudiant en cybersécurité et alternant en SOC Engineer chez Aukfood.",
+      "Portfolio, writeups et blog d'un étudiant en cybersécurité, organisé comme une base de connaissances personnelle.",
     images: ["/avatar.png"],
   },
   twitter: {
     card: "summary",
-    title: "Home | 0xbbuddha",
+    title: "0xbbuddha | Knowledge Base",
     images: ["/avatar.png"],
   },
 };
@@ -46,13 +47,13 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
+      className={`${spaceGrotesk.variable} ${ibmPlexMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen font-sans flex flex-col" suppressHydrationWarning>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="min-h-screen font-sans" suppressHydrationWarning>
+        <LanguageProvider>
+          <SiteShell>{children}</SiteShell>
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -1,7 +1,6 @@
-import Link from "next/link";
-import { ArrowLeft, Terminal, Key, Database, Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Terminal, Key, Database, Shield } from "lucide-react";
 import { RevealFlagBlock } from "@/components/RevealFlag";
+import { PageHeader } from "@/components/PageHeader";
 
 function CodeBlock({
   children,
@@ -34,32 +33,24 @@ export const metadata = {
 
 export default function WriteupSignedPage() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12">
-      <Button variant="ghost" size="sm" asChild className="mb-8 gap-2">
-        <Link href="/writeups">
-          <ArrowLeft className="size-4" />
-          Retour aux writeups
-        </Link>
-      </Button>
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
+      <PageHeader
+        eyebrow="Writeup"
+        title="Signed"
+        description="Capture NTLM via xp_dirtree, crack d'un compte MSSQL et Silver Ticket pour reprendre la main sur la machine. On démarre avec des identifiants MSSQL et on pivote jusqu'à SYSTEM."
+        breadcrumbs={[
+          { label: "README", href: "/" },
+          { label: "Writeups", href: "/writeups" },
+          { label: "Signed" },
+        ]}
+        stats={[
+          { label: "Platform", value: "HackTheBox" },
+          { label: "Difficulty", value: "Medium" },
+          { label: "Date", value: "2026-02-18" },
+        ]}
+      />
 
-      <article className="space-y-10">
-        <header>
-          <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-            <span className="font-mono text-primary">HackTheBox</span>
-            <span>·</span>
-            <span>Medium</span>
-            <span>·</span>
-            <span>Windows</span>
-          </div>
-          <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight sm:text-4xl">
-            Signed
-          </h1>
-          <p className="mt-3 text-muted-foreground">
-            Comme souvent en pentest Windows réel, on démarre avec des
-            identifiants pour le compte <strong>scott / Sm230#C5NatH</strong>,
-            utilisables sur le service MSSQL.
-          </p>
-        </header>
+      <article className="mt-8 space-y-10">
 
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">

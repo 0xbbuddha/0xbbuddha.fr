@@ -1,6 +1,4 @@
-import Link from "next/link";
 import {
-  ArrowLeft,
   Terminal,
   Network,
   Shield,
@@ -13,7 +11,7 @@ import {
   Heart,
   Zap,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/PageHeader";
 
 function CodeBlock({
   children,
@@ -59,35 +57,24 @@ export const metadata = {
 
 export default function ArticleBashHoundPage() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12">
-      <Button variant="ghost" size="sm" asChild className="mb-8 gap-2">
-        <Link href="/blog">
-          <ArrowLeft className="size-4" />
-          Retour au blog
-        </Link>
-      </Button>
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
+      <PageHeader
+        eyebrow="Article · Tools"
+        title="Et si on recodait un collecteur AD en pur Bash ?"
+        description="BashHound & BashHound-CE : un collecteur Active Directory pour BloodHound en Bash pur. Protocole LDAP, encodage ASN.1, parsing des Security Descriptors et export JSON v5/v6."
+        breadcrumbs={[
+          { label: "README", href: "/" },
+          { label: "Blog", href: "/blog" },
+          { label: "BashHound" },
+        ]}
+        stats={[
+          { label: "Category", value: "Tools" },
+          { label: "Tags", value: "Active Directory · BloodHound · Bash" },
+          { label: "Date", value: "2026-03-18" },
+        ]}
+      />
 
-      <article className="space-y-12">
-        {/* Header */}
-        <header>
-          <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-            <span className="font-mono text-primary">Tools</span>
-            <span>·</span>
-            <span>Active Directory</span>
-            <span>·</span>
-            <span>BloodHound</span>
-            <span>·</span>
-            <span>2026-03-18</span>
-          </div>
-          <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight sm:text-4xl">
-            Et si on recodait un collecteur AD en pur Bash ?
-          </h1>
-          <p className="mt-3 text-lg text-muted-foreground">
-            BashHound &amp; BashHound-CE : un collecteur Active Directory pour
-            BloodHound en Bash pur. Protocole LDAP, encodage ASN.1, parsing des
-            Security Descriptors et export JSON v5/v6.
-          </p>
-        </header>
+      <article className="mt-8 space-y-12">
 
         {/* Section personnelle */}
         <section className="rounded-lg border border-primary/20 bg-primary/5 p-6">
@@ -113,7 +100,7 @@ export default function ArticleBashHoundPage() {
               rel="noopener noreferrer"
               className="text-primary underline underline-offset-4 hover:no-underline"
             >
-              &quot;Pure bash — No commands, just bash&quot;
+              &quot;Pure bash : No commands, just bash&quot;
             </a>
             . La vidéo montre jusqu&apos;où on peut pousser Bash : implémenter
             des fonctionnalités réseau, manipuler du binaire, encoder des
@@ -132,7 +119,7 @@ export default function ArticleBashHoundPage() {
           <p className="text-muted-foreground mb-3">
             La toute première ligne de code écrite a été celle-ci :
           </p>
-          <CodeBlock title="bashhound — commit initial">
+          <CodeBlock title="bashhound : commit initial">
 {`# Voici la première ligne de code de BashHound mother fuck**`}
           </CodeBlock>
           <p className="text-muted-foreground mb-3">
@@ -191,18 +178,18 @@ export default function ArticleBashHoundPage() {
             Sommaire
           </h2>
           <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground font-mono">
-            <li>Contexte — BloodHound et ses collecteurs</li>
+            <li>Contexte : BloodHound et ses collecteurs</li>
             <li>Les collecteurs existants</li>
             <li>Architecture globale du projet</li>
             <li>Contraintes et choix de design</li>
-            <li>lib/asn1.sh — Encodage ASN.1 en Bash</li>
-            <li>lib/ldap.sh — Protocole LDAP en Bash pur</li>
-            <li>lib/ldap_parser.sh — Parsing des réponses LDAP</li>
-            <li>lib/acl_parser.sh — Security Descriptors et ACEs</li>
-            <li>lib/collectors.sh — Collecte des objets AD</li>
-            <li>lib/export.sh / export_ce.sh — Export BloodHound JSON</li>
-            <li>BashHound vs BashHound-CE — Format v5 vs v6, AD CS</li>
-            <li>Benchmark — RustHound-CE vs BashHound-CE</li>
+            <li>lib/asn1.sh : Encodage ASN.1 en Bash</li>
+            <li>lib/ldap.sh : Protocole LDAP en Bash pur</li>
+            <li>lib/ldap_parser.sh : Parsing des réponses LDAP</li>
+            <li>lib/acl_parser.sh : Security Descriptors et ACEs</li>
+            <li>lib/collectors.sh : Collecte des objets AD</li>
+            <li>lib/export.sh / export_ce.sh : Export BloodHound JSON</li>
+            <li>BashHound vs BashHound-CE : Format v5 vs v6, AD CS</li>
+            <li>Benchmark : RustHound-CE vs BashHound-CE</li>
             <li>Limites connues</li>
             <li>Ce que ça m&apos;a appris</li>
             <li>Conclusion</li>
@@ -213,7 +200,7 @@ export default function ArticleBashHoundPage() {
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <Layers className="size-5 text-primary" />
-            1. Contexte — BloodHound et ses collecteurs
+            1. Contexte : BloodHound et ses collecteurs
           </h2>
           <p className="text-muted-foreground mb-3">
             Si t&apos;as déjà fait de la pentest AD, tu connais{" "}
@@ -428,7 +415,7 @@ ZIP → Import dans BloodHound`}
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <Cpu className="size-5 text-primary" />
-            5. lib/asn1.sh — Encodage ASN.1 en Bash
+            5. lib/asn1.sh : Encodage ASN.1 en Bash
           </h2>
           <p className="text-muted-foreground mb-3">
             C&apos;est là que ça commence à être vraiment fun. LDAP parle en
@@ -452,7 +439,7 @@ ZIP → Import dans BloodHound`}
             dont la signification dépend de la structure du message définie
             par le protocole.
           </p>
-          <CodeBlock title="Encodage BER — TLV">
+          <CodeBlock title="Encodage BER : TLV">
 {`[ Tag (souvent 1 octet) ] [ Length (1 à N octets) ] [ Value (N octets) ]
 
 Exemple : INTEGER 3
@@ -473,7 +460,7 @@ Exemple : OCTET STRING "CN=admin"
             universels et tags spécifiques aux messages LDAP. C&apos;est la base
             sur laquelle tout le reste s&apos;appuie.
           </p>
-          <CodeBlock title="lib/asn1.sh — Constantes">
+          <CodeBlock title="lib/asn1.sh : Constantes">
 {`# Types ASN.1 universels
 readonly ASN1_BOOLEAN=0x01
 readonly ASN1_INTEGER=0x02
@@ -507,7 +494,7 @@ readonly LDAP_CONTEXT_7=0x87     # present filter (attribut=*)`}
             indique combien d&apos;octets suivent pour encoder la vraie longueur.
             Simple en théorie, piège en pratique quand on manipule tout en hex.
           </p>
-          <CodeBlock title="lib/asn1.sh — asn1_encode_length()">
+          <CodeBlock title="lib/asn1.sh : asn1_encode_length()">
 {`asn1_encode_length() {
     local length=$1
 
@@ -539,7 +526,7 @@ Résultat : 82 012c
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
             Encodage des types principaux
           </h3>
-          <CodeBlock title="lib/asn1.sh — Encodage INTEGER">
+          <CodeBlock title="lib/asn1.sh : Encodage INTEGER">
 {`asn1_encode_integer() {
     local value=$1
     local hex_value=$(printf '%x' "$value")
@@ -561,7 +548,7 @@ Résultat : 82 012c
     printf '%s' "$hex_value"
 }`}
           </CodeBlock>
-          <CodeBlock title="lib/asn1.sh — Encodage OCTET STRING">
+          <CodeBlock title="lib/asn1.sh : Encodage OCTET STRING">
 {`asn1_encode_octet_string() {
     local string="$1"
     # Conversion ASCII → hex avec xxd
@@ -596,7 +583,7 @@ Résultat : 82 012c
             m&apos;a pris un moment à comprendre. La doc RFC est pas franchement
             accueillante.
           </p>
-          <CodeBlock title="lib/asn1.sh — Encodage OID">
+          <CodeBlock title="lib/asn1.sh : Encodage OID">
 {`asn1_encode_oid() {
     local oid="$1"
     IFS='.' read -ra parts <<< "$oid"
@@ -637,7 +624,7 @@ Résultat : 82 012c
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <Network className="size-5 text-primary" />
-            6. lib/ldap.sh — Protocole LDAP en Bash pur
+            6. lib/ldap.sh : Protocole LDAP en Bash pur
           </h2>
           <p className="text-muted-foreground mb-3">
             Une fois l&apos;encodage ASN.1 en place, il faut mettre les mains
@@ -656,7 +643,7 @@ Résultat : 82 012c
             et on peut lire/écrire dessus comme n&apos;importe quel fichier. On
             utilise le descripteur 3 comme socket bidirectionnel :
           </p>
-          <CodeBlock title="lib/ldap.sh — Connexion LDAP plain TCP">
+          <CodeBlock title="lib/ldap.sh : Connexion LDAP plain TCP">
 {`ldap_connect_plain() {
     local host="$1"
     local port="$2"
@@ -688,7 +675,7 @@ Résultat : 82 012c
             comme tunnel TLS, en lui passant les données via deux named pipes
             (FIFOs). C&apos;est un peu tordu, mais ça marche.
           </p>
-          <CodeBlock title="lib/ldap.sh — Connexion LDAPS via OpenSSL">
+          <CodeBlock title="lib/ldap.sh : Connexion LDAPS via OpenSSL">
 {`ldap_connect_tls() {
     local host="$1"
     local port="$2"
@@ -722,7 +709,7 @@ Résultat : 82 012c
             le TLS.
           </p>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            LDAP Bind — Authentification
+            LDAP Bind : Authentification
           </h3>
           <p className="text-muted-foreground mb-3">
             Le Bind c&apos;est l&apos;authentification, le premier message
@@ -742,7 +729,7 @@ BindRequest ::= [APPLICATION 0] SEQUENCE {  -- tag 0x60
     authentication  [0] OCTET STRING (password)  -- tag 0x80
 }`}
           </CodeBlock>
-          <CodeBlock title="lib/ldap.sh — ldap_bind()">
+          <CodeBlock title="lib/ldap.sh : ldap_bind()">
 {`ldap_bind() {
     local dn="$1"
     local password="$2"
@@ -799,7 +786,7 @@ BindRequest ::= [APPLICATION 0] SEQUENCE {  -- tag 0x60
     attributes     AttributeDescriptionList
 }`}
           </CodeBlock>
-          <CodeBlock title="lib/ldap.sh — ldap_search()">
+          <CodeBlock title="lib/ldap.sh : ldap_search()">
 {`ldap_search() {
     local base_dn="$1"
     local scope="${"$"}{2:-2}"          # 2 = wholeSubtree
@@ -868,7 +855,7 @@ ${"$"}{filter_encoded}${"$"}{attrs_encoded}"
             lire le header d&apos;abord, déterminer la longueur, puis lire
             exactement le bon nombre d&apos;octets. Rien de plus, rien de moins :
           </p>
-          <CodeBlock title="lib/ldap.sh — ldap_receive_message()">
+          <CodeBlock title="lib/ldap.sh : ldap_receive_message()">
 {`ldap_receive_message() {
     local read_fd=3
     [ "$LDAP_USE_TLS" = "true" ] && read_fd=4
@@ -931,7 +918,7 @@ ${"$"}{filter_encoded}${"$"}{attrs_encoded}"
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <Code2 className="size-5 text-primary" />
-            7. lib/ldap_parser.sh — Parsing des réponses LDAP
+            7. lib/ldap_parser.sh : Parsing des réponses LDAP
           </h2>
           <p className="text-muted-foreground mb-3">
             On reçoit les objets AD sous forme d&apos;un gros blob hex. Une
@@ -954,7 +941,7 @@ ${"$"}{filter_encoded}${"$"}{attrs_encoded}"
             dans la réponse, et on lit les octets qui suivent pour récupérer
             la valeur :
           </p>
-          <CodeBlock title="lib/ldap_parser.sh — extract_sam_from_response()">
+          <CodeBlock title="lib/ldap_parser.sh : extract_sam_from_response()">
 {`extract_sam_from_response() {
     local hex="$1"
     # "sAMAccountName" en hex
@@ -998,7 +985,7 @@ d2040000      ← 1234 (little-endian)
 34230000      ← 9012 (little-endian)
 f4010000      ← 500 (little-endian) = Administrator RID`}
           </CodeBlock>
-          <CodeBlock title="lib/ldap_parser.sh — Conversion SID hex → string">
+          <CodeBlock title="lib/ldap_parser.sh : Conversion SID hex → string">
 {`extract_sid_from_hex() {
     local hex="$1"
 
@@ -1042,7 +1029,7 @@ f4010000      ← 500 (little-endian) = Administrator RID`}
             <code className="rounded bg-muted px-1">20250318123045.0Z</code>) et
             se parse différemment :
           </p>
-          <CodeBlock title="lib/ldap_parser.sh — Conversion FILETIME → Unix timestamp">
+          <CodeBlock title="lib/ldap_parser.sh : Conversion FILETIME → Unix timestamp">
 {`extract_filetime_timestamp() {
     local hex_response="$1"
     local attr_name="$2"
@@ -1103,7 +1090,7 @@ f4010000      ← 500 (little-endian) = Administrator RID`}
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <Shield className="size-5 text-primary" />
-            8. lib/acl_parser.sh — Security Descriptors et ACEs
+            8. lib/acl_parser.sh : Security Descriptors et ACEs
           </h2>
           <p className="text-muted-foreground mb-3">
             C&apos;est probablement la partie la plus chiante du projet, et
@@ -1165,7 +1152,7 @@ Types d'ACE :
             32 bits qui définissent ce que le principal peut faire. BashHound
             mappe les valeurs hex vers les noms que BloodHound comprend :
           </p>
-          <CodeBlock title="lib/acl_parser.sh — Access Masks">
+          <CodeBlock title="lib/acl_parser.sh : Access Masks">
 {`declare -gA ACCESS_MASK_TO_RIGHT=(
     # Droits génériques (32 bits de poids fort)
     [10000000]="GenericAll"
@@ -1201,7 +1188,7 @@ Types d'ACE :
             un GUID dans l&apos;ACE précise de quel droit il s&apos;agit. Et certains
             de ces GUIDs valent de l&apos;or en pentest :
           </p>
-          <CodeBlock title="lib/acl_parser.sh — Extended Rights critiques">
+          <CodeBlock title="lib/acl_parser.sh : Extended Rights critiques">
 {`declare -gA EXTENDED_RIGHTS=(
     # ForceChangePassword : changer le mdp sans connaître l'ancien
     ["00299570-246d-11d0-a768-00aa006e0529"]="ForceChangePassword"
@@ -1251,7 +1238,7 @@ Types d'ACE :
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
             Flags d&apos;héritage des ACEs
           </h3>
-          <CodeBlock title="lib/acl_parser.sh — ACE Flags">
+          <CodeBlock title="lib/acl_parser.sh : ACE Flags">
 {`declare -gA ACE_FLAGS=(
     [01]="OBJECT_INHERIT_ACE"       # Hérité par les objets enfants
     [02]="CONTAINER_INHERIT_ACE"    # Hérité par les conteneurs enfants
@@ -1274,7 +1261,7 @@ Types d'ACE :
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <Database className="size-5 text-primary" />
-            9. lib/collectors.sh — Collecte des objets AD
+            9. lib/collectors.sh : Collecte des objets AD
           </h2>
           <p className="text-muted-foreground mb-3">
             <code className="rounded bg-muted px-1">collectors.sh</code> c&apos;est
@@ -1285,7 +1272,7 @@ Types d'ACE :
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
             Collecte des utilisateurs
           </h3>
-          <CodeBlock title="lib/collectors.sh — collect_users()">
+          <CodeBlock title="lib/collectors.sh : collect_users()">
 {`collect_users() {
     local filter="(objectClass=user)"
     local attributes="distinguishedName,sAMAccountName,objectSid,primaryGroupID,
@@ -1336,7 +1323,7 @@ $last_logon|$last_logon_ts|$pwd_last_set|$uac|$admin_count|$spns" \
             <code className="rounded bg-muted px-1">gPCFileSysPath</code>, et
             un display name lisible :
           </p>
-          <CodeBlock title="lib/collectors.sh — collect_gpos()">
+          <CodeBlock title="lib/collectors.sh : collect_gpos()">
 {`collect_gpos() {
     local gpo_container="CN=Policies,CN=System,$DOMAIN_DN"
     local filter="(objectClass=groupPolicyContainer)"
@@ -1359,7 +1346,7 @@ $last_logon|$last_logon_ts|$pwd_last_set|$uac|$admin_count|$spns" \
             Utiles pour détecter les forêts, les trusts bidirectionnels, et les
             configurations à risque (SID filtering désactivé par exemple) :
           </p>
-          <CodeBlock title="lib/collectors.sh — collect_trusts()">
+          <CodeBlock title="lib/collectors.sh : collect_trusts()">
 {`collect_trusts() {
     local system_dn="CN=System,$DOMAIN_DN"
     local filter="(objectClass=trustedDomain)"
@@ -1424,7 +1411,7 @@ $last_logon|$last_logon_ts|$pwd_last_set|$uac|$admin_count|$spns" \
             collecter les Certificate Templates, les CAs, et les NTAuth stores.
             BashHound-CE le fait :
           </p>
-          <CodeBlock title="lib/collectors.sh (CE) — Composants AD CS collectés">
+          <CodeBlock title="lib/collectors.sh (CE) : Composants AD CS collectés">
 {`# Certificate Templates
 # DN : CN=Certificate Templates,CN=Public Key Services,CN=Services,CN=Configuration,...
 # Attributs : msPKI-Certificate-Name-Flag, msPKI-Enrollment-Flag,
@@ -1437,7 +1424,7 @@ collect_cert_templates()
 # Attributs : dNSHostName, certificateTemplates (templates activés)
 collect_enterprise_cas()
 
-# NTAuth Store — certificats de confiance pour auth client
+# NTAuth Store : certificats de confiance pour auth client
 # DN : CN=NTAuthCertificates,CN=Public Key Services,...
 collect_ntauthstores()
 
@@ -1478,7 +1465,7 @@ collect_issuancepolicies()`}
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <FileJson className="size-5 text-primary" />
-            10. lib/export.sh / export_ce.sh — Export BloodHound JSON
+            10. lib/export.sh / export_ce.sh : Export BloodHound JSON
           </h2>
           <p className="text-muted-foreground mb-3">
             Une fois les fichiers temporaires remplis, c&apos;est la phase
@@ -1499,7 +1486,7 @@ collect_issuancepolicies()`}
             <code className="rounded bg-muted px-1">data</code> avec la liste
             des objets. Simple :
           </p>
-          <CodeBlock title="Format JSON BloodHound v5 — Utilisateurs">
+          <CodeBlock title="Format JSON BloodHound v5 : Utilisateurs">
 {`{
   "meta": {
     "methods": 0,
@@ -1553,7 +1540,7 @@ collect_issuancepolicies()`}
             <code className="rounded bg-muted px-1">ContainedBy</code> qui
             permettent de visualiser la hiérarchie OU/conteneurs :
           </p>
-          <CodeBlock title="Format JSON BloodHound CE v6 — Structure">
+          <CodeBlock title="Format JSON BloodHound CE v6 : Structure">
 {`{
   "meta": {
     "methods": 0,
@@ -1620,7 +1607,7 @@ bloodhound_issuancepolicies_TIMESTAMP.json # Issuance Policies`}
             identifiant unique pour chaque nœud. Solution : générer un UUID-like
             déterministe à partir du DN via MD5 :
           </p>
-          <CodeBlock title="lib/export_ce.sh — Génération ObjectIdentifier">
+          <CodeBlock title="lib/export_ce.sh : Génération ObjectIdentifier">
 {`# Pour un Certificate Template dont le DN est connu mais pas le SID :
 local dn_upper=$(echo "$dn" | tr '[:lower:]' '[:upper:]')
 local object_id=$(echo -n "$dn_upper" | md5sum \
@@ -1634,7 +1621,7 @@ local object_id=$(echo -n "$dn_upper" | md5sum \
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <GitBranch className="size-5 text-primary" />
-            11. BashHound vs BashHound-CE — Format v5 vs v6, AD CS
+            11. BashHound vs BashHound-CE : Format v5 vs v6, AD CS
           </h2>
           <p className="text-muted-foreground mb-3">
             BashHound et BashHound-CE partagent la même architecture et les
@@ -1700,7 +1687,7 @@ local object_id=$(echo -n "$dn_upper" | md5sum \
             volontairement le format de RustHound. Ça donne quelque chose
             d&apos;assez propre pour un script shell :
           </p>
-          <CodeBlock title="BashHound-CE — Format de log structuré">
+          <CodeBlock title="BashHound-CE : Format de log structuré">
 {`[2026-03-18T14:30:22Z INFO  bashhound_ce::ldap] Connected to DOMAIN.LOCAL Active Directory!
 [2026-03-18T14:30:22Z INFO  bashhound_ce::ldap] Starting data collection...
 [2026-03-18T14:30:23Z INFO  bashhound_ce::export] 42 users parsed!
@@ -1714,7 +1701,7 @@ local object_id=$(echo -n "$dn_upper" | md5sum \
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <Zap className="size-5 text-primary" />
-            12. Benchmark — RustHound-CE vs BashHound-CE
+            12. Benchmark : RustHound-CE vs BashHound-CE
           </h2>
           <p className="text-muted-foreground mb-3">
             Soyons honnêtes : Bash n&apos;est pas Rust. BashHound-CE lance des
@@ -1793,7 +1780,7 @@ local object_id=$(echo -n "$dn_upper" | md5sum \
             réponse LDAP contenant 100 utilisateurs avec leurs ACLs, cela
             représente plusieurs centaines de sous-processus.
           </p>
-          <CodeBlock title="Profil d'exécution — ce qui prend du temps">
+          <CodeBlock title="Profil d'exécution : ce qui prend du temps">
 {`# Pour chaque objet LDAP retourné :
 # 1. ldap_receive_message() → dd (1 fork pour lire le header, 1+ pour le contenu)
 # 2. Conversion hex → xxd -p (1 fork)

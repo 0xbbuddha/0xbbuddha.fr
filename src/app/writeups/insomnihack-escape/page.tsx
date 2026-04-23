@@ -1,17 +1,5 @@
-import Link from "next/link";
-import {
-  ArrowLeft,
-  Terminal,
-  Shield,
-  Cpu,
-  Zap,
-  Bug,
-  Eye,
-  Lock,
-  Binary,
-  Heart,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Terminal, Shield, Cpu, Zap, Bug, Eye, Lock, Binary, Heart } from "lucide-react";
+import { PageHeader } from "@/components/PageHeader";
 
 function CodeBlock({
   children,
@@ -57,36 +45,24 @@ export const metadata = {
 
 export default function ArticleEscapePage() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-12">
-      <Button variant="ghost" size="sm" asChild className="mb-8 gap-2">
-        <Link href="/writeups">
-          <ArrowLeft className="size-4" />
-          Retour aux writeups
-        </Link>
-      </Button>
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
+      <PageHeader
+        eyebrow="Writeup"
+        title="Escape — Insomni'hack 2026"
+        description="Challenge par drp3ab0dy. Un binaire qui te donne une fuite mémoire, un overflow, et absolument aucun moyen d'afficher quoi que ce soit. Le genre de situation où il faut devenir créatif."
+        breadcrumbs={[
+          { label: "README", href: "/" },
+          { label: "Writeups", href: "/writeups" },
+          { label: "Escape" },
+        ]}
+        stats={[
+          { label: "Platform", value: "Insomni'hack 2K26" },
+          { label: "Focus", value: "Pwn / seccomp" },
+          { label: "Date", value: "2026-03-21" },
+        ]}
+      />
 
-      <article className="space-y-12">
-        {/* Header */}
-        <header>
-          <div className="flex flex-wrap gap-2 text-sm text-muted-foreground">
-            <span className="font-mono text-primary">CTF Writeup</span>
-            <span>·</span>
-            <span>Pwn</span>
-            <span>·</span>
-            <span>Insomni&apos;hack 2026</span>
-            <span>·</span>
-            <span>2026-03-21</span>
-          </div>
-          <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight sm:text-4xl">
-            Escape - Insomni&apos;hack 2026
-          </h1>
-          <p className="mt-3 text-lg text-muted-foreground">
-            Challenge par <strong>drp3ab0dy</strong>. Un binaire qui te donne
-            une fuite mémoire, un overflow, et absolument aucun moyen
-            d&apos;afficher quoi que ce soit. Le genre de situation où il faut
-            devenir créatif.
-          </p>
-        </header>
+      <article className="mt-8 space-y-12">
 
         {/* Intro personnelle */}
         <section className="rounded-lg border border-primary/20 bg-primary/5 p-6">
