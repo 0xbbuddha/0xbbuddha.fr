@@ -288,7 +288,6 @@ export const writeups: WriteupEntry[] = [
     excerpt:
       "SMB guest, linked server MSSQL, capture de credentials par DNS et exécution PowerShell dans un service SOAP.",
     focus: "AD path",
-    spoiler: true,
   },
 ];
 

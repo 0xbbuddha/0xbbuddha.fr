@@ -1,6 +1,4 @@
 import { Terminal, Key, Database, Shield, Network } from "lucide-react";
-import { RevealFlagBlock } from "@/components/RevealFlag";
-import { SpoilerWrapper } from "@/components/SpoilerWrapper";
 import { PageHeader } from "@/components/PageHeader";
 
 function CodeBlock({
@@ -51,7 +49,6 @@ export default function WriteupOverwatchPage() {
         ]}
       />
 
-      <SpoilerWrapper machineName="Overwatch" unlockCodeHash="5de9842503165bbcdee71f9107ba5f519211bb041cd2b1b0b683a65725535420">
       <article className="mt-8 space-y-10">
 
         <section>
@@ -216,9 +213,9 @@ SQL (OVERWATCH\\sqlsvc  guest@master)>`}
           <CodeBlock title="Lecture user.txt">
 {`cat ../Desktop/user.txt`}
           </CodeBlock>
-          <RevealFlagBlock title="Résultat (user.txt)" result>
+          <CodeBlock title="Résultat (user.txt)" result>
 {`d583ad30ff2ae368008fcfb525bce6ce`}
-          </RevealFlagBlock>
+          </CodeBlock>
         </section>
 
         <section>
@@ -265,9 +262,9 @@ Invoke-WebRequest -Uri $Url -Method Post -ContentType "text/xml; charset=utf-8" 
           <CodeBlock title="Lecture root.txt">
 {`type C:\\Users\\Administrator\\Desktop\\root.txt`}
           </CodeBlock>
-          <RevealFlagBlock title="Résultat (root.txt)" result>
+          <CodeBlock title="Résultat (root.txt)" result>
 {`ac5bd179d0b76900076d7815301375ff`}
-          </RevealFlagBlock>
+          </CodeBlock>
         </section>
 
         <section className="rounded-lg border border-border bg-card p-6">
@@ -284,7 +281,6 @@ Invoke-WebRequest -Uri $Url -Method Post -ContentType "text/xml; charset=utf-8" 
           </ul>
         </section>
       </article>
-      </SpoilerWrapper>
     </div>
   );
 }
