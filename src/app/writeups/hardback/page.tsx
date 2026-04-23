@@ -40,7 +40,7 @@ export default function WriteupHardbackPage() {
       <PageHeader
         eyebrow="Writeup"
         title="Hardback"
-        description="Pas de shell classique : SSH ouvre directement le client MariaDB en lecture seule. Des traces de migration dans audit_log, un rôle trop permissif, et la commande \e oubliée dans la sandbox cliente — on finit en root sans jamais avoir eu de prompt shell."
+        description="Pas de shell classique : SSH ouvre directement le client MariaDB en lecture seule. Des traces de migration dans audit_log, un rôle trop permissif, et la commande \e oubliée dans la sandbox cliente, on finit en root sans jamais avoir eu de prompt shell."
         breadcrumbs={[
           { label: "README", href: "/" },
           { label: "Writeups", href: "/writeups" },

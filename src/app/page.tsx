@@ -25,7 +25,7 @@ function TerminalBlock({
         <span className="size-2.5 rounded-full bg-border/60" />
         <span className="size-2.5 rounded-full bg-border/60" />
         <span className="size-2.5 rounded-full bg-border/60" />
-        <span className="ml-2 text-muted-foreground/50">bash — {title}</span>
+        <span className="ml-2 text-muted-foreground/50">bash - {title}</span>
       </div>
       <div className="px-5 py-4">{children}</div>
     </div>
@@ -33,14 +33,69 @@ function TerminalBlock({
 }
 
 export default function HomePage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
+
+  const localizedProfile = {
+    role: lang === "fr" ? siteProfile.currentRole : "SOC Engineer @ Aukfood",
+    study: lang === "fr" ? siteProfile.currentStudy : "Cybersecurity MSc @ Oteria",
+    territory: lang === "fr" ? siteProfile.territory : "France",
+    focus:
+      lang === "fr"
+        ? siteProfile.focus.join("  ·  ")
+        : ["Red / Purple Team tooling", "SOC & detection", "Active Directory", "Labs & writeups"].join("  ·  "),
+    intro:
+      lang === "fr"
+        ? siteProfile.intro
+        : "Cybersecurity MSc student at Oteria and SOC Engineer apprentice at Aukfood. I use this place to document projects, field notes, and what I learn while building tools.",
+  };
+
+  const projectEn: Record<string, { description: string; note: string; status: string }> = {
+    ArchimedeaOS: {
+      description: "Arch Linux distribution focused on Purple Team operations for consistent lab and engagement workflows.",
+      note: "Unified tooling baseline for offensive and defensive experimentation.",
+      status: "System build",
+    },
+    Nihil: {
+      description: "Full pentest lab stack with Docker images for reproducible offensive testing.",
+      note: "Built to prototype fast, break fast, and rebuild cleanly.",
+      status: "Lab stack",
+    },
+    "BashHound-CE": {
+      description: "Active Directory collector for BloodHound Community Edition, written entirely in Bash.",
+      note: "A deep dive into LDAP, ASN.1 and AD graph collection without heavy dependencies.",
+      status: "Open source",
+    },
+    Hermes: {
+      description: "Linux Mythic C2 agent in Python with check-in, tasking and operator control primitives.",
+      note: "Built to understand implant internals and C2 protocol behavior.",
+      status: "C2 agent",
+    },
+    PantheonLab: {
+      description: "Immersive AD + Linux lab themed around Greek mythology with Ansible/Vagrant deployment.",
+      note: "A reproducible playground to document realistic attack chains.",
+      status: "Training lab",
+    },
+    FreeMalwares: {
+      description: "Educational C project exploring obfuscation and evasion techniques in controlled environments.",
+      note: "Strictly educational research to understand mechanisms, not industrialize them.",
+      status: "Research",
+    },
+  };
+
+  const skillTitleEn: Record<string, string> = {
+    "SOC & Détection": "SOC & Detection",
+    "Pentest & Offensive Web": "Pentest & Offensive Web",
+    "Pentest & Offensive AD": "Pentest & Offensive AD",
+    "Systeme & Réseau": "Systems & Network",
+    "Langages & Outils": "Languages & Tooling",
+  };
 
   const whoami = [
     { key: "handle",    value: siteProfile.handle,        accent: true },
-    { key: "role",      value: siteProfile.currentRole },
-    { key: "study",     value: siteProfile.currentStudy },
-    { key: "territory", value: siteProfile.territory },
-    { key: "focus",     value: siteProfile.focus.join("  ·  ") },
+    { key: "role",      value: localizedProfile.role },
+    { key: "study",     value: localizedProfile.study },
+    { key: "territory", value: localizedProfile.territory },
+    { key: "focus",     value: localizedProfile.focus },
   ];
 
   return (
@@ -64,7 +119,7 @@ export default function HomePage() {
             {siteProfile.handle}
           </h1>
           <p className="mt-1 truncate text-sm text-muted-foreground">
-            {siteProfile.currentRole} · {siteProfile.currentStudy}
+            {localizedProfile.role} · {localizedProfile.study}
           </p>
           <div className="mt-3 flex gap-4">
             {socialLinks.map((link) => {
@@ -102,7 +157,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <p className="mt-4 leading-6 text-foreground/80">{siteProfile.intro}</p>
+          <p className="mt-4 leading-6 text-foreground/80">{localizedProfile.intro}</p>
           <p className="mt-3 animate-pulse text-primary/50">█</p>
         </TerminalBlock>
 
@@ -119,13 +174,15 @@ export default function HomePage() {
                   <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                     <span className="font-semibold text-foreground">{project.title}</span>
                     <span className="text-muted-foreground/50">#</span>
-                    <span className="text-primary">{project.status}</span>
+                    <span className="text-primary">
+                      {lang === "fr" ? project.status : (projectEn[project.title]?.status ?? project.status)}
+                    </span>
                     <a
                       href={project.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="ml-auto shrink-0 text-muted-foreground/50 transition-colors hover:text-primary"
-                      aria-label={`Ouvrir ${project.title}`}
+                      aria-label={lang === "fr" ? `Ouvrir ${project.title}` : `Open ${project.title}`}
                     >
                       <ArrowUpRight className="size-3.5" />
                     </a>
@@ -133,8 +190,12 @@ export default function HomePage() {
                   <p className="mt-1 text-muted-foreground">
                     {project.tags.join("  ·  ")}
                   </p>
-                  <p className="mt-1.5 leading-5 text-foreground/85">{project.description}</p>
-                  <p className="mt-1 italic leading-5 text-muted-foreground">{project.note}</p>
+                  <p className="mt-1.5 leading-5 text-foreground/85">
+                    {lang === "fr" ? project.description : (projectEn[project.title]?.description ?? project.description)}
+                  </p>
+                  <p className="mt-1 italic leading-5 text-muted-foreground">
+                    {lang === "fr" ? project.note : (projectEn[project.title]?.note ?? project.note)}
+                  </p>
                 </div>
               </div>
             ))}
@@ -148,7 +209,9 @@ export default function HomePage() {
           <div className="space-y-4">
             {skillCategories.map((cat) => (
               <div key={cat.title}>
-                <p className="mb-1 text-primary/80"># {cat.title}</p>
+                <p className="mb-1 text-primary/80">
+                  # {lang === "fr" ? cat.title : (skillTitleEn[cat.title] ?? cat.title)}
+                </p>
                 <p className="leading-6 text-foreground/85">{cat.items.join("  ·  ")}</p>
               </div>
             ))}

@@ -3,7 +3,7 @@
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function CertipyPage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
@@ -15,7 +15,9 @@ export default function CertipyPage() {
           certipy
         </h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
-          Référence rapide certipy : audit et exploitation ADCS depuis Linux, find, req, auth, ESC1-ESC13.
+          {lang === "fr"
+            ? "Référence rapide certipy : audit et exploitation ADCS depuis Linux, find, req, auth, ESC1-ESC13."
+            : "Quick certipy reference: ADCS auditing and abuse from Linux, find, req, auth, ESC1-ESC13."}
         </p>
       </header>
 

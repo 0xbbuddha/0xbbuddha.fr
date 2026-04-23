@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import {
   BookText,
+  Cable,
   ChevronRight,
   Compass,
   Crosshair,
@@ -35,7 +36,7 @@ import { useLanguage } from "@/components/LanguageProvider";
 import type { Tr } from "@/lib/i18n";
 
 function iconForHref(href: string) {
-  // depth 0 — sections parentes
+  // depth 0 - sections parentes
   if (href === "/") return Compass;
   if (href === "/red-team") return Target;
   if (href === "/cheatsheets") return FileText;
@@ -43,19 +44,21 @@ function iconForHref(href: string) {
   if (href === "/writeups/htb") return Shield;
   if (href === "/writeups/ctf") return Flag;
   if (href === "/blog") return BookText;
-  // depth 1 — Red Team Notes
+  // depth 1 - Red Team Notes
   if (href === "/red-team/ad-exploit") return Network;
   if (href === "/red-team/privesc-windows") return Monitor;
   if (href === "/red-team/privesc-linux") return Terminal;
   if (href === "/red-team/esc") return ScrollText;
   if (href === "/red-team/pivoting") return GitFork;
-  // depth 1 — Cheatsheets
+  // depth 1 - Cheatsheets
   if (href === "/cheatsheets/netexec") return Globe;
   if (href === "/cheatsheets/bloodyad") return Droplet;
   if (href === "/cheatsheets/certipy") return FileKey;
-  // depth 1 — My Tools
+  // depth 1 - My Tools
   if (href === "/my-tools/gofenrir") return Crosshair;
   if (href === "/my-tools/bashhound-ce") return PawPrint;
+  // depth 2 - Pivoting sub-pages
+  if (href === "/red-team/pivoting/ligolo") return Cable;
   return null;
 }
 
@@ -115,7 +118,7 @@ function NavTreeItem({
     if (isActive || isAncestor) setOpen(true);
   }, [isActive, isAncestor]);
 
-  const Icon = depth <= 1 ? iconForHref(item.href ?? "") : null;
+  const Icon = depth <= 2 ? iconForHref(item.href ?? "") : null;
   const displayLabel = depth === 0 ? navLabel(item.href ?? "", item.label, t) : item.label;
   const pad = DEPTH_PAD[Math.min(depth, 3)];
 
@@ -226,7 +229,7 @@ function NavigationContent({
           <p className="truncate text-sm font-semibold text-foreground">
             {siteProfile.handle}
           </p>
-          <p className="text-[11px] text-muted-foreground">Knowledge Base</p>
+          <p className="text-[11px] text-muted-foreground">{t.shell.knowledgeBase}</p>
         </div>
       </Link>
 
@@ -284,6 +287,7 @@ function NavigationContent({
 }
 
 function RightRail({ pathname }: { pathname: string }) {
+  const { t } = useLanguage();
   const rail = getRailContext(pathname);
 
   if (!rail.anchors.length && !rail.related.length) return null;
@@ -293,7 +297,7 @@ function RightRail({ pathname }: { pathname: string }) {
       {rail.anchors.length > 0 && (
         <div>
           <p className="mb-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50">
-            On this page
+            {t.shell.onThisPage}
           </p>
           <div className="space-y-0.5">
             {rail.anchors.map((item) => (
@@ -313,7 +317,7 @@ function RightRail({ pathname }: { pathname: string }) {
       {rail.related.length > 0 && (
         <div>
           <p className="mb-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50">
-            Related
+            {t.shell.related}
           </p>
           <div className="space-y-2">
             {rail.related.map((item) => (
@@ -334,6 +338,7 @@ function RightRail({ pathname }: { pathname: string }) {
 }
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
+  const { t } = useLanguage();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -365,7 +370,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </Link>
             <button
               type="button"
-              aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+              aria-label={menuOpen ? t.shell.closeMenu : t.shell.openMenu}
               onClick={() => setMenuOpen((v) => !v)}
               className="p-1.5 text-muted-foreground transition-colors hover:text-foreground"
             >
@@ -389,7 +394,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           />
           <div className="absolute left-0 top-0 h-full w-64 border-r border-border bg-background px-5 py-6 shadow-2xl">
             <div className="mb-5 flex items-center justify-between">
-              <span className="text-sm font-semibold text-foreground">Navigation</span>
+              <span className="text-sm font-semibold text-foreground">{t.shell.navigation}</span>
               <button
                 type="button"
                 onClick={() => setMenuOpen(false)}

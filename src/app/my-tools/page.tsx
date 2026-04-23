@@ -4,23 +4,28 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 
-const tools = [
-  {
-    href: "/my-tools/gofenrir",
-    name: "GoFenrir",
-    description: "Outil de reconnaissance et énumération réseau écrit en Go.",
-    status: "WIP",
-  },
-  {
-    href: "/my-tools/bashhound-ce",
-    name: "BashHound-CE",
-    description: "Collecteur Active Directory pour BloodHound CE, en Bash pur.",
-    status: "Stable",
-  },
-];
-
 export default function MyToolsPage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
+  const tools = [
+    {
+      href: "/my-tools/gofenrir",
+      name: "GoFenrir",
+      description:
+        lang === "fr"
+          ? "Outil de reconnaissance et énumération réseau écrit en Go."
+          : "Network reconnaissance and enumeration tool written in Go.",
+      status: "WIP",
+    },
+    {
+      href: "/my-tools/bashhound-ce",
+      name: "BashHound-CE",
+      description:
+        lang === "fr"
+          ? "Collecteur Active Directory pour BloodHound CE, en Bash pur."
+          : "Active Directory collector for BloodHound CE, written in pure Bash.",
+      status: lang === "fr" ? "Stable" : "Stable",
+    },
+  ];
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">

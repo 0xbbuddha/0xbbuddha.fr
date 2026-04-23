@@ -61,7 +61,7 @@ export default function LigoloPage() {
         },
         {
           cmd: "ligolo-ng » ifconfig",
-          why: "Affiche les interfaces réseau de la machine compromise — cartographie les subnets internes.",
+          why: "Affiche les interfaces réseau de la machine compromise, utile pour cartographier les subnets internes.",
         },
         {
           cmd: "ligolo-ng » start",
@@ -97,7 +97,7 @@ export default function LigoloPage() {
         },
         {
           cmd: "ligolo-ng » listener_add --addr 0.0.0.0:11601 --to 127.0.0.1:11601 --tcp",
-          why: "Ouvre un listener sur l'agent (machine 1) qui redirige vers le proxy — permet à l'agent 2 de s'y connecter.",
+          why: "Ouvre un listener sur l'agent (machine 1) qui redirige vers le proxy. Permet à l'agent 2 de s'y connecter.",
         },
         {
           cmd: "ligolo-ng » tunnel_start --tun ligolo2",

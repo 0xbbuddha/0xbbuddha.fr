@@ -4,36 +4,50 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 
-const sections = [
-  {
-    href: "/red-team/ad-exploit",
-    name: "AD Exploit",
-    description: "Chemins d'exploitation Active Directory : Kerberoasting, AS-REP, ACL abuse, DCSync.",
-  },
-  {
-    href: "/red-team/privesc-windows",
-    name: "Privesc Windows",
-    description: "Élévation de privilèges sur systèmes Windows : services, tokens, DLL hijacking.",
-  },
-  {
-    href: "/red-team/privesc-linux",
-    name: "Privesc Linux",
-    description: "Élévation de privilèges sur Linux : SUID, sudo, capabilities, crons.",
-  },
-  {
-    href: "/red-team/esc",
-    name: "ESC",
-    description: "Abus de mauvaises configurations ADCS : ESC1 à ESC13, Shadow Credentials.",
-  },
-  {
-    href: "/red-team/pivoting",
-    name: "Pivoting",
-    description: "Techniques de pivot et tunnel dans un réseau compromis : port forwarding, SOCKS, Chisel.",
-  },
-];
-
 export default function RedTeamPage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
+  const sections = [
+    {
+      href: "/red-team/ad-exploit",
+      name: "AD Exploit",
+      description:
+        lang === "fr"
+          ? "Chemins d'exploitation Active Directory : Kerberoasting, AS-REP, ACL abuse, DCSync."
+          : "Active Directory attack paths: Kerberoasting, AS-REP, ACL abuse, DCSync.",
+    },
+    {
+      href: "/red-team/privesc-windows",
+      name: "Privesc Windows",
+      description:
+        lang === "fr"
+          ? "Élévation de privilèges sur systèmes Windows : services, tokens, DLL hijacking."
+          : "Windows privilege escalation: services, tokens, DLL hijacking.",
+    },
+    {
+      href: "/red-team/privesc-linux",
+      name: "Privesc Linux",
+      description:
+        lang === "fr"
+          ? "Élévation de privilèges sur Linux : SUID, sudo, capabilities, crons."
+          : "Linux privilege escalation: SUID, sudo, capabilities, cron abuse.",
+    },
+    {
+      href: "/red-team/esc",
+      name: "ESC",
+      description:
+        lang === "fr"
+          ? "Abus de mauvaises configurations ADCS : ESC1 à ESC13, Shadow Credentials."
+          : "ADCS misconfiguration abuse: ESC1 to ESC13 and Shadow Credentials.",
+    },
+    {
+      href: "/red-team/pivoting",
+      name: "Pivoting",
+      description:
+        lang === "fr"
+          ? "Techniques de pivot et tunnel dans un réseau compromis : port forwarding, SOCKS, Chisel."
+          : "Pivoting and tunneling techniques in compromised networks: port forwarding, SOCKS, Chisel.",
+    },
+  ];
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">

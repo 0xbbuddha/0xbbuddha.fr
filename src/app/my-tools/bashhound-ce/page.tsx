@@ -1,6 +1,59 @@
 "use client";
 
+import { useLanguage } from "@/components/LanguageProvider";
+
 export default function BashHoundCEPage() {
+  const { lang } = useLanguage();
+  const translateWhy = (text: string) => {
+    if (lang === "fr") return text;
+    const map: Record<string, string> = {
+      "Recupere la release tar.gz, extrait les fichiers et rend le binaire executable.":
+        "Downloads the tar.gz release, extracts files, and makes the binary executable.",
+      "Alternative en ZIP si tu preferes ce format d'archive.":
+        "ZIP alternative if you prefer this archive format.",
+      "Installation directe via AUR sur Arch Linux.":
+        "Direct installation through AUR on Arch Linux.",
+      "Affiche l'aide complete et verifie que le binaire est fonctionnel.":
+        "Shows full help and verifies the binary works.",
+      "Affiche la version installee de BashHound-CE.":
+        "Displays installed BashHound-CE version.",
+      "Syntaxe generale du collecteur.":
+        "General collector syntax.",
+      "Le domaine AD est obligatoire pour lancer la collecte.":
+        "AD domain is required to start collection.",
+      "Authentification LDAP standard avec identifiants explicites.":
+        "Standard LDAP authentication with explicit credentials.",
+      "Force un DC/FQDN LDAP specifique au lieu de l'auto-decouverte.":
+        "Forces a specific LDAP DC/FQDN instead of auto-discovery.",
+      "Definit le nom du fichier JSON de sortie.":
+        "Sets output JSON filename.",
+      "Genere le ZIP puis supprime les JSON pour reduire les traces locales.":
+        "Creates ZIP then removes JSON files to reduce local artifacts.",
+      "Force LDAP en clair sur le port 389.":
+        "Forces plain LDAP on port 389.",
+      "Active LDAPS/TLS (equivalent a `--port 636`).":
+        "Enables LDAPS/TLS (equivalent to `--port 636`).",
+      "Force explicitement l'absence de TLS meme sur 636 (cas de labo/legacy).":
+        "Explicitly disables TLS even on 636 (lab/legacy cases).",
+      "Mode verbeux pour suivre toutes les etapes de collecte.":
+        "Verbose mode to follow all collection steps.",
+      "Affiche l'aide courte sans lancer de collecte.":
+        "Shows short help without starting collection.",
+      "Collecte complete BloodHound CE (methode par defaut).":
+        "Full BloodHound CE collection (default method).",
+      "Collecte centree DC, sans collecte de sessions.":
+        "DC-focused collection without session collection.",
+      "Recupere uniquement les sessions utilisateurs.":
+        "Collects user sessions only.",
+      "Collecte uniquement les relations de confiance AD.":
+        "Collects AD trust relationships only.",
+      "Collecte uniquement les ACLs pour analyse des abuse paths.":
+        "Collects ACLs only for abuse path analysis.",
+      "Collecte les memberships de groupes AD uniquement.":
+        "Collects AD group memberships only.",
+    };
+    return map[text] ?? text;
+  };
   type CommandItem = {
     cmd: string;
     why: string;
@@ -174,7 +227,9 @@ export default function BashHoundCEPage() {
           BashHound-CE
         </h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
-          Cheatsheet complete de `bashhound-ce` avec toutes les options du help, classees par section et expliquees.
+          {lang === "fr"
+            ? "Cheatsheet complete de `bashhound-ce` avec toutes les options du help, classees par section et expliquees."
+            : "Complete `bashhound-ce` cheatsheet with help options grouped by sections and explained."}
         </p>
       </header>
 
@@ -186,7 +241,7 @@ export default function BashHoundCEPage() {
               <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
                 <code>{item.cmd}</code>
               </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{item.why}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
             </article>
           ))}
         </div>
@@ -200,7 +255,7 @@ export default function BashHoundCEPage() {
               <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
                 <code>{item.cmd}</code>
               </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{item.why}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
             </article>
           ))}
         </div>
@@ -216,7 +271,7 @@ export default function BashHoundCEPage() {
                   <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
                     <code>{item.cmd}</code>
                   </pre>
-                  <p className="mt-2 text-xs text-muted-foreground">{item.why}</p>
+                  <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
                 </article>
               ))}
             </div>
@@ -225,7 +280,9 @@ export default function BashHoundCEPage() {
       </section>
 
       <div className="mt-6 text-xs text-muted-foreground/80">
-        Variables a remplacer : `domain.local`, `USERNAME`, `PASSWORD`, `dc01.domain.local`.
+        {lang === "fr"
+          ? "Variables a remplacer : `domain.local`, `USERNAME`, `PASSWORD`, `dc01.domain.local`."
+          : "Replace these variables: `domain.local`, `USERNAME`, `PASSWORD`, `dc01.domain.local`."}
       </div>
     </div>
   );

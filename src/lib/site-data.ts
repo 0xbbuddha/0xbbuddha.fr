@@ -266,6 +266,18 @@ export const writeups: WriteupEntry[] = [
     focus: "Pwn / seccomp",
   },
   {
+    slug: "eighteen",
+    title: "Eighteen",
+    type: "htb",
+    platform: "HackTheBox",
+    difficulty: "Easy",
+    os: "Windows",
+    date: "2025-12-16",
+    excerpt:
+      "MSSQL impersonation pour extraire un hash Flask depuis une DB interne, crack et spray WinRM, puis BadSuccessor pour hériter des credentials Administrator via un dMSA.",
+    focus: "MSSQL / dMSA BadSuccessor",
+  },
+  {
     slug: "signed",
     title: "Signed",
     type: "htb",
@@ -456,7 +468,7 @@ const staticRailContexts: Record<string, RailContext> = {
   "/cheatsheets/netexec": {
     eyebrow: "Cheatsheets",
     title: "NetExec",
-    summary: "Commandes nxc par protocole — SMB, LDAP, MSSQL, WinRM, SSH.",
+    summary: "Commandes nxc par protocole : SMB, LDAP, MSSQL, WinRM, SSH.",
     anchors: [
       { href: "#install", label: "Installation" },
       { href: "#syntax", label: "Syntax" },
@@ -509,7 +521,7 @@ const staticRailContexts: Record<string, RailContext> = {
   "/my-tools/gofenrir": {
     eyebrow: "My Tools",
     title: "GoFenrir",
-    summary: "Enumérateur AD/SMB Go — LDAP et SMB par section.",
+    summary: "Enumérateur AD/SMB Go : LDAP et SMB par section.",
     anchors: [
       { href: "#install", label: "Installation" },
       { href: "#syntax", label: "Syntax" },
@@ -613,7 +625,7 @@ const staticRailContexts: Record<string, RailContext> = {
     ],
   },
   "/writeups/htb": {
-    eyebrow: "Writeups — HackTheBox",
+    eyebrow: "Writeups HackTheBox",
     title: "Machines HTB",
     summary: "Résolutions triées par difficulté et OS.",
     anchors: [
@@ -629,7 +641,7 @@ const staticRailContexts: Record<string, RailContext> = {
     ],
   },
   "/writeups/ctf": {
-    eyebrow: "Writeups — CTF",
+    eyebrow: "Writeups CTF",
     title: "CTF & Compétitions",
     summary: "Writeups de challenges CTF par événement.",
     anchors: [{ href: "#ctf", label: "Challenges" }],

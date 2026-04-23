@@ -28,14 +28,14 @@ const fr = {
   },
   writeups: {
     htb: {
-      eyebrow: "Writeups — HackTheBox",
+      eyebrow: "Writeups HackTheBox",
       title: "Machines HackTheBox",
       description:
         "Résolutions organisées par difficulté et système d'exploitation.",
       noEntries: "Aucune machine dans cette catégorie.",
     },
     ctf: {
-      eyebrow: "Writeups — CTF",
+      eyebrow: "Writeups CTF",
       title: "CTF & Compétitions",
       description:
         "Writeups de challenges CTF et compétitions de hacking.",
@@ -72,7 +72,7 @@ const fr = {
   },
   myTools: {
     eyebrow: "My Tools",
-    title: "Documentation — outils perso",
+    title: "Documentation outils perso",
     description:
       "Documentation d'usage et notes techniques pour les outils que j'ai construits.",
     wip: "La documentation est en cours de rédaction.",
@@ -81,6 +81,15 @@ const fr = {
     entries: "entrées",
     comingSoon: "À venir",
     langToggle: "EN",
+    protected: "protégé",
+  },
+  shell: {
+    knowledgeBase: "Base de connaissances",
+    onThisPage: "Sur cette page",
+    related: "Liens liés",
+    navigation: "Navigation",
+    openMenu: "Ouvrir le menu",
+    closeMenu: "Fermer le menu",
   },
   article: {
     backBlog: "Blog",
@@ -118,14 +127,14 @@ const en = {
   },
   writeups: {
     htb: {
-      eyebrow: "Writeups — HackTheBox",
+      eyebrow: "Writeups HackTheBox",
       title: "HackTheBox Machines",
       description:
         "Writeups organized by difficulty and operating system.",
       noEntries: "No machines in this category yet.",
     },
     ctf: {
-      eyebrow: "Writeups — CTF",
+      eyebrow: "Writeups CTF",
       title: "CTF & Competitions",
       description:
         "Writeups for CTF challenges and hacking competitions.",
@@ -162,7 +171,7 @@ const en = {
   },
   myTools: {
     eyebrow: "My Tools",
-    title: "Personal Tools — Docs",
+    title: "Personal Tools Docs",
     description:
       "Usage documentation and technical notes for tools I built.",
     wip: "Documentation is being written.",
@@ -171,6 +180,15 @@ const en = {
     entries: "entries",
     comingSoon: "Coming soon",
     langToggle: "FR",
+    protected: "protected",
+  },
+  shell: {
+    knowledgeBase: "Knowledge Base",
+    onThisPage: "On this page",
+    related: "Related",
+    navigation: "Navigation",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
   },
   article: {
     backBlog: "Blog",

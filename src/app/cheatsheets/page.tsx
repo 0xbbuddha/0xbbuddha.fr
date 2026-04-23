@@ -4,29 +4,37 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 
-const sheets = [
-  {
-    href: "/cheatsheets/netexec",
-    name: "NetExec",
-    description: "Énumération et exploitation SMB, WinRM, LDAP, MSSQL, RDP.",
-    tags: ["SMB", "WinRM", "LDAP", "MSSQL"],
-  },
-  {
-    href: "/cheatsheets/bloodyad",
-    name: "BloodyAD",
-    description: "Manipulation d'attributs Active Directory sans binaires suspects.",
-    tags: ["AD", "LDAP", "Privesc"],
-  },
-  {
-    href: "/cheatsheets/certipy",
-    name: "Certipy",
-    description: "Audit et exploitation d'ADCS depuis Linux : find, req, auth, ESC.",
-    tags: ["ADCS", "ESC", "PKI"],
-  },
-];
-
 export default function CheatsheetPage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
+  const sheets = [
+    {
+      href: "/cheatsheets/netexec",
+      name: "NetExec",
+      description:
+        lang === "fr"
+          ? "Énumération et exploitation SMB, WinRM, LDAP, MSSQL, RDP."
+          : "SMB, WinRM, LDAP, MSSQL and RDP enumeration/exploitation.",
+      tags: ["SMB", "WinRM", "LDAP", "MSSQL"],
+    },
+    {
+      href: "/cheatsheets/bloodyad",
+      name: "BloodyAD",
+      description:
+        lang === "fr"
+          ? "Manipulation d'attributs Active Directory sans binaires suspects."
+          : "Active Directory attribute abuse without suspicious binaries.",
+      tags: ["AD", "LDAP", "Privesc"],
+    },
+    {
+      href: "/cheatsheets/certipy",
+      name: "Certipy",
+      description:
+        lang === "fr"
+          ? "Audit et exploitation d'ADCS depuis Linux : find, req, auth, ESC."
+          : "ADCS auditing and exploitation from Linux: find, req, auth, ESC.",
+      tags: ["ADCS", "ESC", "PKI"],
+    },
+  ];
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">

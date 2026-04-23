@@ -48,7 +48,7 @@ export default function ArticleEscapePage() {
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
       <PageHeader
         eyebrow="Writeup"
-        title="Escape — Insomni'hack 2026"
+        title="Escape / Insomni'hack 2026"
         description="Challenge par drp3ab0dy. Un binaire qui te donne une fuite mémoire, un overflow, et absolument aucun moyen d'afficher quoi que ce soit. Le genre de situation où il faut devenir créatif."
         breadcrumbs={[
           { label: "README", href: "/" },

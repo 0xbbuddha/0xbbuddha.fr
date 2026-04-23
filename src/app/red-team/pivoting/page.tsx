@@ -4,17 +4,19 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 
-const tools = [
-  {
-    href: "/red-team/pivoting/ligolo",
-    name: "Ligolo-NG",
-    description: "Tunnel TUN kernel-space, routing de subnets internes et double pivot.",
-    tags: ["TUN", "Tunnel", "Routing", "Double Pivot"],
-  },
-];
-
 export default function PivotingPage() {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
+  const tools = [
+    {
+      href: "/red-team/pivoting/ligolo",
+      name: "Ligolo-NG",
+      description:
+        lang === "fr"
+          ? "Tunnel TUN kernel-space, routing de subnets internes et double pivot."
+          : "Kernel-space TUN tunnel, internal subnet routing and double pivoting.",
+      tags: ["TUN", "Tunnel", "Routing", "Double Pivot"],
+    },
+  ];
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
@@ -26,7 +28,9 @@ export default function PivotingPage() {
           Pivoting
         </h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
-          Techniques de pivot réseau — tunnels, routing de subnets internes, double pivot.
+          {lang === "fr"
+            ? "Techniques de pivot réseau : tunnels, routing de subnets internes, double pivot."
+            : "Network pivoting techniques: tunnels, internal subnet routing and double pivoting."}
         </p>
         <div className="mt-4 text-xs text-muted-foreground">
           {tools.length} {t.common.entries}

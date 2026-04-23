@@ -74,7 +74,7 @@ export default function HTBPage() {
                               {entry.spoiler && (
                                 <>
                                   <span>·</span>
-                                  <span className="text-primary">protégé</span>
+                                  <span className="text-primary">{t.common.protected}</span>
                                 </>
                               )}
                             </div>

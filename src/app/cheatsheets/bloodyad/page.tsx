@@ -1,6 +1,57 @@
 "use client";
 
+import { useLanguage } from "@/components/LanguageProvider";
+
 export default function BloodyADPage() {
+  const { lang } = useLanguage();
+  const translateWhy = (text: string) => {
+    if (lang === "fr") return text;
+    const exact: Record<string, string> = {
+      "Installe bloodyAD dans un environnement isolé via pipx (recommandé).":
+        "Installs bloodyAD in an isolated pipx environment (recommended).",
+      "Installation via APT sur Debian/Ubuntu si le paquet est disponible.":
+        "Installs through APT on Debian/Ubuntu if package is available.",
+      "Vérifie l'installation et affiche les commandes disponibles.":
+        "Verifies installation and shows available commands.",
+      "Syntaxe générale avec authentification password classique.":
+        "General syntax with standard password authentication.",
+      "Pass-the-Hash : préfixer le hash avec `:` en guise de mot de passe.":
+        "Pass-the-Hash: prefix hash with `:` as password.",
+      "Authentification Kerberos (ccache courant). Utiliser le FQDN, pas l'IP.":
+        "Kerberos authentication (current ccache). Use FQDN, not IP.",
+    };
+    if (exact[text]) return exact[text];
+    return text
+      .replace(/^Liste /, "Lists ")
+      .replace(/^Récupère /, "Retrieves ")
+      .replace(/^Récupère /, "Retrieves ")
+      .replace(/^Lit /, "Reads ")
+      .replace(/^Affiche /, "Displays ")
+      .replace(/^Trouve /, "Finds ")
+      .replace(/^Inclut /, "Includes ")
+      .replace(/^Dump /, "Dumps ")
+      .replace(/^Ajoute /, "Adds ")
+      .replace(/^Retire /, "Removes ")
+      .replace(/^Accorde /, "Grants ")
+      .replace(/^Change /, "Changes ")
+      .replace(/^Crée /, "Creates ")
+      .replace(/^Configure /, "Configures ")
+      .replace(/^Force /, "Forces ")
+      .replace(/^Active /, "Enables ")
+      .replace(/^Supprime /, "Removes ")
+      .replaceAll("domaine", "domain")
+      .replaceAll("utilisateur", "user")
+      .replaceAll("utilisateurs", "users")
+      .replaceAll("groupes", "groups")
+      .replaceAll("groupe", "group")
+      .replaceAll("machine", "machine")
+      .replaceAll("comptes", "accounts")
+      .replaceAll("compte", "account")
+      .replaceAll("mot de passe", "password")
+      .replaceAll("mots de passe", "passwords")
+      .replaceAll("depuis Linux", "from Linux")
+      .replaceAll("pour", "for");
+  };
   type CommandItem = {
     cmd: string;
     why: string;
@@ -32,7 +83,7 @@ export default function BloodyADPage() {
       { cmd: "bloodyAD --help", why: "Vérifie l'installation et affiche les commandes disponibles." },
       {
         cmd: "bloodyAD --host $DC -d $DOMAIN -u '$USER' -p '$PASS' [command]",
-        why: "Syntaxe générale — authentification password classique.",
+        why: "Syntaxe générale avec authentification password classique.",
       },
       {
         cmd: "bloodyAD --host $DC -d $DOMAIN -u '$USER' -p ':$NTHASH' [command]",
@@ -288,7 +339,9 @@ export default function BloodyADPage() {
           BloodyAD
         </h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
-          Cheatsheet bloodyAD — énumération AD, ACL, Kerberos, credentials et exploitation depuis Linux.
+          {lang === "fr"
+            ? "Cheatsheet bloodyAD : énumération AD, ACL, Kerberos, credentials et exploitation depuis Linux."
+            : "bloodyAD cheatsheet: AD enumeration, ACL, Kerberos, credentials, and Linux-based abuse."}
         </p>
       </header>
 
@@ -300,7 +353,7 @@ export default function BloodyADPage() {
               <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
                 <code>{item.cmd}</code>
               </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{item.why}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
             </article>
           ))}
         </div>
@@ -314,7 +367,7 @@ export default function BloodyADPage() {
               <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
                 <code>{item.cmd}</code>
               </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{item.why}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
             </article>
           ))}
         </div>
@@ -330,7 +383,7 @@ export default function BloodyADPage() {
                   <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
                     <code>{item.cmd}</code>
                   </pre>
-                  <p className="mt-2 text-xs text-muted-foreground">{item.why}</p>
+                  <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
                 </article>
               ))}
             </div>

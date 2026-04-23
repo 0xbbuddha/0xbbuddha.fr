@@ -1,6 +1,63 @@
 "use client";
 
+import { useLanguage } from "@/components/LanguageProvider";
+
 export default function NetexecPage() {
+  const { lang } = useLanguage();
+  const translateWhy = (text: string) => {
+    if (lang === "fr") return text;
+    let out = text;
+    const exact: Record<string, string> = {
+      "Installe NetExec proprement via pipx depuis le depot officiel.":
+        "Installs NetExec cleanly via pipx from the official repository.",
+      "Verifie que le binaire est accessible et affiche la version installee.":
+        "Checks that the binary is accessible and shows installed version.",
+      "Affiche l'aide globale et la liste des protocoles disponibles.":
+        "Shows global help and the list of available protocols.",
+      "Affiche toutes les options du module SMB.":
+        "Shows all SMB module options.",
+      "Syntaxe commune a tous les protocoles.":
+        "Common syntax for all protocols.",
+      "Cible : IP unique, plage CIDR, range ou fichier avec -t targets.txt.":
+        "Target can be: single IP, CIDR range, host range, or file with -t targets.txt.",
+    };
+    if (exact[out]) return exact[out];
+    out = out
+      .replace(/^Liste /, "Lists ")
+      .replace(/^Affiche /, "Displays ")
+      .replace(/^Teste /, "Tests ")
+      .replace(/^Tente /, "Attempts ")
+      .replace(/^Force /, "Forces ")
+      .replace(/^Enumere /, "Enumerates ")
+      .replace(/^Recupere /, "Retrieves ")
+      .replace(/^Execute /, "Executes ")
+      .replace(/^Detecte /, "Detects ")
+      .replace(/^Telecharge /, "Downloads ")
+      .replace(/^Uploade /, "Uploads ")
+      .replace(/^Valide /, "Validates ")
+      .replace(/^Sonde /, "Probes ")
+      .replace(/^Continue /, "Continues ")
+      .replaceAll("domaine", "domain")
+      .replaceAll("comptes", "accounts")
+      .replaceAll("compte", "account")
+      .replaceAll("utilisateurs", "users")
+      .replaceAll("utilisateur", "user")
+      .replaceAll("partages", "shares")
+      .replaceAll("cible", "target")
+      .replaceAll("cibles", "targets")
+      .replaceAll("mot de passe", "password")
+      .replaceAll("mots de passe", "passwords")
+      .replaceAll("hashes", "hashes")
+      .replaceAll("sortie", "output")
+      .replaceAll("reseau", "network")
+      .replaceAll("machine", "machine")
+      .replaceAll("machines", "machines")
+      .replaceAll("avec", "with")
+      .replaceAll("sans", "without")
+      .replaceAll("pour", "for")
+      .replaceAll("via", "via");
+    return out;
+  };
   type CommandItem = {
     cmd: string;
     why: string;
@@ -264,7 +321,9 @@ export default function NetexecPage() {
           NetExec
         </h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
-          Cheatsheet complete nxc — SMB, LDAP, MSSQL, WinRM, SSH. Auth, enumeration, exploitation et modules.
+          {lang === "fr"
+            ? "Cheatsheet complete nxc : SMB, LDAP, MSSQL, WinRM, SSH. Auth, enumeration, exploitation et modules."
+            : "Complete nxc cheatsheet: SMB, LDAP, MSSQL, WinRM, SSH. Auth, enumeration, exploitation and modules."}
         </p>
       </header>
 
@@ -276,7 +335,7 @@ export default function NetexecPage() {
               <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
                 <code>{item.cmd}</code>
               </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{item.why}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
             </article>
           ))}
         </div>
@@ -290,7 +349,7 @@ export default function NetexecPage() {
               <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
                 <code>{item.cmd}</code>
               </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{item.why}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
             </article>
           ))}
         </div>
@@ -306,7 +365,7 @@ export default function NetexecPage() {
                   <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
                     <code>{item.cmd}</code>
                   </pre>
-                  <p className="mt-2 text-xs text-muted-foreground">{item.why}</p>
+                  <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
                 </article>
               ))}
             </div>
