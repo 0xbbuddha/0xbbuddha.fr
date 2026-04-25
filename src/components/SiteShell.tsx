@@ -89,6 +89,27 @@ function AphroditeIcon({ className }: { className?: string }) {
   );
 }
 
+function GoFenrirIcon({ className }: { className?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src="/gofenrir-logo.png" alt="GoFenrir" className={className} />
+  );
+}
+
+function BashHoundIcon({ className }: { className?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src="/bashhound-ce-logo.png" alt="BashHound-CE" className={className} />
+  );
+}
+
+function NetExecIcon({ className }: { className?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src="/netexec-logo.png" alt="NetExec" className={className} />
+  );
+}
+
 function ArchLinuxIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -119,19 +140,19 @@ function iconForHref(href: string) {
   if (href === "/red-team/esc") return ScrollText;
   if (href === "/red-team/pivoting") return GitFork;
   // depth 1 - Cheatsheets
-  if (href === "/cheatsheets/netexec") return Globe;
+  if (href === "/cheatsheets/netexec") return NetExecIcon;
   if (href === "/cheatsheets/bloodyad") return Droplet;
   if (href === "/cheatsheets/certipy") return FileKey;
   // depth 1 - My Tools
-  if (href === "/my-tools/gofenrir") return Crosshair;
-  if (href === "/my-tools/bashhound-ce") return PawPrint;
+  if (href === "/my-tools/gofenrir") return GoFenrirIcon;
+  if (href === "/my-tools/bashhound-ce") return BashHoundIcon;
   // depth 2 - AD Exploit categories
   if (href === "/red-team/ad-exploit/information-gathering") return Eye;
   if (href === "/red-team/ad-exploit/pre-exploitation") return Zap;
   if (href === "/red-team/ad-exploit/exploitation") return Bug;
   if (href === "/red-team/ad-exploit/post-exploitation") return Trophy;
   // depth 3 - Information Gathering
-  if (href === "/red-team/ad-exploit/information-gathering/netexec") return Globe;
+  if (href === "/red-team/ad-exploit/information-gathering/netexec") return NetExecIcon;
   if (href === "/red-team/ad-exploit/information-gathering/bloodyad") return Droplet;
   if (href === "/red-team/ad-exploit/information-gathering/bloodhound") return PawPrint;
   if (href === "/red-team/ad-exploit/information-gathering/password-misconfigs") return Key;
