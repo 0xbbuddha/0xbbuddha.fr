@@ -42,10 +42,10 @@ export default function HpPrinterPage() {
             : "Lists available printers and shows the default printer.",
         },
         {
-          cmd: "lp -d HP_OfficeJet_Pro_9020 'mon-fichier.pdf'",
+          cmd: "lp -d PRINTER_NAME 'mon-fichier.pdf'",
           why: lang === "fr"
-            ? "Envoie un fichier PDF à l'imprimante spécifiée. Adapter le nom d'imprimante."
-            : "Sends a PDF file to the specified printer. Adapt the printer name.",
+            ? "Envoie un fichier PDF à l'imprimante spécifiée. Remplacer PRINTER_NAME par le nom retourné par lpstat."
+            : "Sends a PDF file to the specified printer. Replace PRINTER_NAME with the name returned by lpstat.",
         },
         {
           cmd: "lpstat -o",
@@ -54,16 +54,16 @@ export default function HpPrinterPage() {
             : "Shows currently queued print jobs.",
         },
         {
-          cmd: "lpoptions -d HP_OfficeJet_Pro_9020",
+          cmd: "lpoptions -d PRINTER_NAME",
           why: lang === "fr"
-            ? "Définit l'imprimante comme imprimante par défaut."
-            : "Sets the printer as the default printer.",
+            ? "Définit l'imprimante comme imprimante par défaut. Remplacer PRINTER_NAME par le nom retourné par lpstat."
+            : "Sets the printer as the default printer. Replace PRINTER_NAME with the name returned by lpstat.",
         },
         {
-          cmd: "cancel -a HP_OfficeJet_Pro_9020",
+          cmd: "cancel -a PRINTER_NAME",
           why: lang === "fr"
-            ? "Annule tous les jobs d'impression en cours sur cette imprimante."
-            : "Cancels all queued print jobs on this printer.",
+            ? "Annule tous les jobs d'impression en cours. Remplacer PRINTER_NAME par le nom retourné par lpstat."
+            : "Cancels all queued print jobs. Replace PRINTER_NAME with the name returned by lpstat.",
         },
         {
           cmd: "http://localhost:631",
