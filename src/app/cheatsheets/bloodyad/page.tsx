@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/components/LanguageProvider";
+import { CheatsheetCommandCard } from "@/components/CheatsheetCommandCard";
 
 export default function BloodyADPage() {
   const { lang } = useLanguage();
@@ -10,47 +11,89 @@ export default function BloodyADPage() {
       "Installe bloodyAD dans un environnement isolé via pipx (recommandé).":
         "Installs bloodyAD in an isolated pipx environment (recommended).",
       "Installation via APT sur Debian/Ubuntu si le paquet est disponible.":
-        "Installs through APT on Debian/Ubuntu if package is available.",
+        "Installs through APT on Debian/Ubuntu if the package is available.",
       "Vérifie l'installation et affiche les commandes disponibles.":
-        "Verifies installation and shows available commands.",
+        "Verifies the installation and shows available commands.",
       "Syntaxe générale avec authentification password classique.":
         "General syntax with standard password authentication.",
       "Pass-the-Hash : préfixer le hash avec `:` en guise de mot de passe.":
-        "Pass-the-Hash: prefix hash with `:` as password.",
+        "Pass-the-Hash: prefix the hash with `:` as the password value.",
       "Authentification Kerberos (ccache courant). Utiliser le FQDN, pas l'IP.":
-        "Kerberos authentication (current ccache). Use FQDN, not IP.",
+        "Kerberos authentication (current ccache). Use the FQDN, not the IP.",
+      "Liste tous les comptes utilisateurs du domaine.":
+        "Lists all user accounts in the domain.",
+      "Récupère tous les attributs LDAP d'un utilisateur spécifique.":
+        "Retrieves all LDAP attributes for a specific user.",
+      "Lit les flags UAC (ACCOUNTDISABLE, DONT_REQ_PREAUTH, etc.).":
+        "Reads UAC flags (`ACCOUNTDISABLE`, `DONT_REQ_PREAUTH`, etc.).",
+      "Récupère des attributs précis sur un objet utilisateur.":
+        "Retrieves specific attributes from a user object.",
+      "Liste tous les groupes du domaine.":
+        "Lists all groups in the domain.",
+      "Énumère les membres d'un groupe AD.":
+        "Enumerates the members of an AD group.",
+      "Affiche tous les groupes dont un utilisateur est membre.":
+        "Displays all groups where a user is a member.",
+      "Liste tous les comptes machine du domaine.":
+        "Lists all machine accounts in the domain.",
+      "Énumère les relations de confiance inter-domaines.":
+        "Enumerates inter-domain trust relationships.",
+      "Récupère la politique de mot de passe du domaine.":
+        "Retrieves the domain password policy.",
+      "Vérifie le quota de comptes machine créables par un utilisateur standard.":
+        "Checks how many machine accounts a standard user can create.",
+      "Dump l'ensemble des enregistrements DNS du domaine.":
+        "Dumps all DNS records from the domain.",
+      "Trouve tous les attributs sur lesquels l'utilisateur courant a des droits d'écriture.":
+        "Finds all attributes where the current user has write permissions.",
+      "Inclut les objets supprimés dans la recherche de droits d'écriture.":
+        "Includes deleted objects in write-permission discovery.",
+      "Affiche le descripteur de sécurité d'un objet (ACL lisible).":
+        "Displays an object's security descriptor (readable ACL).",
+      "Trouve les comptes kerberoastables (SPN défini).":
+        "Finds kerberoastable accounts (SPN configured).",
+      "Trouve les comptes AS-REP roastables (DONT_REQ_PREAUTH activé et compte actif).":
+        "Finds AS-REP roastable accounts (`DONT_REQ_PREAUTH` enabled and account active).",
+      "Lit le secret géré d'un compte gMSA/dMSA (requiert les droits ACL appropriés).":
+        "Reads the managed secret of a gMSA/dMSA account (requires appropriate ACL rights).",
+      "Dump les mots de passe LAPS de toutes les machines accessibles.":
+        "Dumps LAPS passwords from all accessible machines.",
+      "Lit le mot de passe LAPS d'une machine spécifique.":
+        "Reads the LAPS password of a specific machine.",
+      "Force le changement de mot de passe d'un utilisateur (requiert GenericAll/WriteProp).":
+        "Forces a user password change (requires `GenericAll`/`WriteProp`).",
+      "Ajoute un utilisateur ou objet dans un groupe AD.":
+        "Adds a user or object to an AD group.",
+      "Retire un membre d'un groupe AD.":
+        "Removes a member from an AD group.",
+      "Accorde GenericAll sur un objet cible (contrôle total).":
+        "Grants `GenericAll` on a target object (full control).",
+      "Change le propriétaire d'un objet AD (permet d'accorder ensuite des droits).":
+        "Changes the owner of an AD object (then allows granting rights).",
+      "Accorde les droits DCSync (GetChangesAll) à un objet pour extraire les hashes du domaine.":
+        "Grants DCSync rights (`GetChangesAll`) to an object to extract domain hashes.",
+      "Active AS-REP roasting sur un compte (supprime la pré-authentification Kerberos).":
+        "Enables AS-REP roasting on an account (removes Kerberos pre-authentication).",
+      "Réactive un compte désactivé.":
+        "Re-enables a disabled account.",
+      "Active la constrained delegation avec protocol transition (S4U2Self).":
+        "Enables constrained delegation with protocol transition (`S4U2Self`).",
+      "Injecte des shadow credentials (msDS-KeyCredentialLink) pour obtenir un TGT sans mot de passe.":
+        "Injects shadow credentials (`msDS-KeyCredentialLink`) to obtain a TGT without a password.",
+      "Assigne un SPN à un compte pour le rendre kerberoastable.":
+        "Assigns an SPN to an account to make it kerberoastable.",
+      "Configure le RBCD (Resource-Based Constrained Delegation) sur une machine cible.":
+        "Configures RBCD (Resource-Based Constrained Delegation) on a target machine.",
+      "Crée un compte machine (utile pour RBCD si le quota MachineAccountQuota > 0).":
+        "Creates a machine account (useful for RBCD when `MachineAccountQuota > 0`).",
+      "Exploite la primitive BadSuccessor via un compte dMSA contrôlé.":
+        "Exploits the BadSuccessor primitive through a controlled dMSA account.",
+      "Ajoute un enregistrement DNS (utile pour NTLM relay ou coercition).":
+        "Adds a DNS record (useful for NTLM relay or coercion).",
+      "Supprime un enregistrement DNS précédemment ajouté (nettoyage).":
+        "Removes a previously added DNS record (cleanup).",
     };
-    if (exact[text]) return exact[text];
-    return text
-      .replace(/^Liste /, "Lists ")
-      .replace(/^Récupère /, "Retrieves ")
-      .replace(/^Récupère /, "Retrieves ")
-      .replace(/^Lit /, "Reads ")
-      .replace(/^Affiche /, "Displays ")
-      .replace(/^Trouve /, "Finds ")
-      .replace(/^Inclut /, "Includes ")
-      .replace(/^Dump /, "Dumps ")
-      .replace(/^Ajoute /, "Adds ")
-      .replace(/^Retire /, "Removes ")
-      .replace(/^Accorde /, "Grants ")
-      .replace(/^Change /, "Changes ")
-      .replace(/^Crée /, "Creates ")
-      .replace(/^Configure /, "Configures ")
-      .replace(/^Force /, "Forces ")
-      .replace(/^Active /, "Enables ")
-      .replace(/^Supprime /, "Removes ")
-      .replaceAll("domaine", "domain")
-      .replaceAll("utilisateur", "user")
-      .replaceAll("utilisateurs", "users")
-      .replaceAll("groupes", "groups")
-      .replaceAll("groupe", "group")
-      .replaceAll("machine", "machine")
-      .replaceAll("comptes", "accounts")
-      .replaceAll("compte", "account")
-      .replaceAll("mot de passe", "password")
-      .replaceAll("mots de passe", "passwords")
-      .replaceAll("depuis Linux", "from Linux")
-      .replaceAll("pour", "for");
+    return exact[text] ?? "Command purpose available in French only.";
   };
   type CommandItem = {
     cmd: string;
@@ -349,12 +392,7 @@ export default function BloodyADPage() {
         <h2 className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{installMethods.title}</h2>
         <div className="space-y-4">
           {installMethods.commands.map((item) => (
-            <article key={item.cmd} className="rounded-sm border border-border/60 p-3">
-              <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
-                <code>{item.cmd}</code>
-              </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
-            </article>
+            <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
           ))}
         </div>
       </section>
@@ -363,12 +401,7 @@ export default function BloodyADPage() {
         <h2 className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{basics.title}</h2>
         <div className="space-y-4">
           {basics.commands.map((item) => (
-            <article key={item.cmd} className="rounded-sm border border-border/60 p-3">
-              <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
-                <code>{item.cmd}</code>
-              </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
-            </article>
+            <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
           ))}
         </div>
       </section>
@@ -379,12 +412,7 @@ export default function BloodyADPage() {
             <h2 className="font-mono text-xs uppercase tracking-widest text-primary">{section.title}</h2>
             <div className="mt-3 space-y-4">
               {section.commands.map((item) => (
-                <article key={item.cmd} className="rounded-sm border border-border/60 p-3">
-                  <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
-                    <code>{item.cmd}</code>
-                  </pre>
-                  <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
-                </article>
+                <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
               ))}
             </div>
           </article>

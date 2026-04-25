@@ -351,46 +351,10 @@ function buildCTFTree(): NavigationItem[] {
 export const navigationGroups: NavigationGroup[] = [
   {
     titleKey: "startHere",
-    items: [{ href: "/", label: "README", badge: "00" }],
-  },
-  {
-    titleKey: "redTeam",
-    items: [{
-      href: "/red-team",
-      label: "Red Team Notes",
-      children: [
-        { href: "/red-team/ad-exploit", label: "AD Exploit" },
-        { href: "/red-team/privesc-windows", label: "Privesc Windows" },
-        { href: "/red-team/privesc-linux", label: "Privesc Linux" },
-        { href: "/red-team/esc", label: "ESC" },
-        { href: "/red-team/pivoting", label: "Pivoting", children: [
-          { href: "/red-team/pivoting/ligolo", label: "Ligolo-NG" },
-        ]},
-      ],
-    }],
-  },
-  {
-    titleKey: "cheatsheets",
-    items: [{
-      href: "/cheatsheets",
-      label: "Cheatsheets",
-      children: [
-        { href: "/cheatsheets/netexec", label: "NetExec" },
-        { href: "/cheatsheets/bloodyad", label: "BloodyAD" },
-        { href: "/cheatsheets/certipy", label: "Certipy" },
-      ],
-    }],
-  },
-  {
-    titleKey: "myTools",
-    items: [{
-      href: "/my-tools",
-      label: "My Tools",
-      children: [
-        { href: "/my-tools/gofenrir", label: "GoFenrir" },
-        { href: "/my-tools/bashhound-ce", label: "BashHound-CE" },
-      ],
-    }],
+    items: [
+      { href: "/", label: "README", badge: "00" },
+      { href: "/search", label: "Search" },
+    ],
   },
   {
     titleKey: "writeups",
@@ -410,12 +374,221 @@ export const navigationGroups: NavigationGroup[] = [
     ],
   },
   {
+    titleKey: "redTeam",
+    items: [{
+      href: "/red-team",
+      label: "Red Team Notes",
+      children: [
+        {
+          href: "/red-team/ad-exploit",
+          label: "AD Exploit",
+          children: [
+            {
+              href: "/red-team/ad-exploit/information-gathering",
+              label: "Enumeration",
+              children: [
+                { href: "/red-team/ad-exploit/information-gathering/netexec", label: "nxc" },
+                { href: "/red-team/ad-exploit/information-gathering/bloodyad", label: "bloodyAD" },
+                { href: "/red-team/ad-exploit/information-gathering/bloodhound", label: "BloodHound" },
+                { href: "/red-team/ad-exploit/information-gathering/password-misconfigs", label: "Exposed Secrets" },
+                { href: "/red-team/ad-exploit/information-gathering/laps-enum", label: "LAPS" },
+                { href: "/red-team/ad-exploit/information-gathering/kerberos-auth", label: "Kerberos" },
+              ],
+            },
+            {
+              href: "/red-team/ad-exploit/pre-exploitation",
+              label: "Pre-Exploitation",
+              children: [
+                { href: "/red-team/ad-exploit/pre-exploitation/relay-attacks", label: "NTLM Relay" },
+                { href: "/red-team/ad-exploit/pre-exploitation/phishing", label: "Initial Access" },
+                { href: "/red-team/ad-exploit/pre-exploitation/network-attacks", label: "Network Attacks" },
+                { href: "/red-team/ad-exploit/pre-exploitation/wsus", label: "WSUS" },
+                { href: "/red-team/ad-exploit/pre-exploitation/password-misconfigs", label: "GPP & Secrets" },
+                { href: "/red-team/ad-exploit/pre-exploitation/coercion", label: "Coercion" },
+              ],
+            },
+            {
+              href: "/red-team/ad-exploit/exploitation",
+              label: "Exploitation",
+              children: [
+                { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Cred Dump" },
+                { href: "/red-team/ad-exploit/exploitation/kerberos-attacks", label: "Kerberos" },
+                { href: "/red-team/ad-exploit/exploitation/delegation-attacks", label: "Delegation" },
+                { href: "/red-team/ad-exploit/exploitation/domain-privesc", label: "Domain PrivEsc" },
+                { href: "/red-team/ad-exploit/exploitation/bloodyad-attacks", label: "bloodyAD" },
+                {
+                  href: "/red-team/ad-exploit/exploitation/acl-gpo",
+                  label: "ACL & GPO",
+                  children: [
+                    { href: "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse", label: "ACL" },
+                    { href: "/red-team/ad-exploit/exploitation/acl-gpo/adcs-attacks", label: "ADCS" },
+                  ],
+                },
+                { href: "/red-team/ad-exploit/exploitation/mssql-attacks", label: "MSSQL" },
+                { href: "/red-team/ad-exploit/exploitation/laps-abuse", label: "LAPS" },
+                { href: "/red-team/ad-exploit/exploitation/process-injection", label: "Injection" },
+                { href: "/red-team/ad-exploit/exploitation/account-operators", label: "Account Operators" },
+                { href: "/red-team/ad-exploit/exploitation/ad-recycle-bin", label: "AD Recycle Bin" },
+                { href: "/red-team/ad-exploit/exploitation/gpo-abuse", label: "GPO" },
+                { href: "/red-team/ad-exploit/exploitation/misc-cves", label: "Notable CVEs" },
+              ],
+            },
+            {
+              href: "/red-team/ad-exploit/post-exploitation",
+              label: "Post-Exploitation",
+              children: [
+                { href: "/red-team/ad-exploit/post-exploitation/lateral-movement", label: "Lateral Movement" },
+                { href: "/red-team/ad-exploit/post-exploitation/procedures", label: "Cleanup" },
+                {
+                  href: "/red-team/ad-exploit/post-exploitation/win-privesc",
+                  label: "Windows PrivEsc",
+                  children: [
+                    { href: "/red-team/ad-exploit/post-exploitation/win-privesc/potato-attacks", label: "Potatoes" },
+                    { href: "/red-team/ad-exploit/post-exploitation/win-privesc/credential-dumping", label: "Cred Dump" },
+                    { href: "/red-team/ad-exploit/post-exploitation/win-privesc/local-privesc", label: "Local PrivEsc" },
+                    { href: "/red-team/ad-exploit/post-exploitation/win-privesc/server-operators", label: "Server Operators" },
+                    { href: "/red-team/ad-exploit/post-exploitation/win-privesc/ad-recycle-bin", label: "AD Recycle Bin" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          href: "/red-team/privesc-windows",
+          label: "Privesc Windows",
+          children: [
+            { href: "/red-team/privesc-windows/local-enum", label: "Local Enum" },
+            {
+              href: "/red-team/privesc-windows/credential-access",
+              label: "Credential Access",
+              children: [
+                { href: "/red-team/privesc-windows/credential-dumping", label: "Credential Dumping" },
+              ],
+            },
+            {
+              href: "/red-team/privesc-windows/privilege-abuse",
+              label: "Privilege Abuse",
+              children: [
+                { href: "/red-team/privesc-windows/service-abuse", label: "Service Abuse" },
+              ],
+            },
+          ],
+        },
+        {
+          href: "/red-team/privesc-linux",
+          label: "Privesc Linux",
+          children: [
+            {
+              href: "/red-team/privesc-linux/privilege-paths",
+              label: "Privilege Paths",
+              children: [
+                { href: "/red-team/privesc-linux/sudo-suid", label: "Sudo / SUID" },
+                { href: "/red-team/privesc-linux/capabilities-cron", label: "Capabilities / Cron" },
+                { href: "/red-team/privesc-linux/docker-privesc", label: "Docker" },
+              ],
+            },
+          ],
+        },
+        {
+          href: "/red-team/esc",
+          label: "ESC",
+          children: [
+            {
+              href: "/red-team/esc/abuse-paths",
+              label: "Abuse Paths",
+              children: [
+                { href: "/red-team/esc/esc1-esc2", label: "ESC1 / ESC2" },
+                { href: "/red-team/esc/shadow-credentials", label: "Shadow Credentials" },
+              ],
+            },
+          ],
+        },
+        {
+          href: "/red-team/pivoting",
+          label: "Pivoting",
+          children: [
+            { href: "/red-team/pivoting/ligolo", label: "Ligolo-NG" },
+          ],
+        },
+        {
+          href: "/red-team/c2",
+          label: "C2",
+          children: [
+            {
+              href: "/red-team/c2/mythic",
+              label: "Mythic",
+              children: [
+                {
+                  href: "/red-team/c2/mythic/agents",
+                  label: "Agents",
+                  children: [
+                    { href: "/red-team/c2/mythic/agents/aphrodite", label: "Aphrodite" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    }],
+  },
+  {
+    titleKey: "pentestWeb",
+    items: [{ href: "/red-team/pentest-web", label: "Pentest Web Notes" }],
+  },
+  {
+    titleKey: "archLinux",
+    items: [{
+      href: "/arch-linux",
+      label: "Arch Linux Notes",
+      children: [
+        { href: "/arch-linux/pacman", label: "Pacman" },
+        { href: "/arch-linux/zram", label: "Zram" },
+        { href: "/arch-linux/grub-rescue", label: "GRUB Rescue" },
+        { href: "/arch-linux/kernel-recovery", label: "Kernel Recovery" },
+        { href: "/arch-linux/hp-printer", label: "HP Printer" },
+      ],
+    }],
+  },
+  {
+    titleKey: "cheatsheets",
+    items: [{
+      href: "/cheatsheets",
+      label: "Cheatsheets",
+      children: [
+        { href: "/cheatsheets/netexec", label: "NetExec" },
+        { href: "/cheatsheets/bloodyad", label: "BloodyAD" },
+        { href: "/cheatsheets/certipy", label: "Certipy" },
+        {
+          href: "/my-tools",
+          label: "My Tools",
+          children: [
+            { href: "/my-tools/gofenrir", label: "GoFenrir" },
+            { href: "/my-tools/bashhound-ce", label: "BashHound-CE" },
+          ],
+        },
+      ],
+    }],
+  },
+  {
     titleKey: "blog",
     items: [{ href: "/blog", label: "Blog", badge: String(articles.length).padStart(2, "0") }],
   },
 ];
 
 const staticRailContexts: Record<string, RailContext> = {
+  "/search": {
+    eyebrow: "Search",
+    title: "Recherche globale",
+    summary: "Recherche par outil, commande, tag, writeup et article.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/cheatsheets", label: "Cheatsheets", meta: "Command references" },
+      { href: "/my-tools", label: "My Tools", meta: "Personal tooling" },
+    ],
+  },
   "/": {
     eyebrow: "README",
     title: "0xbbuddha",
@@ -554,12 +727,34 @@ const staticRailContexts: Record<string, RailContext> = {
   "/red-team/ad-exploit": {
     eyebrow: "Red Team Notes",
     title: "AD Exploit",
-    summary: "Chaînes d'exploitation Active Directory.",
+    summary: "Workflow AD de bout en bout : de la cartographie à la compromission.",
     anchors: [],
     facts: [],
     related: [
-      { href: "/red-team/privesc-windows", label: "Privesc Windows", meta: "Red Team Notes" },
       { href: "/cheatsheets/netexec", label: "NetExec", meta: "Cheatsheet" },
+      { href: "/cheatsheets/bloodyad", label: "BloodyAD", meta: "Cheatsheet" },
+    ],
+  },
+  "/red-team/ad-exploit/information-gathering": {
+    eyebrow: "AD Exploit",
+    title: "Information Gathering",
+    summary: "Cartographier le domaine avant d'agir : NetExec, BloodyAD, BloodHound et plus.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/pre-exploitation", label: "Pre-Exploitation", meta: "AD Exploit" },
+      { href: "/cheatsheets/netexec", label: "NetExec", meta: "Cheatsheet" },
+    ],
+  },
+  "/red-team/ad-exploit/pre-exploitation": {
+    eyebrow: "AD Exploit",
+    title: "Pre-Exploitation",
+    summary: "Relay, coercition, phishing et abus réseau avant exploitation.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/information-gathering", label: "Information Gathering", meta: "AD Exploit" },
+      { href: "/red-team/ad-exploit/exploitation", label: "Exploitation", meta: "AD Exploit" },
     ],
   },
   "/red-team/privesc-windows": {
@@ -584,6 +779,20 @@ const staticRailContexts: Record<string, RailContext> = {
       { href: "/red-team/pivoting", label: "Pivoting", meta: "Red Team Notes" },
     ],
   },
+  "/red-team/privesc-linux/docker-privesc": {
+    eyebrow: "Privesc Linux",
+    title: "Docker Privesc",
+    summary: "Groupe docker = root sur l'hôte via mount + chroot.",
+    anchors: [
+      { href: "#enum", label: "Enumeration" },
+      { href: "#exploit", label: "Exploitation" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/privesc-linux/sudo-suid", label: "Sudo / SUID", meta: "Privesc Linux" },
+      { href: "/red-team/privesc-linux/capabilities-cron", label: "Capabilities / Cron", meta: "Privesc Linux" },
+    ],
+  },
   "/red-team/esc": {
     eyebrow: "Red Team Notes",
     title: "ESC",
@@ -606,6 +815,157 @@ const staticRailContexts: Record<string, RailContext> = {
       { href: "/red-team/ad-exploit", label: "AD Exploit", meta: "Red Team Notes" },
     ],
   },
+  "/red-team/c2": {
+    eyebrow: "Red Team Notes",
+    title: "C2",
+    summary: "Frameworks C2 et agents perso.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/c2/mythic", label: "Mythic", meta: "C2" },
+      { href: "/blog/aphrodite", label: "Aphrodite", meta: "Blog" },
+    ],
+  },
+  "/red-team/c2/mythic": {
+    eyebrow: "C2",
+    title: "Mythic",
+    summary: "Agents Mythic perso : design et implémentation.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/c2/mythic/agents", label: "Agents", meta: "Mythic" },
+      { href: "/blog/aphrodite", label: "Article blog", meta: "Blog" },
+    ],
+  },
+  "/red-team/c2/mythic/agents": {
+    eyebrow: "Mythic",
+    title: "Agents",
+    summary: "Agents Mythic que j'ai développés.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/c2/mythic/agents/aphrodite", label: "Aphrodite", meta: "Agents" },
+      { href: "/red-team/c2/mythic", label: "Mythic", meta: "C2" },
+    ],
+  },
+  "/red-team/c2/mythic/agents/aphrodite": {
+    eyebrow: "Agents",
+    title: "Aphrodite",
+    summary: "Agent Mythic Linux en Nim.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/blog/aphrodite", label: "Article blog", meta: "Blog" },
+      { href: "/red-team/c2/mythic", label: "Mythic", meta: "C2" },
+    ],
+  },
+  "/red-team/pentest-web": {
+    eyebrow: "Red Team Notes",
+    title: "Pentest Web",
+    summary: "Notes offensives web : injections, auth bypass, API.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit", label: "AD Exploit", meta: "Red Team Notes" },
+      { href: "/cheatsheets", label: "Cheatsheets", meta: "Références rapides" },
+    ],
+  },
+  "/arch-linux": {
+    eyebrow: "Arch Linux Notes",
+    title: "Arch Linux Notes",
+    summary: "Notes de configuration et de maintenance pour Arch Linux.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/arch-linux/pacman", label: "Pacman", meta: "Arch Linux" },
+      { href: "/arch-linux/grub-rescue", label: "GRUB Rescue", meta: "Arch Linux" },
+    ],
+  },
+  "/arch-linux/pacman": {
+    eyebrow: "Arch Linux",
+    title: "Pacman",
+    summary: "Gestion des paquets, export et hooks automatiques.",
+    anchors: [
+      { href: "#export", label: "Export" },
+      { href: "#hooks-setup", label: "Hooks Setup" },
+      { href: "#paccache", label: "Paccache" },
+      { href: "#orphans", label: "Orphans" },
+      { href: "#list-packages", label: "List Packages" },
+      { href: "#pacnew", label: "Pacnew" },
+      { href: "#arch-audit", label: "Arch-Audit" },
+    ],
+    facts: [],
+    related: [
+      { href: "/arch-linux/kernel-recovery", label: "Kernel Recovery", meta: "Arch Linux" },
+      { href: "/arch-linux/grub-rescue", label: "GRUB Rescue", meta: "Arch Linux" },
+    ],
+  },
+  "/arch-linux/zram": {
+    eyebrow: "Arch Linux",
+    title: "Zram",
+    summary: "Swap compressé en RAM avec zram-generator et zstd.",
+    anchors: [
+      { href: "#install", label: "Install" },
+      { href: "#config", label: "Config" },
+      { href: "#enable", label: "Enable" },
+      { href: "#verify", label: "Verify" },
+      { href: "#swappiness", label: "Swappiness" },
+    ],
+    facts: [],
+    related: [
+      { href: "/arch-linux/pacman", label: "Pacman", meta: "Arch Linux" },
+      { href: "/arch-linux/kernel-recovery", label: "Kernel Recovery", meta: "Arch Linux" },
+    ],
+  },
+  "/arch-linux/grub-rescue": {
+    eyebrow: "Arch Linux",
+    title: "GRUB Rescue",
+    summary: "Réparer GRUB depuis le prompt rescue quand Windows écrase l'EFI.",
+    anchors: [
+      { href: "#find-partition", label: "Find Partition" },
+      { href: "#load-grub", label: "Load GRUB" },
+      { href: "#reinstall", label: "Reinstall" },
+      { href: "#verify", label: "Verify" },
+    ],
+    facts: [],
+    related: [
+      { href: "/arch-linux/kernel-recovery", label: "Kernel Recovery", meta: "Arch Linux" },
+      { href: "/arch-linux/pacman", label: "Pacman", meta: "Arch Linux" },
+    ],
+  },
+  "/arch-linux/kernel-recovery": {
+    eyebrow: "Arch Linux",
+    title: "Kernel Recovery",
+    summary: "Recovery depuis un live USB après une mise à jour qui casse le boot.",
+    anchors: [
+      { href: "#mount", label: "Mount Partitions" },
+      { href: "#bind", label: "Bind Mounts" },
+      { href: "#chroot", label: "Chroot" },
+      { href: "#fix-pacman", label: "Fix Pacman" },
+      { href: "#repair", label: "Repair Packages" },
+      { href: "#initramfs", label: "Initramfs" },
+      { href: "#boot", label: "Fix Boot" },
+    ],
+    facts: [],
+    related: [
+      { href: "/arch-linux/grub-rescue", label: "GRUB Rescue", meta: "Arch Linux" },
+      { href: "/arch-linux/pacman", label: "Pacman", meta: "Arch Linux" },
+    ],
+  },
+  "/arch-linux/hp-printer": {
+    eyebrow: "Arch Linux",
+    title: "HP Printer",
+    summary: "Configurer une imprimante HP avec HPLIP et CUPS.",
+    anchors: [
+      { href: "#install", label: "Install" },
+      { href: "#manage", label: "Manage" },
+    ],
+    facts: [],
+    related: [
+      { href: "/arch-linux/pacman", label: "Pacman", meta: "Arch Linux" },
+      { href: "/arch-linux/zram", label: "Zram", meta: "Arch Linux" },
+    ],
+  },
   "/red-team/pivoting/ligolo": {
     eyebrow: "Pivoting",
     title: "Ligolo-NG",
@@ -622,6 +982,590 @@ const staticRailContexts: Record<string, RailContext> = {
     related: [
       { href: "/red-team/pivoting", label: "← Pivoting", meta: "Red Team Notes" },
       { href: "/red-team/ad-exploit", label: "AD Exploit", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/ad-exploit/information-gathering/netexec": {
+    eyebrow: "Information Gathering",
+    title: "NetExec (nxc)",
+    summary: "Enumération SMB, LDAP, utilisateurs et délégation via nxc.",
+    anchors: [
+      { href: "#access", label: "Access Check" },
+      { href: "#users", label: "Users & Groups" },
+      { href: "#deleg", label: "Delegation" },
+      { href: "#shares", label: "Shares" },
+    ],
+    facts: [],
+    related: [
+      { href: "/cheatsheets/netexec", label: "NetExec", meta: "Cheatsheet" },
+      { href: "/red-team/ad-exploit/information-gathering/bloodyad", label: "BloodyAD", meta: "Information Gathering" },
+    ],
+  },
+  "/red-team/ad-exploit/information-gathering/bloodyad": {
+    eyebrow: "Information Gathering",
+    title: "BloodyAD",
+    summary: "Enumération LDAP profonde via bloodyAD : domaine, users, délégation.",
+    anchors: [
+      { href: "#domain", label: "Domain Info" },
+      { href: "#users", label: "Users" },
+      { href: "#creds", label: "Credentials" },
+      { href: "#deleg", label: "Delegation" },
+    ],
+    facts: [],
+    related: [
+      { href: "/cheatsheets/bloodyad", label: "BloodyAD", meta: "Cheatsheet" },
+      { href: "/red-team/ad-exploit/information-gathering/netexec", label: "NetExec", meta: "Information Gathering" },
+    ],
+  },
+  "/red-team/ad-exploit/information-gathering/bloodhound": {
+    eyebrow: "Information Gathering",
+    title: "BloodHound & SharpHound",
+    summary: "Collecte BloodHound CE pour visualisation des chemins d'attaque.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/my-tools/bashhound-ce", label: "BashHound-CE", meta: "My Tools" },
+      { href: "/red-team/ad-exploit/information-gathering/netexec", label: "NetExec", meta: "Information Gathering" },
+    ],
+  },
+  "/red-team/ad-exploit/information-gathering/password-misconfigs": {
+    eyebrow: "Information Gathering",
+    title: "Password Misconfigs",
+    summary: "GPP, descriptions, AutoLogon et shares pour trouver des credentials exposés.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/pre-exploitation/password-misconfigs", label: "Password Misconfigs", meta: "Pre-Exploitation" },
+      { href: "/red-team/ad-exploit/information-gathering/netexec", label: "NetExec", meta: "Information Gathering" },
+    ],
+  },
+  "/red-team/ad-exploit/information-gathering/laps-enum": {
+    eyebrow: "Information Gathering",
+    title: "LAPS Enum",
+    summary: "Détection et lecture des mots de passe LAPS v1 et v2.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/laps-abuse", label: "LAPS Abuse", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/information-gathering/netexec", label: "NetExec", meta: "Information Gathering" },
+    ],
+  },
+  "/red-team/ad-exploit/information-gathering/kerberos-auth": {
+    eyebrow: "Information Gathering",
+    title: "Kerberos Auth",
+    summary: "Obtention de TGT, gestion ccache et vérification Kerberos.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/kerberos-attacks", label: "Kerberos Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/information-gathering/netexec", label: "NetExec", meta: "Information Gathering" },
+    ],
+  },
+  "/red-team/ad-exploit/information-gathering/pre-win2000": {
+    eyebrow: "Information Gathering",
+    title: "Pre-Win2000",
+    summary: "Abus du groupe Pre-Windows 2000 Compatible Access pour null session.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/information-gathering/netexec", label: "NetExec", meta: "Information Gathering" },
+      { href: "/red-team/ad-exploit/exploitation/maq-abuse", label: "MAQ Abuse", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/information-gathering/maq-abuse": {
+    eyebrow: "Information Gathering",
+    title: "MAQ Abuse",
+    summary: "Vérification et exploitation de la Machine Account Quota.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/maq-abuse", label: "MAQ Abuse", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/delegation-attacks", label: "Delegation Attacks", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/information-gathering/linux-ad": {
+    eyebrow: "Information Gathering",
+    title: "Linux in AD",
+    summary: "Enumération depuis Linux : realm, keytab, ccache et tickets Kerberos.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/information-gathering/kerberos-auth", label: "Kerberos Auth", meta: "Information Gathering" },
+      { href: "/red-team/ad-exploit/information-gathering/netexec", label: "NetExec", meta: "Information Gathering" },
+    ],
+  },
+  "/red-team/ad-exploit/pre-exploitation/relay-attacks": {
+    eyebrow: "Pre-Exploitation",
+    title: "Relay Attacks",
+    summary: "Repérer les cibles sans signing, capturer et relayer les hashes NTLM.",
+    anchors: [
+      { href: "#recon", label: "Recon" },
+      { href: "#responder", label: "Responder" },
+      { href: "#ntlmrelayx", label: "ntlmrelayx" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/pre-exploitation/network-attacks", label: "Network Attacks", meta: "Pre-Exploitation" },
+      { href: "/red-team/ad-exploit/pre-exploitation/coercion", label: "Coercion", meta: "Pre-Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/pre-exploitation/phishing": {
+    eyebrow: "Pre-Exploitation",
+    title: "Phishing & Initial Access",
+    summary: "HTA, macros Office et combinaisons avec relay pour accès initial.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/pre-exploitation/relay-attacks", label: "Relay Attacks", meta: "Pre-Exploitation" },
+      { href: "/red-team/ad-exploit/pre-exploitation/network-attacks", label: "Network Attacks", meta: "Pre-Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/pre-exploitation/network-attacks": {
+    eyebrow: "Pre-Exploitation",
+    title: "Network Attacks",
+    summary: "IPv6 takeover avec mitm6, LLMNR/NBT-NS poisoning et WPAD abuse.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/pre-exploitation/relay-attacks", label: "Relay Attacks", meta: "Pre-Exploitation" },
+      { href: "/red-team/ad-exploit/pre-exploitation/coercion", label: "Coercion", meta: "Pre-Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/pre-exploitation/wsus": {
+    eyebrow: "Pre-Exploitation",
+    title: "WSUS Attack",
+    summary: "Exploiter un WSUS mal configuré (HTTP) pour pousser de fausses mises à jour.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/pre-exploitation/relay-attacks", label: "Relay Attacks", meta: "Pre-Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/gpo-abuse", label: "GPO Abuse", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/pre-exploitation/exchange": {
+    eyebrow: "Pre-Exploitation",
+    title: "Exchange / Outlook Attacks",
+    summary: "PrivExchange, ProxyShell et relay NTLM via Exchange.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/pre-exploitation/relay-attacks", label: "Relay Attacks", meta: "Pre-Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/pre-exploitation/password-misconfigs": {
+    eyebrow: "Pre-Exploitation",
+    title: "Password Misconfigs",
+    summary: "GPP, descriptions et shares pour trouver des credentials exposés.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/information-gathering/password-misconfigs", label: "Password Misconfigs", meta: "Information Gathering" },
+      { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/pre-exploitation/coercion": {
+    eyebrow: "Pre-Exploitation",
+    title: "Coercion",
+    summary: "PetitPotam, PrinterBug et Coercer pour forcer des authentifications NTLM.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/pre-exploitation/relay-attacks", label: "Relay Attacks", meta: "Pre-Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/delegation-attacks", label: "Delegation Attacks", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation": {
+    eyebrow: "AD Exploit",
+    title: "Exploitation",
+    summary: "Kerberos, délégation, ACL, ADCS et abus de groupes sensibles.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/pre-exploitation", label: "Pre-Exploitation", meta: "AD Exploit" },
+      { href: "/red-team/ad-exploit/post-exploitation", label: "Post-Exploitation", meta: "AD Exploit" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/credential-attacks": {
+    eyebrow: "Exploitation",
+    title: "Credential Attacks",
+    summary: "LAPS, gMSA, DCSync et secrets locaux.",
+    anchors: [
+      { href: "#managed", label: "LAPS & gMSA" },
+      { href: "#dcsync", label: "DCSync" },
+      { href: "#local", label: "SAM / LSA" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/kerberos-attacks", label: "Kerberos Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/credential-dumping", label: "Credential Dumping", meta: "Win PrivEsc" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/kerberos-attacks": {
+    eyebrow: "Exploitation",
+    title: "Kerberos Attacks",
+    summary: "AS-REP, Kerberoasting, PTT et tickets forgés.",
+    anchors: [
+      { href: "#asrep", label: "AS-REP Roasting" },
+      { href: "#kerb", label: "Kerberoasting" },
+      { href: "#ptt", label: "Pass-the-Ticket" },
+      { href: "#forged", label: "Forged Tickets" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/delegation-attacks", label: "Delegation Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/delegation-attacks": {
+    eyebrow: "Exploitation",
+    title: "Delegation Attacks",
+    summary: "Unconstrained, constrained et RBCD.",
+    anchors: [
+      { href: "#enum", label: "Enumeration" },
+      { href: "#rbcd", label: "RBCD" },
+      { href: "#constrained", label: "Constrained" },
+      { href: "#unconstrained", label: "Unconstrained" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/kerberos-attacks", label: "Kerberos Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse", label: "ACL Abuse", meta: "ACL & GPO" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/domain-privesc": {
+    eyebrow: "Exploitation",
+    title: "Domain Privilege Escalation",
+    summary: "Groupes sensibles, AdminSDHolder et trust attacks.",
+    anchors: [
+      { href: "#groups", label: "Sensitive Groups" },
+      { href: "#sdprop", label: "AdminSDHolder" },
+      { href: "#trust", label: "Trust Attacks" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse", label: "ACL Abuse", meta: "ACL & GPO" },
+      { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/bloodyad-attacks": {
+    eyebrow: "Exploitation",
+    title: "BloodyAD Attacks",
+    summary: "Manipulation LDAP directe : objets, ACLs et persistance.",
+    anchors: [
+      { href: "#objects", label: "Objects" },
+      { href: "#reads", label: "Sensitive Reads" },
+      { href: "#deleg", label: "Delegation" },
+    ],
+    facts: [],
+    related: [
+      { href: "/cheatsheets/bloodyad", label: "BloodyAD", meta: "Cheatsheet" },
+      { href: "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse", label: "ACL Abuse", meta: "ACL & GPO" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/acl-gpo": {
+    eyebrow: "Exploitation",
+    title: "ACL & GPO",
+    summary: "ACL abuse et ADCS attacks pour escalade domaine.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse", label: "ACL Abuse", meta: "ACL & GPO" },
+      { href: "/red-team/ad-exploit/exploitation/acl-gpo/adcs-attacks", label: "ADCS Attacks", meta: "ACL & GPO" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse": {
+    eyebrow: "ACL & GPO",
+    title: "ACL Abuse",
+    summary: "GenericAll, WriteDacl, owner takeover et shadow credentials.",
+    anchors: [
+      { href: "#recon", label: "Recon" },
+      { href: "#generic", label: "GenericAll" },
+      { href: "#dacl", label: "WriteDacl" },
+      { href: "#group", label: "AddMember" },
+    ],
+    facts: [],
+    related: [
+      { href: "/cheatsheets/bloodyad", label: "BloodyAD", meta: "Cheatsheet" },
+      { href: "/red-team/ad-exploit/exploitation/acl-gpo/adcs-attacks", label: "ADCS Attacks", meta: "ACL & GPO" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/acl-gpo/adcs-attacks": {
+    eyebrow: "ACL & GPO",
+    title: "ADCS Attacks",
+    summary: "ESC1, ESC4, ESC8 et relay vers Web Enrollment.",
+    anchors: [
+      { href: "#enum", label: "Enumeration" },
+      { href: "#esc1", label: "ESC1 & ESC2" },
+      { href: "#esc4", label: "ESC4 & ESC6" },
+      { href: "#esc8", label: "ESC8 Relay" },
+    ],
+    facts: [],
+    related: [
+      { href: "/cheatsheets/certipy", label: "Certipy", meta: "Cheatsheet" },
+      { href: "/red-team/esc", label: "ESC", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/backup-operator": {
+    eyebrow: "Exploitation",
+    title: "Backup Operator",
+    summary: "Extraire SAM, SYSTEM et ntds.dit via les droits Backup Operators.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/server-operators", label: "Server Operators", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/mssql-attacks": {
+    eyebrow: "Exploitation",
+    title: "MSSQL Attacks",
+    summary: "xp_cmdshell, capture de hash et pivot via linked servers.",
+    anchors: [
+      { href: "#enum", label: "Enumeration" },
+      { href: "#exec", label: "Command Exec" },
+      { href: "#pivot", label: "Hash & Pivot" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/pre-exploitation/relay-attacks", label: "Relay Attacks", meta: "Pre-Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/applocker-wdac": {
+    eyebrow: "Exploitation",
+    title: "AppLocker / WDAC Bypass",
+    summary: "Contourner les restrictions d'exécution via LOLBAS et compilation.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/process-injection", label: "Process Injection", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/local-privesc", label: "Local PrivEsc", meta: "Win PrivEsc" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/laps-abuse": {
+    eyebrow: "Exploitation",
+    title: "LAPS Abuse",
+    summary: "Lire les mots de passe LAPS v1/v2 et les utiliser pour mouvement latéral.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/information-gathering/laps-enum", label: "LAPS Enum", meta: "Information Gathering" },
+      { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/process-injection": {
+    eyebrow: "Exploitation",
+    title: "Process Injection",
+    summary: "Shellcode injection et process hollowing pour exécution furtive.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/applocker-wdac", label: "AppLocker / WDAC", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/credential-dumping", label: "Credential Dumping", meta: "Win PrivEsc" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/maq-abuse": {
+    eyebrow: "Exploitation",
+    title: "MAQ Abuse",
+    summary: "Créer un compte machine via MAQ pour une chaîne RBCD.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/delegation-attacks", label: "Delegation Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/information-gathering/maq-abuse", label: "MAQ Abuse", meta: "Information Gathering" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/account-operators": {
+    eyebrow: "Exploitation",
+    title: "Account Operators",
+    summary: "Créer et modifier des utilisateurs via le groupe Account Operators.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/domain-privesc", label: "Domain PrivEsc", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/backup-operator", label: "Backup Operator", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/print-server-operators": {
+    eyebrow: "Exploitation",
+    title: "Print & Server Operators",
+    summary: "SeLoadDriverPrivilege via Print Operators pour obtenir SYSTEM sur le DC.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/server-operators", label: "Server Operators", meta: "Win PrivEsc" },
+      { href: "/red-team/ad-exploit/exploitation/backup-operator", label: "Backup Operator", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/ad-recycle-bin": {
+    eyebrow: "Exploitation",
+    title: "AD Recycle Bin",
+    summary: "Lire les objets supprimés pour retrouver des credentials résiduels.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/ad-recycle-bin", label: "AD Recycle Bin", meta: "Win PrivEsc" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/dns-admins": {
+    eyebrow: "Exploitation",
+    title: "DNS Admins",
+    summary: "Charger une DLL dans le service DNS via DnsAdmins pour SYSTEM.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/dns-admins", label: "DNS Admins", meta: "Win PrivEsc" },
+      { href: "/red-team/ad-exploit/exploitation/print-server-operators", label: "Print & Server Operators", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/gpo-abuse": {
+    eyebrow: "Exploitation",
+    title: "GPO Abuse",
+    summary: "Modifier des GPOs pour exécuter du code sur les machines d'une OU.",
+    anchors: [
+      { href: "#enum", label: "Enumeration" },
+      { href: "#modify", label: "Modification" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse", label: "ACL Abuse", meta: "ACL & GPO" },
+      { href: "/red-team/ad-exploit/exploitation/domain-privesc", label: "Domain PrivEsc", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/misc-cves": {
+    eyebrow: "Exploitation",
+    title: "Misc CVEs",
+    summary: "Zerologon, PrintNightmare, noPac et EternalBlue : détection rapide.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/kerberos-attacks", label: "Kerberos Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/acl-gpo/adcs-attacks", label: "ADCS Attacks", meta: "ACL & GPO" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation": {
+    eyebrow: "AD Exploit",
+    title: "Post-Exploitation",
+    summary: "Mouvement latéral, persistance et nettoyage OPSEC.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation", label: "Exploitation", meta: "AD Exploit" },
+      { href: "/red-team/pivoting", label: "Pivoting", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/lateral-movement": {
+    eyebrow: "Post-Exploitation",
+    title: "Lateral Movement",
+    summary: "SMB, WMI, WinRM et Kerberos pour mouvement latéral.",
+    anchors: [
+      { href: "#smb", label: "SMB" },
+      { href: "#kerberos", label: "Kerberos" },
+      { href: "#remote", label: "WinRM & RDP" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/credential-dumping", label: "Credential Dumping", meta: "Win PrivEsc" },
+      { href: "/red-team/pivoting", label: "Pivoting", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/procedures": {
+    eyebrow: "Post-Exploitation",
+    title: "Procedures & Cleanup",
+    summary: "Persistance discrète et nettoyage OPSEC après compromission.",
+    anchors: [
+      { href: "#persist", label: "Persistence" },
+      { href: "#cleanup", label: "Cleanup" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/lateral-movement", label: "Lateral Movement", meta: "Post-Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse", label: "ACL Abuse", meta: "ACL & GPO" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/win-privesc": {
+    eyebrow: "Post-Exploitation",
+    title: "Windows Privilege Escalation",
+    summary: "Potato attacks, credential dumping et abus de groupes privilegiés.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/lateral-movement", label: "Lateral Movement", meta: "Post-Exploitation" },
+      { href: "/red-team/privesc-windows", label: "Privesc Windows", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/win-privesc/potato-attacks": {
+    eyebrow: "Windows Privilege Escalation",
+    title: "Potato Attacks",
+    summary: "GodPotato, PrintSpoofer et RoguePotato pour SeImpersonate vers SYSTEM.",
+    anchors: [
+      { href: "#enum", label: "Privileges" },
+      { href: "#godpotato", label: "GodPotato" },
+      { href: "#printspoofer", label: "PrintSpoofer" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/credential-dumping", label: "Credential Dumping", meta: "Win PrivEsc" },
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/local-privesc", label: "Local PrivEsc", meta: "Win PrivEsc" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/win-privesc/credential-dumping": {
+    eyebrow: "Windows Privilege Escalation",
+    title: "Credential Dumping",
+    summary: "LSASS, SAM, LSA et DPAPI : tout extraire d'une machine Windows.",
+    anchors: [
+      { href: "#lsass", label: "LSASS" },
+      { href: "#sam", label: "SAM & Registry" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/post-exploitation/lateral-movement", label: "Lateral Movement", meta: "Post-Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/win-privesc/local-privesc": {
+    eyebrow: "Windows Privilege Escalation",
+    title: "Local PrivEsc",
+    summary: "Services, tâches planifiées et credentials en clair pour escalade locale.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/potato-attacks", label: "Potato Attacks", meta: "Win PrivEsc" },
+      { href: "/red-team/privesc-windows", label: "Privesc Windows", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/win-privesc/server-operators": {
+    eyebrow: "Windows Privilege Escalation",
+    title: "Server Operators",
+    summary: "Modifier des services pour exécuter du code SYSTEM sur le DC.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/print-server-operators", label: "Print & Server Operators", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/potato-attacks", label: "Potato Attacks", meta: "Win PrivEsc" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/win-privesc/dns-admins": {
+    eyebrow: "Windows Privilege Escalation",
+    title: "DNS Admins",
+    summary: "Charger une DLL dans le service DNS pour SYSTEM sur le DC.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/dns-admins", label: "DNS Admins", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/server-operators", label: "Server Operators", meta: "Win PrivEsc" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/win-privesc/ad-recycle-bin": {
+    eyebrow: "Windows Privilege Escalation",
+    title: "AD Recycle Bin",
+    summary: "Explorer les objets supprimés pour retrouver des credentials résiduels.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/ad-recycle-bin", label: "AD Recycle Bin", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
     ],
   },
   "/writeups/htb": {

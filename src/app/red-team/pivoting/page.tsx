@@ -5,16 +5,23 @@ import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/components/LanguageProvider";
 
 export default function PivotingPage() {
-  const { lang, t } = useLanguage();
-  const tools = [
+  const { lang } = useLanguage();
+  const sections = [
     {
-      href: "/red-team/pivoting/ligolo",
-      name: "Ligolo-NG",
+      href: "/red-team/pivoting/tunneling",
+      name: "Tunneling",
       description:
         lang === "fr"
-          ? "Tunnel TUN kernel-space, routing de subnets internes et double pivot."
-          : "Kernel-space TUN tunnel, internal subnet routing and double pivoting.",
-      tags: ["TUN", "Tunnel", "Routing", "Double Pivot"],
+          ? "Catégories de tunnels pour l'accès aux segments internes."
+          : "Tunnel categories for internal segment access.",
+    },
+    {
+      href: "/red-team/pivoting/routing",
+      name: "Routing",
+      description:
+        lang === "fr"
+          ? "Catégories de routage et rebond inter-réseaux."
+          : "Routing and cross-network relay categories.",
     },
   ];
 
@@ -22,7 +29,7 @@ export default function PivotingPage() {
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6">
         <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">
-          {t.redTeam.eyebrow}
+          Red Team Notes
         </p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
           Pivoting
@@ -32,31 +39,18 @@ export default function PivotingPage() {
             ? "Techniques de pivot réseau : tunnels, routing de subnets internes, double pivot."
             : "Network pivoting techniques: tunnels, internal subnet routing and double pivoting."}
         </p>
-        <div className="mt-4 text-xs text-muted-foreground">
-          {tools.length} {t.common.entries}
-        </div>
       </header>
 
       <div className="divide-y divide-border">
-        {tools.map((tool) => (
+        {sections.map((section) => (
           <Link
-            key={tool.href}
-            href={tool.href}
+            key={section.href}
+            href={section.href}
             className="group flex items-start gap-4 py-5"
           >
             <div className="min-w-0 flex-1">
-              <p className="mb-1.5 font-mono text-xs text-primary">{tool.name}</p>
-              <p className="mb-2 text-xs leading-6 text-muted-foreground">{tool.description}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {tool.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded border border-border px-2 py-0.5 font-mono text-[10px] text-muted-foreground"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              <p className="mb-1.5 font-mono text-xs text-primary">{section.name}</p>
+              <p className="text-xs leading-6 text-muted-foreground">{section.description}</p>
             </div>
             <ArrowRight className="mt-1 size-3.5 shrink-0 text-muted-foreground/30 transition-colors group-hover:text-primary" />
           </Link>

@@ -1,62 +1,193 @@
 "use client";
 
 import { useLanguage } from "@/components/LanguageProvider";
+import { CheatsheetCommandCard } from "@/components/CheatsheetCommandCard";
 
 export default function NetexecPage() {
   const { lang } = useLanguage();
   const translateWhy = (text: string) => {
     if (lang === "fr") return text;
-    let out = text;
     const exact: Record<string, string> = {
       "Installe NetExec proprement via pipx depuis le depot officiel.":
         "Installs NetExec cleanly via pipx from the official repository.",
       "Verifie que le binaire est accessible et affiche la version installee.":
-        "Checks that the binary is accessible and shows installed version.",
+        "Verifies that the binary is available and shows the installed version.",
       "Affiche l'aide globale et la liste des protocoles disponibles.":
-        "Shows global help and the list of available protocols.",
+        "Displays global help and the list of available protocols.",
       "Affiche toutes les options du module SMB.":
-        "Shows all SMB module options.",
+        "Displays all options for the SMB module.",
       "Syntaxe commune a tous les protocoles.":
-        "Common syntax for all protocols.",
+        "Shared syntax used across all protocols.",
       "Cible : IP unique, plage CIDR, range ou fichier avec -t targets.txt.":
-        "Target can be: single IP, CIDR range, host range, or file with -t targets.txt.",
+        "Target can be a single IP, a CIDR range, a host range, or a file with `-t targets.txt`.",
+      "Null session SMB : teste l'acces anonyme sans identifiants.":
+        "SMB null session: tests anonymous access without credentials.",
+      "Null session LDAP : idem pour le protocole LDAP.":
+        "LDAP null session: same check for the LDAP protocol.",
+      "Tente l'acces avec le compte Guest (souvent actif sur vieux postes).":
+        "Attempts access with the Guest account (often still enabled on legacy hosts).",
+      "Authentification domaine classique user/password.":
+        "Standard domain authentication with username and password.",
+      "Force l'authentification locale (hors contexte domaine).":
+        "Forces local authentication outside of domain context.",
+      "Specifies le domaine explicitement pour un contexte multi-domaines.":
+        "Explicitly sets the domain for multi-domain environments.",
+      "Authentification via hash NT (Pass-the-Hash) sans connaitre le mot de passe en clair.":
+        "Authenticates with an NT hash (Pass-the-Hash) without knowing the plaintext password.",
+      "Format LM:NT complet si le LM hash est disponible.":
+        "Uses full LM:NT format when an LM hash is available.",
+      "PTH en mode local-auth pour les comptes machine ou locaux.":
+        "Pass-the-Hash in local-auth mode for machine or local accounts.",
+      "Force l'authentification Kerberos au lieu de NTLM.":
+        "Forces Kerberos authentication instead of NTLM.",
+      "Utilise le cache Kerberos existant (ccache) plutot que de re-s'authentifier.":
+        "Uses the existing Kerberos cache (`ccache`) instead of re-authenticating.",
+      "Injecte un ccache specifique (post-getTGT/getST) pour l'authentification.":
+        "Injects a specific `ccache` (after `getTGT`/`getST`) for authentication.",
+      "Cree le produit cartesien user x password (attention aux lockouts).":
+        "Builds the full user x password cartesian product (watch for account lockouts).",
+      "Teste user[i]/pass[i] en mode paire lineaire, sans croisement.":
+        "Tests `user[i]/pass[i]` in linear pair mode, without cross-combinations.",
+      "Spray de hashes NT contre une liste d'utilisateurs, un hash par user.":
+        "Performs NT hash spraying against a user list, one hash per user.",
+      "Continue apres le premier succes, utile pour identifier tous les comptes valides.":
+        "Continues after the first success, useful to identify all valid accounts.",
+      "Sonde SMB : hostname, domaine, OS, signing et version SMB.":
+        "SMB probe: hostname, domain, OS, SMB signing, and SMB version.",
+      "Discovery reseau : identifie tous les hotes SMB actifs sur un /24.":
+        "Network discovery: identifies all active SMB hosts on a /24.",
+      "Liste les comptes utilisateurs du domaine via SMB.":
+        "Lists domain user accounts through SMB.",
+      "Liste les groupes du domaine et leurs membres.":
+        "Lists domain groups and their members.",
+      "Enumere les groupes locaux de la machine cible.":
+        "Enumerates local groups on the target machine.",
+      "Brute-force des RID pour decouvrir des comptes meme sans acces annuaire.":
+        "Performs RID brute force to discover accounts even without directory access.",
+      "Affiche les sessions SMB actives sur la cible.":
+        "Displays active SMB sessions on the target.",
+      "Identifie les utilisateurs actuellement connectes sur la machine.":
+        "Identifies users currently logged on to the machine.",
+      "Recupere la politique de mot de passe du domaine (lockout threshold, etc.).":
+        "Retrieves domain password policy (lockout threshold, etc.).",
+      "Genere une liste d'hotes SMB ne forcant pas la signature (cibles relay).":
+        "Generates a list of SMB hosts that do not enforce signing (relay candidates).",
+      "Enumere les partages accessibles et les permissions (READ/WRITE).":
+        "Enumerates accessible shares and their permissions (READ/WRITE).",
+      "Meme chose en null session pour detecter les partages publics.":
+        "Same check in null session mode to detect public shares.",
+      "Spider recursif de tous les partages accessibles, liste tous les fichiers.":
+        "Recursively spiders all accessible shares and lists every file.",
+      "Spider avec telechargement automatique des fichiers trouves.":
+        "Spider mode with automatic download of discovered files.",
+      "Telecharge un fichier depuis un partage SMB distant.":
+        "Downloads a file from a remote SMB share.",
+      "Uploade un fichier local vers un partage SMB distant.":
+        "Uploads a local file to a remote SMB share.",
+      "Execute une commande shell sur la cible via SMB (CreateProcess).":
+        "Executes a shell command on the target through SMB (`CreateProcess`).",
+      "Execute une commande PowerShell sur la cible via SMB.":
+        "Executes a PowerShell command on the target through SMB.",
+      "Force le mode d'execution smbexec (moins bruyant que psexec).":
+        "Forces `smbexec` execution mode (usually quieter than `psexec`).",
+      "Force le mode d'execution WMI (pas de service cree).":
+        "Forces WMI execution mode (no service creation).",
+      "Dump les hashes du SAM local (comptes locaux uniquement).":
+        "Dumps local SAM hashes (local accounts only).",
+      "Dump les secrets LSA (mots de passe services, cached creds, etc.).":
+        "Dumps LSA secrets (service passwords, cached credentials, etc.).",
+      "Dump le NTDS.dit via VSS pour recuperer tous les hashes du domaine (DC uniquement).":
+        "Dumps `NTDS.dit` through VSS to recover all domain hashes (DC only).",
+      "Dump uniquement le hash d'un utilisateur specifique depuis NTDS.":
+        "Dumps only one specific user hash from NTDS.",
+      "Dump LSASS en memoire via lsassy pour extraire les credentials en clair.":
+        "Dumps LSASS in memory via `lsassy` to extract plaintext credentials.",
+      "Dump LSASS via nanodump (evasion meilleure qu'un dump classique).":
+        "Dumps LSASS via `nanodump` (better evasion than a classic dump).",
+      "Cherche des mots de passe en clair dans les GPP (SYSVOL).":
+        "Searches for plaintext passwords in GPP (`SYSVOL`).",
+      "Tente de dechiffrer les secrets DPAPI de l'utilisateur connecte.":
+        "Attempts to decrypt DPAPI secrets for the logged-in user.",
+      "Detecte la vulnerabilite ZeroLogon (CVE-2020-1472) sur le DC.":
+        "Detects the ZeroLogon vulnerability (`CVE-2020-1472`) on the DC.",
+      "Teste la coercition PetitPotam (Printer Spooler / EfsRpc).":
+        "Tests PetitPotam coercion (`Printer Spooler` / `EfsRpc`).",
+      "Detecte la vulnerabilite noPac (CVE-2021-42278/42287).":
+        "Detects the noPac vulnerability (`CVE-2021-42278/42287`).",
+      "Detecte PrintNightmare (CVE-2021-1675) sur le spooler d'impression.":
+        "Detects PrintNightmare (`CVE-2021-1675`) on the print spooler.",
+      "Enumere les produits antivirus installes sur la machine cible.":
+        "Enumerates antivirus products installed on the target machine.",
+      "Liste les utilisateurs AD via LDAP.":
+        "Lists AD users through LDAP.",
+      "Liste les groupes AD et leurs membres.":
+        "Lists AD groups and their members.",
+      "Trouve les objets proteges par AdminSDHolder (adminCount=1).":
+        "Finds objects protected by AdminSDHolder (`adminCount=1`).",
+      "Identifie les comptes avec unconstrained delegation.":
+        "Identifies accounts configured with unconstrained delegation.",
+      "Trouve les comptes sans politique de mot de passe obligatoire.":
+        "Finds accounts without an enforced password policy.",
+      "Decouvre toutes les configurations de delegation (constrained/unconstrained/RBCD).":
+        "Discovers all delegation configurations (constrained/unconstrained/RBCD).",
+      "Recupere les TGS des comptes avec SPN pour crackage offline (Kerberoasting).":
+        "Retrieves TGS tickets from SPN accounts for offline cracking (Kerberoasting).",
+      "Recupere les AS-REP des comptes sans pre-auth Kerberos.":
+        "Retrieves AS-REP tickets from accounts without Kerberos pre-auth.",
+      "Collecte toutes les donnees BloodHound CE (users, groups, sessions, ACLs, GPOs, trusts).":
+        "Collects all BloodHound CE data (users, groups, sessions, ACLs, GPOs, trusts).",
+      "Collecte uniquement les donnees DC (plus rapide, moins de bruit reseau).":
+        "Collects only DC data (faster and with less network noise).",
+      "Enumere les Certificate Authority et templates ADCS, signale les mauvaises configs ESC.":
+        "Enumerates Certificate Authorities and ADCS templates, and flags ESC misconfigurations.",
+      "Verifie le Machine Account Quota (combien de comptes machine on peut creer).":
+        "Checks Machine Account Quota (how many machine accounts can be created).",
+      "Lit les mots de passe LAPS v1/v2 si les ACL le permettent.":
+        "Reads LAPS v1/v2 passwords when ACLs allow access.",
+      "Enumere les Group Managed Service Accounts et leurs attributs.":
+        "Enumerates Group Managed Service Accounts and their attributes.",
+      "Convertit un ID gMSA en nom lisible.":
+        "Converts a gMSA ID into a readable name.",
+      "Dechiffre les secrets gMSA stockes dans LSA si les droits le permettent.":
+        "Decrypts gMSA secrets stored in LSA when permissions allow it.",
+      "Authentification SQL Server en mode Windows (domaine).":
+        "SQL Server authentication in Windows (domain) mode.",
+      "Authentification SQL locale (SQL login, pas Windows auth).":
+        "Local SQL authentication (SQL login, not Windows auth).",
+      "Force le domaine pour l'authentification Windows sur MSSQL.":
+        "Forces the domain for Windows authentication on MSSQL.",
+      "Execute une requete SQL directement.":
+        "Executes an SQL query directly.",
+      "Liste toutes les bases de donnees disponibles sur l'instance.":
+        "Lists all databases available on the instance.",
+      "Brute-force des RID pour cartographier les logins SQL et Windows.":
+        "Performs RID brute force to map SQL and Windows logins.",
+      "Execute une commande OS via xp_cmdshell (doit etre active ou activable).":
+        "Executes an OS command through `xp_cmdshell` (must be enabled or enableable).",
+      "Execute du PowerShell via xp_cmdshell.":
+        "Executes PowerShell through `xp_cmdshell`.",
+      "Telecharge un fichier depuis la cible via MSSQL (BULK INSERT / OPENROWSET).":
+        "Downloads a file from the target through MSSQL (`BULK INSERT` / `OPENROWSET`).",
+      "Uploade un fichier local sur la cible via MSSQL.":
+        "Uploads a local file to the target through MSSQL.",
+      "Valide les credentials sur WinRM et verifie si le compte est admin.":
+        "Validates credentials on WinRM and checks whether the account is admin.",
+      "Validation via hash NT sur WinRM (Pass-the-Hash).":
+        "Validation through NT hash on WinRM (Pass-the-Hash).",
+      "Spray de credentials sur WinRM en mode paire lineaire.":
+        "Performs credential spraying on WinRM in linear pair mode.",
+      "Execute une commande shell sur la cible via WinRM.":
+        "Executes a shell command on the target through WinRM.",
+      "Execute du PowerShell sur la cible via WinRM.":
+        "Executes PowerShell on the target through WinRM.",
+      "Valide des credentials SSH sur la cible.":
+        "Validates SSH credentials on the target.",
+      "Authentification SSH par cle privee.":
+        "SSH authentication using a private key.",
+      "Execute une commande sur la cible via SSH.":
+        "Executes a command on the target through SSH.",
     };
-    if (exact[out]) return exact[out];
-    out = out
-      .replace(/^Liste /, "Lists ")
-      .replace(/^Affiche /, "Displays ")
-      .replace(/^Teste /, "Tests ")
-      .replace(/^Tente /, "Attempts ")
-      .replace(/^Force /, "Forces ")
-      .replace(/^Enumere /, "Enumerates ")
-      .replace(/^Recupere /, "Retrieves ")
-      .replace(/^Execute /, "Executes ")
-      .replace(/^Detecte /, "Detects ")
-      .replace(/^Telecharge /, "Downloads ")
-      .replace(/^Uploade /, "Uploads ")
-      .replace(/^Valide /, "Validates ")
-      .replace(/^Sonde /, "Probes ")
-      .replace(/^Continue /, "Continues ")
-      .replaceAll("domaine", "domain")
-      .replaceAll("comptes", "accounts")
-      .replaceAll("compte", "account")
-      .replaceAll("utilisateurs", "users")
-      .replaceAll("utilisateur", "user")
-      .replaceAll("partages", "shares")
-      .replaceAll("cible", "target")
-      .replaceAll("cibles", "targets")
-      .replaceAll("mot de passe", "password")
-      .replaceAll("mots de passe", "passwords")
-      .replaceAll("hashes", "hashes")
-      .replaceAll("sortie", "output")
-      .replaceAll("reseau", "network")
-      .replaceAll("machine", "machine")
-      .replaceAll("machines", "machines")
-      .replaceAll("avec", "with")
-      .replaceAll("sans", "without")
-      .replaceAll("pour", "for")
-      .replaceAll("via", "via");
-    return out;
+    return exact[text] ?? "Command purpose available in French only.";
   };
   type CommandItem = {
     cmd: string;
@@ -331,12 +462,7 @@ export default function NetexecPage() {
         <h2 className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{installMethods.title}</h2>
         <div className="space-y-4">
           {installMethods.commands.map((item) => (
-            <article key={item.cmd} className="rounded-sm border border-border/60 p-3">
-              <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
-                <code>{item.cmd}</code>
-              </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
-            </article>
+            <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
           ))}
         </div>
       </section>
@@ -345,12 +471,7 @@ export default function NetexecPage() {
         <h2 className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{basics.title}</h2>
         <div className="space-y-4">
           {basics.commands.map((item) => (
-            <article key={item.cmd} className="rounded-sm border border-border/60 p-3">
-              <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
-                <code>{item.cmd}</code>
-              </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
-            </article>
+            <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
           ))}
         </div>
       </section>
@@ -358,15 +479,16 @@ export default function NetexecPage() {
       <section className="space-y-4">
         {sections.map((section) => (
           <article key={section.title} id={section.groupId} className="rounded-sm border border-border p-5">
-            <h2 className="font-mono text-xs uppercase tracking-widest text-primary">{section.title}</h2>
+            <h2 className="font-mono text-xs uppercase tracking-widest text-primary">
+              {lang === "fr" && section.title === "Auth - Listes de credentials"
+                ? "Auth - Listes de credentials"
+                : section.title === "Auth - Listes de credentials"
+                  ? "Auth - Credential Lists"
+                  : section.title}
+            </h2>
             <div className="mt-3 space-y-4">
               {section.commands.map((item) => (
-                <article key={item.cmd} className="rounded-sm border border-border/60 p-3">
-                  <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
-                    <code>{item.cmd}</code>
-                  </pre>
-                  <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
-                </article>
+                <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
               ))}
             </div>
           </article>

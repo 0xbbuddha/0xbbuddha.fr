@@ -5,6 +5,8 @@ const fr = {
     groups: {
       startHere: "Par ici",
       redTeam: "Red Team Notes",
+      pentestWeb: "Pentest Web Notes",
+      archLinux: "Arch Linux Notes",
       cheatsheets: "Cheatsheets",
       myTools: "My Tools",
       writeups: "Writeups",
@@ -12,6 +14,7 @@ const fr = {
     },
     items: {
       readme: "README",
+      search: "Recherche",
       redTeam: "Red Team Notes",
       cheatsheets: "Cheatsheets",
       myTools: "My Tools",
@@ -104,6 +107,8 @@ const en = {
     groups: {
       startHere: "Start Here",
       redTeam: "Red Team Notes",
+      pentestWeb: "Pentest Web Notes",
+      archLinux: "Arch Linux Notes",
       cheatsheets: "Cheatsheets",
       myTools: "My Tools",
       writeups: "Writeups",
@@ -111,6 +116,7 @@ const en = {
     },
     items: {
       readme: "README",
+      search: "Search",
       redTeam: "Red Team Notes",
       cheatsheets: "Cheatsheets",
       myTools: "My Tools",

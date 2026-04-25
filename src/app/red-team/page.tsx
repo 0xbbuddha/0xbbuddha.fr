@@ -66,6 +66,17 @@ export default function RedTeamPage() {
         </div>
       </header>
 
+      <section className="mb-6 rounded-sm border border-border p-5">
+        <h2 className="mb-2 font-mono text-xs uppercase tracking-widest text-primary">
+          {lang === "fr" ? "Playbook perso" : "Personal playbook"}
+        </h2>
+        <p className="text-xs leading-6 text-muted-foreground">
+          {lang === "fr"
+            ? "Cette section est mon workflow terrain: enum utile, abus réalistes, validation propre et cleanup. L'objectif n'est pas de lister 300 commandes, mais d'avoir le bon enchainement au bon moment."
+            : "This section is my field workflow: useful enum, realistic abuse paths, clean validation, and cleanup. The goal is not to list 300 commands, but to use the right chain at the right moment."}
+        </p>
+      </section>
+
       <div className="divide-y divide-border">
         {sections.map((section) => (
           <Link

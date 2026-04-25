@@ -1,6 +1,7 @@
 "use client";
 
 import { useLanguage } from "@/components/LanguageProvider";
+import { CheatsheetCommandCard } from "@/components/CheatsheetCommandCard";
 
 export default function BashHoundCEPage() {
   const { lang } = useLanguage();
@@ -52,7 +53,7 @@ export default function BashHoundCEPage() {
       "Collecte les memberships de groupes AD uniquement.":
         "Collects AD group memberships only.",
     };
-    return map[text] ?? text;
+    return map[text] ?? "Command purpose available in French only.";
   };
   type CommandItem = {
     cmd: string;
@@ -237,12 +238,7 @@ export default function BashHoundCEPage() {
         <h2 className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{installation.title}</h2>
         <div className="space-y-4">
           {installation.commands.map((item) => (
-            <article key={item.cmd} className="rounded-sm border border-border/60 p-3">
-              <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
-                <code>{item.cmd}</code>
-              </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
-            </article>
+            <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
           ))}
         </div>
       </section>
@@ -251,12 +247,7 @@ export default function BashHoundCEPage() {
         <h2 className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{basics.title}</h2>
         <div className="space-y-4">
           {basics.commands.map((item) => (
-            <article key={item.cmd} className="rounded-sm border border-border/60 p-3">
-              <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
-                <code>{item.cmd}</code>
-              </pre>
-              <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
-            </article>
+            <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
           ))}
         </div>
       </section>
@@ -267,12 +258,7 @@ export default function BashHoundCEPage() {
             <h2 className="font-mono text-xs uppercase tracking-widest text-primary">{section.title}</h2>
             <div className="mt-3 space-y-4">
               {section.commands.map((item) => (
-                <article key={item.cmd} className="rounded-sm border border-border/60 p-3">
-                  <pre className="overflow-x-auto rounded-sm bg-muted/30 p-3 text-xs text-foreground">
-                    <code>{item.cmd}</code>
-                  </pre>
-                  <p className="mt-2 text-xs text-muted-foreground">{translateWhy(item.why)}</p>
-                </article>
+                <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
               ))}
             </div>
           </article>

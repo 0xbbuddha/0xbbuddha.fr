@@ -5,29 +5,76 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import {
+  Activity,
+  AlertTriangle,
+  Archive,
+  ArrowLeftRight,
+  BadgeCheck,
+  Ban,
   BookText,
+  Bot,
+  Bug,
   Cable,
   ChevronRight,
+  ClipboardList,
+  Clock,
+  Code2,
+  Cog,
   Compass,
+  Cpu,
   Crosshair,
+  Crown,
+  Database,
+  Download,
   Droplet,
+  Eye,
   FileKey,
   FileText,
   Flag,
+  Flame,
+  Ghost,
   GitFork,
   Github,
   Globe,
+  HardDrive,
+  Key,
+  KeyRound,
+  LayoutGrid,
   Linkedin,
+  Lock,
+  Magnet,
+  Mail,
   Menu,
   Monitor,
   Network,
+  Package,
   PawPrint,
+  Printer,
+  Radio,
+  Route,
+  Scan,
+  Scroll,
   ScrollText,
+  Search,
+  Server,
+  Settings,
   Shield,
+  ShieldAlert,
+  ShieldOff,
+  Signal,
+  Layers,
+  Sparkles,
   Target,
   Terminal,
+  Timer,
+  Trash2,
+  Trophy,
+  Unlock,
+  Users,
+  Wifi,
   Wrench,
   X,
+  Zap,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getRailContext, navigationGroups, siteProfile, socialLinks } from "@/lib/site-data";
@@ -35,9 +82,30 @@ import type { NavigationItem } from "@/lib/site-data";
 import { useLanguage } from "@/components/LanguageProvider";
 import type { Tr } from "@/lib/i18n";
 
+function AphroditeIcon({ className }: { className?: string }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img src="/aphrodite.svg" alt="Aphrodite" className={className} />
+  );
+}
+
+function ArchLinuxIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+    >
+      <path d="M11.39.605C10.376 3.092 9.764 4.72 8.635 7.132c.693.734 1.543 1.589 2.923 2.554-1.484-.61-2.496-1.224-3.252-1.86C6.86 10.842 4.596 15.138 0 23.395c3.612-2.085 6.412-3.37 9.021-3.862a6.61 6.61 0 01-.171-1.547l.003-.115c.058-2.315 1.261-4.095 2.687-3.973 1.426.12 2.534 2.096 2.478 4.409a6.52 6.52 0 01-.146 1.243c2.58.505 5.352 1.787 8.914 3.844-.702-1.293-1.33-2.459-1.929-3.57-.943-.73-1.926-1.682-3.933-2.713 1.38.359 2.367.772 3.137 1.234-6.09-11.334-6.582-12.84-8.67-17.74z" />
+    </svg>
+  );
+}
+
 function iconForHref(href: string) {
   // depth 0 - sections parentes
   if (href === "/") return Compass;
+  if (href === "/search") return Search;
   if (href === "/red-team") return Target;
   if (href === "/cheatsheets") return FileText;
   if (href === "/my-tools") return Wrench;
@@ -45,7 +113,7 @@ function iconForHref(href: string) {
   if (href === "/writeups/ctf") return Flag;
   if (href === "/blog") return BookText;
   // depth 1 - Red Team Notes
-  if (href === "/red-team/ad-exploit") return Network;
+  if (href === "/red-team/ad-exploit") return LayoutGrid;
   if (href === "/red-team/privesc-windows") return Monitor;
   if (href === "/red-team/privesc-linux") return Terminal;
   if (href === "/red-team/esc") return ScrollText;
@@ -57,14 +125,101 @@ function iconForHref(href: string) {
   // depth 1 - My Tools
   if (href === "/my-tools/gofenrir") return Crosshair;
   if (href === "/my-tools/bashhound-ce") return PawPrint;
+  // depth 2 - AD Exploit categories
+  if (href === "/red-team/ad-exploit/information-gathering") return Eye;
+  if (href === "/red-team/ad-exploit/pre-exploitation") return Zap;
+  if (href === "/red-team/ad-exploit/exploitation") return Bug;
+  if (href === "/red-team/ad-exploit/post-exploitation") return Trophy;
+  // depth 3 - Information Gathering
+  if (href === "/red-team/ad-exploit/information-gathering/netexec") return Globe;
+  if (href === "/red-team/ad-exploit/information-gathering/bloodyad") return Droplet;
+  if (href === "/red-team/ad-exploit/information-gathering/bloodhound") return PawPrint;
+  if (href === "/red-team/ad-exploit/information-gathering/password-misconfigs") return Key;
+  if (href === "/red-team/ad-exploit/information-gathering/laps-enum") return Lock;
+  if (href === "/red-team/ad-exploit/information-gathering/kerberos-auth") return Clock;
+  if (href === "/red-team/ad-exploit/information-gathering/pre-win2000") return Archive;
+  if (href === "/red-team/ad-exploit/information-gathering/maq-abuse") return Cpu;
+  if (href === "/red-team/ad-exploit/information-gathering/linux-ad") return Terminal;
+  // depth 3 - Pré-accès
+  if (href === "/red-team/ad-exploit/pre-exploitation/relay-attacks") return Radio;
+  if (href === "/red-team/ad-exploit/pre-exploitation/phishing") return Mail;
+  if (href === "/red-team/ad-exploit/pre-exploitation/network-attacks") return Wifi;
+  if (href === "/red-team/ad-exploit/pre-exploitation/wsus") return Download;
+  if (href === "/red-team/ad-exploit/pre-exploitation/exchange") return Server;
+  if (href === "/red-team/ad-exploit/pre-exploitation/password-misconfigs") return Key;
+  if (href === "/red-team/ad-exploit/pre-exploitation/coercion") return Magnet;
+  // depth 3 - Exploitation
+  if (href === "/red-team/ad-exploit/exploitation/credential-attacks") return Lock;
+  if (href === "/red-team/ad-exploit/exploitation/kerberos-attacks") return Key;
+  if (href === "/red-team/ad-exploit/exploitation/delegation-attacks") return ArrowLeftRight;
+  if (href === "/red-team/ad-exploit/exploitation/domain-privesc") return Crown;
+  if (href === "/red-team/ad-exploit/exploitation/bloodyad-attacks") return Droplet;
+  if (href === "/red-team/ad-exploit/exploitation/acl-gpo") return Shield;
+  if (href === "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse") return ShieldAlert;
+  if (href === "/red-team/ad-exploit/exploitation/acl-gpo/adcs-attacks") return FileKey;
+  if (href === "/red-team/ad-exploit/exploitation/backup-operator") return Archive;
+  if (href === "/red-team/ad-exploit/exploitation/mssql-attacks") return Database;
+  if (href === "/red-team/ad-exploit/exploitation/applocker-wdac") return Ban;
+  if (href === "/red-team/ad-exploit/exploitation/laps-abuse") return Unlock;
+  if (href === "/red-team/ad-exploit/exploitation/process-injection") return Activity;
+  if (href === "/red-team/ad-exploit/exploitation/maq-abuse") return Cpu;
+  if (href === "/red-team/ad-exploit/exploitation/account-operators") return Users;
+  if (href === "/red-team/ad-exploit/exploitation/print-server-operators") return Printer;
+  if (href === "/red-team/ad-exploit/exploitation/ad-recycle-bin") return Trash2;
+  if (href === "/red-team/ad-exploit/exploitation/dns-admins") return Network;
+  if (href === "/red-team/ad-exploit/exploitation/gpo-abuse") return Settings;
+  if (href === "/red-team/ad-exploit/exploitation/misc-cves") return AlertTriangle;
+  // depth 3 - Post-accès
+  if (href === "/red-team/ad-exploit/post-exploitation/lateral-movement") return ArrowLeftRight;
+  if (href === "/red-team/ad-exploit/post-exploitation/procedures") return ClipboardList;
+  if (href === "/red-team/ad-exploit/post-exploitation/win-privesc") return Zap;
+  // depth 4 - PrivEsc Windows
+  if (href === "/red-team/ad-exploit/post-exploitation/win-privesc/potato-attacks") return Flame;
+  if (href === "/red-team/ad-exploit/post-exploitation/win-privesc/credential-dumping") return Database;
+  if (href === "/red-team/ad-exploit/post-exploitation/win-privesc/local-privesc") return Crown;
+  if (href === "/red-team/ad-exploit/post-exploitation/win-privesc/server-operators") return Server;
+  if (href === "/red-team/ad-exploit/post-exploitation/win-privesc/dns-admins") return Globe;
+  if (href === "/red-team/ad-exploit/post-exploitation/win-privesc/ad-recycle-bin") return Trash2;
+  // depth 2 - Privesc Windows
+  if (href === "/red-team/privesc-windows/local-enum") return Scan;
+  if (href === "/red-team/privesc-windows/credential-access") return KeyRound;
+  if (href === "/red-team/privesc-windows/credential-dumping") return HardDrive;
+  if (href === "/red-team/privesc-windows/privilege-abuse") return ShieldOff;
+  if (href === "/red-team/privesc-windows/service-abuse") return Cog;
+  // depth 2 - Privesc Linux
+  if (href === "/red-team/privesc-linux/privilege-paths") return Route;
+  if (href === "/red-team/privesc-linux/sudo-suid") return Terminal;
+  if (href === "/red-team/privesc-linux/capabilities-cron") return Timer;
+  if (href === "/red-team/privesc-linux/docker-privesc") return Package;
+  // depth 2 - ESC
+  if (href === "/red-team/esc/abuse-paths") return ShieldOff;
+  if (href === "/red-team/esc/esc1-esc2") return BadgeCheck;
+  if (href === "/red-team/esc/shadow-credentials") return Ghost;
   // depth 2 - Pivoting sub-pages
   if (href === "/red-team/pivoting/ligolo") return Cable;
+  // C2
+  if (href === "/red-team/c2") return Signal;
+  if (href === "/red-team/c2/mythic") return Bot;
+  if (href === "/red-team/c2/mythic/agents") return Layers;
+  if (href === "/red-team/c2/mythic/agents/aphrodite") return AphroditeIcon;
+  // Pentest Web
+  if (href === "/red-team/pentest-web") return Code2;
+  // Arch Linux
+  if (href === "/arch-linux") return ArchLinuxIcon;
+  if (href === "/arch-linux/pacman") return Package;
+  if (href === "/arch-linux/zram") return HardDrive;
+  if (href === "/arch-linux/grub-rescue") return Wrench;
+  if (href === "/arch-linux/kernel-recovery") return AlertTriangle;
+  if (href === "/arch-linux/hp-printer") return Printer;
+  // writeup leaf pages
+  if (href.startsWith("/writeups/")) return Scroll;
   return null;
 }
 
 function navLabel(href: string, label: string, t: Tr): string {
   const map: Record<string, string> = {
     "/": t.nav.items.readme,
+    "/search": t.nav.items.search,
     "/red-team": t.nav.items.redTeam,
     "/cheatsheets": t.nav.items.cheatsheets,
     "/my-tools": t.nav.items.myTools,
@@ -118,7 +273,7 @@ function NavTreeItem({
     if (isActive || isAncestor) setOpen(true);
   }, [isActive, isAncestor]);
 
-  const Icon = depth <= 2 ? iconForHref(item.href ?? "") : null;
+  const Icon = iconForHref(item.href ?? "");
   const displayLabel = depth === 0 ? navLabel(item.href ?? "", item.label, t) : item.label;
   const pad = DEPTH_PAD[Math.min(depth, 3)];
 
@@ -349,7 +504,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex min-h-screen max-w-[1400px]">
-        <aside className="sticky top-0 hidden h-screen w-60 shrink-0 border-r border-border px-5 py-6 lg:flex lg:flex-col">
+        <aside className="sticky top-0 hidden h-screen w-72 shrink-0 border-r border-border px-5 py-6 lg:flex lg:flex-col">
           <NavigationContent pathname={pathname} />
         </aside>
 
@@ -378,7 +533,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             </button>
           </div>
 
-          <main className="min-w-0">{children}</main>
+          <main key={pathname} className="min-w-0 animate-page-in">{children}</main>
         </div>
 
         <aside className="sticky top-0 hidden h-screen w-48 shrink-0 border-l border-border px-5 py-8 xl:block">
@@ -392,7 +547,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             className="absolute inset-0 bg-background/80 backdrop-blur-sm"
             onClick={() => setMenuOpen(false)}
           />
-          <div className="absolute left-0 top-0 h-full w-64 border-r border-border bg-background px-5 py-6 shadow-2xl">
+          <div className="absolute left-0 top-0 h-full w-72 border-r border-border bg-background px-5 py-6 shadow-2xl">
             <div className="mb-5 flex items-center justify-between">
               <span className="text-sm font-semibold text-foreground">{t.shell.navigation}</span>
               <button
