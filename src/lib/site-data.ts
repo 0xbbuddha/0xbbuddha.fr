@@ -530,6 +530,22 @@ export const navigationGroups: NavigationGroup[] = [
             },
           ],
         },
+        {
+          href: "/red-team/defense-evasion",
+          label: "Defense Evasion",
+          children: [
+            { href: "/red-team/defense-evasion/disable-av", label: "Disable AV" },
+            {
+              href: "/red-team/defense-evasion/cobalt-strike",
+              label: "Evading with Cobalt Strike",
+              children: [
+                { href: "/red-team/defense-evasion/cobalt-strike/payload-bypass", label: "Payload Bypass" },
+                { href: "/red-team/defense-evasion/cobalt-strike/memory-config", label: "Memory & Config" },
+                { href: "/red-team/defense-evasion/cobalt-strike/process-opsec", label: "Process OPSEC" },
+              ],
+            },
+          ],
+        },
       ],
     }],
   },
@@ -614,6 +630,86 @@ const staticRailContexts: Record<string, RailContext> = {
     related: [
       { href: "/cheatsheets", label: "Cheatsheets", meta: "Références rapides" },
       { href: "/my-tools", label: "My Tools", meta: "Outils perso" },
+    ],
+  },
+  "/red-team/defense-evasion": {
+    eyebrow: "Red Team Notes",
+    title: "Defense Evasion",
+    summary: "OPSEC artefacts, scripts, mémoire et comportement d'exécution.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/c2", label: "C2", meta: "Infrastructure et agents" },
+      { href: "/red-team/pivoting", label: "Pivoting", meta: "Mouvement réseau" },
+    ],
+  },
+  "/red-team/defense-evasion/disable-av": {
+    eyebrow: "Defense Evasion",
+    title: "Disable AV",
+    summary: "Désactiver Windows Defender via PowerShell.",
+    anchors: [
+      { href: "#disable-defender", label: "Minimal" },
+      { href: "#disable-full", label: "Complet" },
+      { href: "#status", label: "Status" },
+      { href: "#exclusions", label: "Exclusions" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/defense-evasion", label: "Defense Evasion", meta: "Vue d'ensemble" },
+      { href: "/red-team/defense-evasion/cobalt-strike", label: "Cobalt Strike", meta: "OPSEC CS" },
+    ],
+  },
+  "/red-team/defense-evasion/cobalt-strike": {
+    eyebrow: "Defense Evasion",
+    title: "Evading with Cobalt Strike",
+    summary: "OPSEC Cobalt Strike : artefacts, scripts, mémoire, commandes, post-ex.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/defense-evasion", label: "Defense Evasion", meta: "Vue d'ensemble" },
+      { href: "/red-team/c2", label: "C2", meta: "Infrastructure" },
+    ],
+  },
+  "/red-team/defense-evasion/cobalt-strike/payload-bypass": {
+    eyebrow: "Cobalt Strike",
+    title: "Payload Bypass",
+    summary: "Bypass AV/AMSI sur les payloads compilés et scripts PowerShell.",
+    anchors: [
+      { href: "#compiled", label: "Payloads compilés" },
+      { href: "#script", label: "Script / AMSI" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/defense-evasion/cobalt-strike", label: "Cobalt Strike", meta: "Vue d'ensemble" },
+      { href: "/red-team/defense-evasion/cobalt-strike/memory-config", label: "Memory & Config", meta: "Stage + Malleable C2" },
+    ],
+  },
+  "/red-team/defense-evasion/cobalt-strike/memory-config": {
+    eyebrow: "Cobalt Strike",
+    title: "Memory & Config",
+    summary: "OPSEC mémoire Beacon et blocs Malleable C2.",
+    anchors: [
+      { href: "#stage", label: "Stage" },
+      { href: "#inject-config", label: "process-inject / post-ex" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/defense-evasion/cobalt-strike", label: "Cobalt Strike", meta: "Vue d'ensemble" },
+      { href: "/red-team/defense-evasion/cobalt-strike/process-opsec", label: "Process OPSEC", meta: "PPID + spawnto" },
+    ],
+  },
+  "/red-team/defense-evasion/cobalt-strike/process-opsec": {
+    eyebrow: "Cobalt Strike",
+    title: "Process OPSEC",
+    summary: "PPID spoofing, spawnto et bypass des détections kernel.",
+    anchors: [
+      { href: "#blending", label: "Process blending" },
+      { href: "#detections", label: "Détections & bypass" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/defense-evasion/cobalt-strike", label: "Cobalt Strike", meta: "Vue d'ensemble" },
+      { href: "/red-team/defense-evasion/cobalt-strike/memory-config", label: "Memory & Config", meta: "Stage + Malleable C2" },
     ],
   },
   "/cheatsheets": {

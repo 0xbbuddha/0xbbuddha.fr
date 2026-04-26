@@ -25,8 +25,8 @@ sudo pacman -S hyprland xdg-desktop-portal-hyprland --overwrite '*'`;
       id: "mount",
       title: lang === "fr" ? "Monter les partitions" : "Mount partitions",
       note: lang === "fr"
-        ? "Depuis le live USB EndeavourOS/Arch — adapter les chemins selon lsblk"
-        : "From the live USB EndeavourOS/Arch — adapt paths based on lsblk",
+        ? "Depuis le live USB EndeavourOS/Arch - adapter les chemins selon lsblk"
+        : "From the live USB EndeavourOS/Arch - adapt paths based on lsblk",
       entries: [
         {
           cmd: "lsblk -f",
@@ -97,8 +97,8 @@ sudo pacman -S hyprland xdg-desktop-portal-hyprland --overwrite '*'`;
       id: "fix-pacman",
       title: lang === "fr" ? "Réparer pacman (si cassé)" : "Fix pacman (if broken)",
       note: lang === "fr"
-        ? "Si pacman est inutilisable dans le chroot — exécuter depuis le live USB"
-        : "If pacman is unusable inside the chroot — run from the live USB",
+        ? "Si pacman est inutilisable dans le chroot - exécuter depuis le live USB"
+        : "If pacman is unusable inside the chroot - run from the live USB",
       entries: [
         {
           cmd: fixPacmanOutside,
@@ -134,8 +134,8 @@ sudo pacman -S hyprland xdg-desktop-portal-hyprland --overwrite '*'`;
         {
           cmd: "sudo find /usr/lib -type f -empty",
           why: lang === "fr"
-            ? "Trouve tous les fichiers vides dans /usr/lib. Des .so vides indiquent une corruption — ils doivent être réinstallés."
-            : "Finds all empty files in /usr/lib. Empty .so files indicate corruption — they need to be reinstalled.",
+            ? "Trouve tous les fichiers vides dans /usr/lib. Des .so vides indiquent une corruption - ils doivent être réinstallés."
+            : "Finds all empty files in /usr/lib. Empty .so files indicate corruption - they need to be reinstalled.",
         },
         {
           cmd: findEmptySo,
@@ -149,8 +149,8 @@ sudo pacman -S hyprland xdg-desktop-portal-hyprland --overwrite '*'`;
       id: "initramfs",
       title: lang === "fr" ? "Régénérer l'initramfs" : "Regenerate initramfs",
       note: lang === "fr"
-        ? "Dans le chroot — dracut détecte automatiquement les kernels installés"
-        : "Inside the chroot — dracut auto-detects installed kernels",
+        ? "Dans le chroot - dracut détecte automatiquement les kernels installés"
+        : "Inside the chroot - dracut auto-detects installed kernels",
       entries: [
         {
           cmd: "dracut -f --regenerate-all",
@@ -177,8 +177,8 @@ sudo pacman -S hyprland xdg-desktop-portal-hyprland --overwrite '*'`;
       id: "login-loop",
       title: lang === "fr" ? "Boucle de login (Hyprland)" : "Login loop (Hyprland)",
       note: lang === "fr"
-        ? "Si le bureau ne démarre pas après reboot — passer en TTY avec Ctrl+Alt+F3"
-        : "If the desktop fails to start after reboot — switch to TTY with Ctrl+Alt+F3",
+        ? "Si le bureau ne démarre pas après reboot - passer en TTY avec Ctrl+Alt+F3"
+        : "If the desktop fails to start after reboot - switch to TTY with Ctrl+Alt+F3",
       entries: [
         {
           cmd: loginLoopFix,
@@ -191,7 +191,7 @@ sudo pacman -S hyprland xdg-desktop-portal-hyprland --overwrite '*'`;
     {
       id: "complete-repair",
       title: lang === "fr" ? "Réparation complète" : "Complete repair",
-      note: lang === "fr" ? "Dans le chroot — réinstalle tout le système natif" : "Inside the chroot — reinstalls the entire native system",
+      note: lang === "fr" ? "Dans le chroot - réinstalle tout le système natif" : "Inside the chroot - reinstalls the entire native system",
       entries: [
         {
           cmd: "sudo pacman -Qqn | sudo pacman -S --overwrite '*' -",

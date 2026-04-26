@@ -47,6 +47,14 @@ export default function RedTeamPage() {
           ? "Techniques de pivot et tunnel dans un réseau compromis : port forwarding, SOCKS, Chisel."
           : "Pivoting and tunneling techniques in compromised networks: port forwarding, SOCKS, Chisel.",
     },
+    {
+      href: "/red-team/defense-evasion",
+      name: "Defense Evasion",
+      description:
+        lang === "fr"
+          ? "Condensé OPSEC: artefacts, scripts, mémoire et comportement des commandes post-exploitation."
+          : "OPSEC digest: artifacts, scripts, memory footprint, and post-execution command behavior.",
+    },
   ];
 
   return (

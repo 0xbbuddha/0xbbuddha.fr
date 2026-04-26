@@ -223,6 +223,13 @@ function iconForHref(href: string) {
   if (href === "/red-team/c2/mythic") return Bot;
   if (href === "/red-team/c2/mythic/agents") return Layers;
   if (href === "/red-team/c2/mythic/agents/aphrodite") return AphroditeIcon;
+  // Defense Evasion
+  if (href === "/red-team/defense-evasion") return ShieldOff;
+  if (href === "/red-team/defense-evasion/disable-av") return Ban;
+  if (href === "/red-team/defense-evasion/cobalt-strike") return Crosshair;
+  if (href === "/red-team/defense-evasion/cobalt-strike/payload-bypass") return Archive;
+  if (href === "/red-team/defense-evasion/cobalt-strike/memory-config") return Database;
+  if (href === "/red-team/defense-evasion/cobalt-strike/process-opsec") return Activity;
   // Pentest Web
   if (href === "/red-team/pentest-web") return Code2;
   // Arch Linux
@@ -387,7 +394,7 @@ function NavigationContent({
   const { lang, setLang, t } = useLanguage();
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex flex-1 min-h-0 flex-col">
       <Link
         href="/"
         onClick={onNavigate}
@@ -409,7 +416,7 @@ function NavigationContent({
         </div>
       </Link>
 
-      <nav className="flex-1 space-y-5 overflow-y-auto">
+      <nav className="min-h-0 flex-1 space-y-5 overflow-x-hidden overflow-y-auto pb-2">
         {navigationGroups.map((group) => (
           <div key={group.titleKey}>
             <p className="mb-1 px-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50">
@@ -525,7 +532,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex min-h-screen max-w-[1400px]">
-        <aside className="sticky top-0 hidden h-screen w-72 shrink-0 border-r border-border px-5 py-6 lg:flex lg:flex-col">
+        <aside className="sticky top-0 hidden h-screen w-72 shrink-0 overflow-hidden border-r border-border px-5 py-6 lg:flex lg:flex-col">
           <NavigationContent pathname={pathname} />
         </aside>
 
@@ -568,7 +575,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             className="absolute inset-0 bg-background/80 backdrop-blur-sm"
             onClick={() => setMenuOpen(false)}
           />
-          <div className="absolute left-0 top-0 h-full w-72 border-r border-border bg-background px-5 py-6 shadow-2xl">
+          <div className="absolute left-0 top-0 h-full w-72 overflow-hidden border-r border-border bg-background px-5 py-6 shadow-2xl">
             <div className="mb-5 flex items-center justify-between">
               <span className="text-sm font-semibold text-foreground">{t.shell.navigation}</span>
               <button
