@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { ArrowUpRight, Github, Linkedin } from "lucide-react";
-import { projects, skillCategories, siteProfile, socialLinks } from "@/lib/site-data";
+import { projects, siteProfile, socialLinks } from "@/lib/site-data";
 import { useLanguage } from "@/components/LanguageProvider";
 
 const SOCIAL_ICONS: Record<string, React.ElementType> = {
@@ -82,12 +82,65 @@ export default function HomePage() {
     },
   };
 
-  const skillTitleEn: Record<string, string> = {
-    "SOC & Détection": "SOC & Detection",
-    "Pentest & Offensive Web": "Pentest & Offensive Web",
-    "Pentest & Offensive AD": "Pentest & Offensive AD",
-    "Systeme & Réseau": "Systems & Network",
-    "Langages & Outils": "Languages & Tooling",
+  const skillSectionsFr = [
+    {
+      title: "Red Team",
+      parts: [
+        { name: "Active Directory", detail: "Enumeration, abuse paths, ADCS, elevation de privileges, persistance." },
+        { name: "Web & API", detail: "OWASP Top 10, fuzzing, analyse applicative, exploitation et post-exploitation." },
+        { name: "Reseau & Infrastructure", detail: "Reconnaissance PTES, exploitation de services/protocoles, pivoting." },
+        { name: "Operations", detail: "C2, OPSEC, mouvement lateral et scenarios offensifs en lab." },
+      ],
+    },
+    {
+      title: "Blue Team",
+      parts: [
+        { name: "Detection", detail: "Detection engineering, regles et signaux actionnables." },
+        { name: "SOC/SOAR", detail: "Triage d'alertes, investigation, qualification et priorisation." },
+        { name: "Defense", detail: "Hardening, reduction de surface d'attaque et remediations." },
+      ],
+    },
+    {
+      title: "Tooling",
+      parts: [
+        { name: "Languages", detail: "Python  ·  Bash  ·  Go  ·  C  ·  PowerShell  ·  ASM  ·  Git" },
+      ],
+    },
+  ];
+
+  const skillSectionsEn = [
+    {
+      title: "Red Team",
+      parts: [
+        { name: "Active Directory", detail: "Enumeration, abuse paths, ADCS, privilege escalation, and persistence." },
+        { name: "Web & API", detail: "OWASP Top 10, fuzzing, application introspection, exploitation, and post-exploitation." },
+        { name: "Network & Infrastructure", detail: "PTES reconnaissance, service/protocol exploitation, and pivoting." },
+        { name: "Operations", detail: "C2, OPSEC, lateral movement, and offensive lab scenarios." },
+      ],
+    },
+    {
+      title: "Blue Team",
+      parts: [
+        { name: "Detection", detail: "Detection engineering, rules, and actionable signals." },
+        { name: "SOC/SOAR", detail: "Alert triage, investigation, qualification, and prioritization." },
+        { name: "Defense", detail: "Hardening, attack surface reduction, and remediation." },
+      ],
+    },
+    {
+      title: "Tooling",
+      parts: [
+        { name: "Languages", detail: "Python  ·  Bash  ·  Go  ·  C  ·  PowerShell  ·  ASM  ·  Git" },
+      ],
+    },
+  ];
+
+  const certifications = {
+    fr: [
+      { name: "CRTO", status: "in coming" },
+    ],
+    en: [
+      { name: "CRTO", status: "upcoming" },
+    ],
   };
 
   const whoami = [
@@ -207,13 +260,30 @@ export default function HomePage() {
         <TerminalBlock id="skills" title="cat /etc/skills.conf">
           <p className="mb-4 text-primary">$ cat /etc/skills.conf</p>
           <div className="space-y-4">
-            {skillCategories.map((cat) => (
-              <div key={cat.title}>
-                <p className="mb-1 text-primary/80">
-                  # {lang === "fr" ? cat.title : (skillTitleEn[cat.title] ?? cat.title)}
-                </p>
-                <p className="leading-6 text-foreground/85">{cat.items.join("  ·  ")}</p>
+            {(lang === "fr" ? skillSectionsFr : skillSectionsEn).map((section) => (
+              <div key={section.title}>
+                <p className="mb-1 text-primary/80"># {section.title}</p>
+                <div className="space-y-1.5">
+                  {section.parts.map((part) => (
+                    <p key={`${section.title}-${part.name}`} className="leading-6 text-muted-foreground">
+                      - <span className="text-foreground">{part.name}</span> :: {part.detail}
+                    </p>
+                  ))}
+                </div>
               </div>
+            ))}
+          </div>
+          <p className="mt-4 animate-pulse text-primary/50">█</p>
+        </TerminalBlock>
+
+        {/* ── certifications ── */}
+        <TerminalBlock id="certifications" title="cat /etc/certifications.conf">
+          <p className="mb-4 text-primary">$ cat /etc/certifications.conf</p>
+          <div className="space-y-1.5 text-muted-foreground">
+            {(lang === "fr" ? certifications.fr : certifications.en).map((cert) => (
+              <p key={cert.name}>
+                - <span className="text-foreground">{cert.name}</span> :: {cert.status}
+              </p>
             ))}
           </div>
           <p className="mt-4 animate-pulse text-primary/50">█</p>
