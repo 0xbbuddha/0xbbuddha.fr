@@ -290,6 +290,18 @@ export const writeups: WriteupEntry[] = [
     focus: "Windows / MSSQL",
   },
   {
+    slug: "pirate",
+    title: "Pirate",
+    type: "htb",
+    platform: "HackTheBox",
+    difficulty: "Hard",
+    os: "Windows",
+    date: "2026-05-10",
+    excerpt:
+      "Cinq techniques AD enchaînées : Pre2k sur MS01$, extraction gMSA, RBCD via NTLM relay, S4U2Proxy sur WEB01 pour récupérer a.white, puis WriteSPN + altservice pour obtenir un ticket CIFS/DC01 en tant qu'Administrator.",
+    focus: "Pre2k / gMSA / RBCD / WriteSPN",
+  },
+  {
     slug: "overwatch",
     title: "Overwatch",
     type: "htb",
