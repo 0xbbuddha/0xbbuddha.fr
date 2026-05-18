@@ -214,7 +214,7 @@ SQL (OVERWATCH\\sqlsvc  guest@master)>`}
 {`cat ../Desktop/user.txt`}
           </CodeBlock>
           <CodeBlock title="Résultat (user.txt)" result>
-{`d583ad30ff2ae368008fcfb525bce6ce`}
+{`REDACTED`}
           </CodeBlock>
         </section>
 
@@ -263,7 +263,7 @@ Invoke-WebRequest -Uri $Url -Method Post -ContentType "text/xml; charset=utf-8" 
 {`type C:\\Users\\Administrator\\Desktop\\root.txt`}
           </CodeBlock>
           <CodeBlock title="Résultat (root.txt)" result>
-{`ac5bd179d0b76900076d7815301375ff`}
+{`REDACTED`}
           </CodeBlock>
         </section>
 

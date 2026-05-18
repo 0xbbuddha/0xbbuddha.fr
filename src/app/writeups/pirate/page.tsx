@@ -1,5 +1,6 @@
 import { Terminal, Key, Database, Shield, Network, Users, Lock } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
+import { SpoilerWrapper } from "@/components/SpoilerWrapper";
 
 function CodeBlock({
   children,
@@ -51,6 +52,10 @@ export default function WriteupPiratePage() {
         ]}
       />
 
+      <SpoilerWrapper
+        machineName="Pirate"
+        unlockCodeHash="3093215ced29374daf8f02b59b648698a7513b5afdf827ee0a3d06959b9d8b0b"
+      >
       <article className="mt-8 space-y-10">
 
         {/* ── 1. RECONNAISSANCE ─────────────────────────────────────────── */}
@@ -458,6 +463,7 @@ nxc smb DC01.pirate.htb --use-kcache -x 'type C:\\Users\\Administrator\\Desktop\
         </section>
 
       </article>
+      </SpoilerWrapper>
     </div>
   );
 }
