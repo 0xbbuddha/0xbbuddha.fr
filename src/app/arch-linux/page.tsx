@@ -43,6 +43,13 @@ export default function ArchLinuxPage() {
         ? "Configurer une imprimante HP avec HPLIP et CUPS."
         : "Set up an HP printer with HPLIP and CUPS.",
     },
+    {
+      href: "/arch-linux/kernel-setup",
+      name: "Kernel Setup",
+      description: lang === "fr"
+        ? "Setup complet aegis-offensive / aegis-hardened / lts avec Secure Boot via sbctl."
+        : "Full aegis-offensive / aegis-hardened / lts setup with Secure Boot via sbctl.",
+    },
   ];
 
   return (

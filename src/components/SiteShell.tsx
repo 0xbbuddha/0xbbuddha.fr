@@ -239,6 +239,7 @@ function iconForHref(href: string) {
   if (href === "/arch-linux/grub-rescue") return Wrench;
   if (href === "/arch-linux/kernel-recovery") return AlertTriangle;
   if (href === "/arch-linux/hp-printer") return Printer;
+  if (href === "/arch-linux/kernel-setup") return Cpu;
   // writeup leaf pages
   if (href.startsWith("/writeups/")) return Scroll;
   return null;

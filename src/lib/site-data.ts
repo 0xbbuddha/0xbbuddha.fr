@@ -576,6 +576,7 @@ export const navigationGroups: NavigationGroup[] = [
         { href: "/arch-linux/grub-rescue", label: "GRUB Rescue" },
         { href: "/arch-linux/kernel-recovery", label: "Kernel Recovery" },
         { href: "/arch-linux/hp-printer", label: "HP Printer" },
+        { href: "/arch-linux/kernel-setup", label: "Kernel Setup" },
       ],
     }],
   },
