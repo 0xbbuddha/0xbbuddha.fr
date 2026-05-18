@@ -11,6 +11,7 @@ const fr = {
       myTools: "My Tools",
       writeups: "Writeups",
       blog: "Blog",
+      misc: "Misc",
     },
     items: {
       readme: "README",
@@ -113,6 +114,7 @@ const en = {
       myTools: "My Tools",
       writeups: "Writeups",
       blog: "Blog",
+      misc: "Misc",
     },
     items: {
       readme: "README",

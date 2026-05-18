@@ -75,6 +75,7 @@ import {
   Wrench,
   X,
   Zap,
+  Music,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getRailContext, navigationGroups, siteProfile, socialLinks } from "@/lib/site-data";
@@ -240,6 +241,9 @@ function iconForHref(href: string) {
   if (href === "/arch-linux/kernel-recovery") return AlertTriangle;
   if (href === "/arch-linux/hp-printer") return Printer;
   if (href === "/arch-linux/kernel-setup") return Cpu;
+  // Misc
+  if (href === "/music") return Music;
+  if (href === "/chess") return Crown;
   // writeup leaf pages
   if (href.startsWith("/writeups/")) return Scroll;
   return null;

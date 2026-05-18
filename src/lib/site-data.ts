@@ -604,6 +604,13 @@ export const navigationGroups: NavigationGroup[] = [
     titleKey: "blog",
     items: [{ href: "/blog", label: "Blog", badge: String(articles.length).padStart(2, "0") }],
   },
+  {
+    titleKey: "misc",
+    items: [
+      { href: "/music", label: "Music" },
+      { href: "/chess", label: "Chess" },
+    ],
+  },
 ];
 
 const staticRailContexts: Record<string, RailContext> = {
