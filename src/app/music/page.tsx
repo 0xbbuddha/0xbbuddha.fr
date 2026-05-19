@@ -5,7 +5,9 @@ import { Music } from "lucide-react";
 
 const LASTFM_USER = "kikilahess";
 const LASTFM_KEY = "7d89c93e907e5e5a5d03ceaef313168f";
-const API_URL = `https://ws.audioscrobbler.com/2.0/?method=user.getTopTracks&user=${LASTFM_USER}&period=1month&limit=4&api_key=${LASTFM_KEY}&format=json`;
+const BASE = `https://ws.audioscrobbler.com/2.0/?user=${LASTFM_USER}&period=1month&api_key=${LASTFM_KEY}&format=json`;
+const TRACKS_URL = `${BASE}&method=user.getTopTracks&limit=4`;
+const ARTISTS_URL = `${BASE}&method=user.getTopArtists&limit=3`;
 const LASTFM_PLACEHOLDER = "2a96cbd8b46e442fc41c2b86b821562f";
 
 interface Track {
@@ -14,6 +16,16 @@ interface Track {
   playcount: string;
   url: string;
   image: Array<{ "#text": string; size: string }>;
+}
+
+interface Artist {
+  name: string;
+  playcount: string;
+  url: string;
+}
+
+interface EnrichedArtist extends Artist {
+  art: string;
 }
 
 interface EnrichedTrack extends Track {
@@ -30,7 +42,17 @@ async function fetchItunesArt(artist: string, track: string): Promise<string> {
   return raw ? raw.replace("100x100bb", "174x174bb") : "";
 }
 
-function SkeletonRow() {
+async function fetchItunesArtistArt(artist: string): Promise<string> {
+  const query = encodeURIComponent(artist);
+  const res = await fetch(
+    `https://itunes.apple.com/search?term=${query}&entity=song&limit=1&media=music`
+  );
+  const data = await res.json();
+  const raw: string = data.results?.[0]?.artworkUrl100 ?? "";
+  return raw ? raw.replace("100x100bb", "174x174bb") : "";
+}
+
+function TrackSkeleton() {
   return (
     <div className="flex items-center gap-4 py-5 border-b border-border animate-pulse">
       <div className="w-5 shrink-0" />
@@ -47,18 +69,29 @@ function SkeletonRow() {
   );
 }
 
+function ArtistSkeleton() {
+  return (
+    <div className="flex items-center gap-3 py-3 border-b border-border animate-pulse">
+      <div className="w-5 shrink-0" />
+      <div className="w-10 h-10 rounded-full bg-muted shrink-0" />
+      <div className="h-4 bg-muted rounded w-1/3" />
+      <div className="ml-auto h-3 bg-muted rounded w-12" />
+    </div>
+  );
+}
+
 export default function MusicPage() {
   const [tracks, setTracks] = useState<EnrichedTrack[]>([]);
+  const [artists, setArtists] = useState<EnrichedArtist[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    fetch(API_URL)
-      .then((r) => r.json())
-      .then(async (data) => {
-        const raw: Track[] = data.toptracks?.track ?? [];
+    Promise.all([fetch(TRACKS_URL).then((r) => r.json()), fetch(ARTISTS_URL).then((r) => r.json())])
+      .then(async ([tracksData, artistsData]) => {
+        const rawTracks: Track[] = tracksData.toptracks?.track ?? [];
         const enriched = await Promise.all(
-          raw.map(async (track) => {
+          rawTracks.map(async (track) => {
             const lastfmImg =
               track.image.find((img) => img.size === "large")?.["#text"] ?? "";
             const hasRealArt = lastfmImg && !lastfmImg.includes(LASTFM_PLACEHOLDER);
@@ -68,7 +101,15 @@ export default function MusicPage() {
             return { ...track, albumArt };
           })
         );
+        const rawArtists: Artist[] = artistsData.topartists?.artist ?? [];
+        const enrichedArtists = await Promise.all(
+          rawArtists.map(async (artist) => {
+            const art = await fetchItunesArtistArt(artist.name).catch(() => "");
+            return { ...artist, art };
+          })
+        );
         setTracks(enriched);
+        setArtists(enrichedArtists);
         setLoading(false);
       })
       .catch(() => {
@@ -91,14 +132,15 @@ export default function MusicPage() {
         </p>
       </header>
 
-      <div className="divide-y divide-border">
-        {loading && [1, 2, 3, 4].map((i) => <SkeletonRow key={i} />)}
+      {error && (
+        <p className="py-6 font-mono text-sm text-muted-foreground">
+          Impossible de charger les donnees Last.fm.
+        </p>
+      )}
 
-        {error && (
-          <p className="py-6 font-mono text-sm text-muted-foreground">
-            Impossible de charger les donnees Last.fm.
-          </p>
-        )}
+      {/* Tracks */}
+      <div className="divide-y divide-border">
+        {loading && [1, 2, 3, 4].map((i) => <TrackSkeleton key={i} />)}
 
         {!loading && !error && tracks.length === 0 && (
           <p className="py-6 font-mono text-sm text-muted-foreground">
@@ -146,6 +188,54 @@ export default function MusicPage() {
               </div>
             </a>
           ))}
+      </div>
+
+      {/* Artists */}
+      <div className="mt-10">
+        <p className="mb-3 text-[11px] font-mono uppercase tracking-widest text-muted-foreground/50">
+          Top artistes
+        </p>
+        <div className="divide-y divide-border">
+          {loading && [1, 2, 3].map((i) => <ArtistSkeleton key={i} />)}
+
+          {!loading &&
+            !error &&
+            artists.map((artist, i) => (
+              <a
+                key={`${artist.name}-${i}`}
+                href={artist.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-3 py-3 -mx-2 px-2 rounded transition-colors hover:bg-muted/20"
+              >
+                <span className="w-5 shrink-0 text-right font-mono text-xs text-muted-foreground/40">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {artist.art ? (
+                  <img
+                    src={artist.art}
+                    alt={artist.name}
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 shrink-0 rounded-full border border-border object-cover"
+                  />
+                ) : (
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border bg-muted">
+                    <Music className="size-4 text-muted-foreground/40" />
+                  </div>
+                )}
+                <span className="flex-1 truncate text-sm font-medium text-foreground transition-colors group-hover:text-primary">
+                  {artist.name}
+                </span>
+                <span className="shrink-0 font-mono text-xs text-primary">
+                  {artist.playcount}
+                </span>
+                <span className="shrink-0 font-mono text-[10px] text-muted-foreground/40">
+                  plays
+                </span>
+              </a>
+            ))}
+        </div>
       </div>
 
       <footer className="mt-8 border-t border-border pt-4">
