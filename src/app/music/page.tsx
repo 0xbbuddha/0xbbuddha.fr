@@ -33,24 +33,61 @@ interface EnrichedTrack extends Track {
   albumArt: string;
 }
 
+type LastfmImage = { "#text": string; size: string };
+
+function artUrl(raw: string): string {
+  return raw.replace(/\d+x\d+bb/, "400x400bb");
+}
+
+function artistMatch(a: string, b: string): boolean {
+  const norm = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return norm(a).includes(norm(b)) || norm(b).includes(norm(a));
+}
+
+function bestLastfmImage(images: LastfmImage[]): string {
+  const img =
+    images.find((i) => i.size === "extralarge")?.["#text"] ||
+    images.find((i) => i.size === "large")?.["#text"] ||
+    "";
+  return img && !img.includes(LASTFM_PLACEHOLDER) ? img : "";
+}
+
+async function fetchLastfmTrackArt(artist: string, track: string): Promise<string> {
+  const url = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${LASTFM_KEY}&artist=${encodeURIComponent(artist)}&track=${encodeURIComponent(track)}&format=json`;
+  const data = await fetch(url).then((r) => r.json());
+  return bestLastfmImage(data.track?.album?.image ?? []);
+}
+
+async function fetchLastfmArtistArt(artist: string): Promise<string> {
+  const url = `https://ws.audioscrobbler.com/2.0/?method=artist.getInfo&artist=${encodeURIComponent(artist)}&api_key=${LASTFM_KEY}&format=json`;
+  const data = await fetch(url).then((r) => r.json());
+  return bestLastfmImage(data.artist?.image ?? []);
+}
+
+async function fetchAudioDBArtistArt(artist: string): Promise<string> {
+  const data = await fetch(
+    `https://www.theaudiodb.com/api/v1/json/2/search.php?s=${encodeURIComponent(artist)}`
+  ).then((r) => r.json());
+  return data.artists?.[0]?.strArtistThumb ?? "";
+}
+
 async function fetchItunesArt(artist: string, track: string): Promise<string> {
   const query = encodeURIComponent(`${artist} ${track}`);
-  const res = await fetch(
-    `https://itunes.apple.com/search?term=${query}&entity=song&limit=1&media=music`
-  );
-  const data = await res.json();
-  const raw: string = data.results?.[0]?.artworkUrl100 ?? "";
-  return raw ? raw.replace("100x100bb", "174x174bb") : "";
+  const data = await fetch(
+    `https://itunes.apple.com/search?term=${query}&entity=song&limit=10&media=music`
+  ).then((r) => r.json());
+  const results: Array<{ artistName: string; artworkUrl100: string }> = data.results ?? [];
+  const match = results.find((r) => artistMatch(r.artistName, artist)) ?? results[0];
+  return match?.artworkUrl100 ? artUrl(match.artworkUrl100) : "";
 }
 
 async function fetchItunesArtistArt(artist: string): Promise<string> {
-  const query = encodeURIComponent(artist);
-  const res = await fetch(
-    `https://itunes.apple.com/search?term=${query}&entity=song&limit=1&media=music`
-  );
-  const data = await res.json();
-  const raw: string = data.results?.[0]?.artworkUrl100 ?? "";
-  return raw ? raw.replace("100x100bb", "174x174bb") : "";
+  const data = await fetch(
+    `https://itunes.apple.com/search?term=${encodeURIComponent(artist)}&entity=song&limit=10&media=music`
+  ).then((r) => r.json());
+  const results: Array<{ artistName: string; artworkUrl100: string }> = data.results ?? [];
+  const match = results.find((r) => artistMatch(r.artistName, artist)) ?? results[0];
+  return match?.artworkUrl100 ? artUrl(match.artworkUrl100) : "";
 }
 
 function TrackSkeleton() {
@@ -94,19 +131,21 @@ export default function MusicPage() {
         const rawTracks: Track[] = tracksData.toptracks?.track ?? [];
         const enriched = await Promise.all(
           rawTracks.map(async (track) => {
-            const lastfmImg =
-              track.image.find((img) => img.size === "large")?.["#text"] ?? "";
-            const hasRealArt = lastfmImg && !lastfmImg.includes(LASTFM_PLACEHOLDER);
-            const albumArt = hasRealArt
-              ? lastfmImg
-              : await fetchItunesArt(track.artist.name, track.name).catch(() => "");
+            const toplistImg = bestLastfmImage(track.image);
+            const albumArt =
+              toplistImg ||
+              (await fetchLastfmTrackArt(track.artist.name, track.name).catch(() => "")) ||
+              (await fetchItunesArt(track.artist.name, track.name).catch(() => ""));
             return { ...track, albumArt };
           })
         );
         const rawArtists: Artist[] = artistsData.topartists?.artist ?? [];
         const enrichedArtists = await Promise.all(
           rawArtists.map(async (artist) => {
-            const art = await fetchItunesArtistArt(artist.name).catch(() => "");
+            const art =
+              (await fetchLastfmArtistArt(artist.name).catch(() => "")) ||
+              (await fetchAudioDBArtistArt(artist.name).catch(() => "")) ||
+              (await fetchItunesArtistArt(artist.name).catch(() => ""));
             return { ...artist, art };
           })
         );
