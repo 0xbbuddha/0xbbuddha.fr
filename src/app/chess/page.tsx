@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 const CHESS_USER = "EnPassantRoot";
 const HEADERS = {
@@ -80,6 +81,7 @@ function SparklineChart({ data }: { data: number[] }) {
 }
 
 export default function ChessPage() {
+  const { lang } = useLanguage();
   const [ratings, setRatings] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -109,7 +111,7 @@ export default function ChessPage() {
           Rapid rating
         </h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
-          Not great, not terrible.
+          {lang === "fr" ? "Pas terrible, pas catastrophique." : "Not great, not terrible."}
         </p>
       </header>
 
@@ -122,7 +124,7 @@ export default function ChessPage() {
 
       {error && (
         <p className="py-6 font-mono text-sm text-muted-foreground">
-          Impossible de charger les donnees Chess.com.
+          {lang === "fr" ? "Impossible de charger les données Chess.com." : "Could not load Chess.com data."}
         </p>
       )}
 
@@ -142,7 +144,7 @@ export default function ChessPage() {
           <div className="rounded-lg border border-border bg-card/40 p-4">
             <SparklineChart data={ratings} />
             <p className="mt-2 text-right font-mono text-[10px] text-muted-foreground/40">
-              {ratings.length} parties rapides
+              {ratings.length} {lang === "fr" ? "parties rapides" : "rapid games"}
             </p>
           </div>
         </div>
@@ -150,7 +152,7 @@ export default function ChessPage() {
 
       {!loading && !error && ratings.length === 0 && (
         <p className="py-6 font-mono text-sm text-muted-foreground">
-          Aucune partie rapide trouvee.
+          {lang === "fr" ? "Aucune partie rapide trouvée." : "No rapid games found."}
         </p>
       )}
 

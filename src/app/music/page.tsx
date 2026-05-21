@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Music } from "lucide-react";
+import { useLanguage } from "@/components/LanguageProvider";
 
 const LASTFM_USER = "kikilahess";
 const LASTFM_KEY = "7d89c93e907e5e5a5d03ceaef313168f";
@@ -81,6 +82,7 @@ function ArtistSkeleton() {
 }
 
 export default function MusicPage() {
+  const { lang } = useLanguage();
   const [tracks, setTracks] = useState<EnrichedTrack[]>([]);
   const [artists, setArtists] = useState<EnrichedArtist[]>([]);
   const [loading, setLoading] = useState(true);
@@ -128,13 +130,13 @@ export default function MusicPage() {
           Top tracks
         </h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
-          Ce que je tourne en boucle en ce moment.
+          {lang === "fr" ? "Ce que je tourne en boucle en ce moment." : "What I have on repeat right now."}
         </p>
       </header>
 
       {error && (
         <p className="py-6 font-mono text-sm text-muted-foreground">
-          Impossible de charger les donnees Last.fm.
+          {lang === "fr" ? "Impossible de charger les données Last.fm." : "Could not load Last.fm data."}
         </p>
       )}
 
@@ -144,7 +146,7 @@ export default function MusicPage() {
 
         {!loading && !error && tracks.length === 0 && (
           <p className="py-6 font-mono text-sm text-muted-foreground">
-            Aucun scrobble ce mois-ci.
+            {lang === "fr" ? "Aucun scrobble ce mois-ci." : "No scrobbles this month."}
           </p>
         )}
 
@@ -193,7 +195,7 @@ export default function MusicPage() {
       {/* Artists */}
       <div className="mt-10">
         <p className="mb-3 text-[11px] font-mono uppercase tracking-widest text-muted-foreground/50">
-          Top artistes
+          {lang === "fr" ? "Top artistes" : "Top artists"}
         </p>
         <div className="divide-y divide-border">
           {loading && [1, 2, 3].map((i) => <ArtistSkeleton key={i} />)}
@@ -249,7 +251,7 @@ export default function MusicPage() {
           >
             {LASTFM_USER}
           </a>{" "}
-          - periode : 1 mois
+          - {lang === "fr" ? "periode : 1 mois" : "period: 1 month"}
         </p>
       </footer>
     </div>

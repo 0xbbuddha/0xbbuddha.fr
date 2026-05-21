@@ -6,6 +6,7 @@ export type ProjectEntry = {
   external: boolean;
   status: string;
   note: string;
+  group?: string;
 };
 
 export type SkillCategory = {
@@ -104,44 +105,76 @@ export const socialLinks = [
 
 export const projects: ProjectEntry[] = [
   {
-    title: "ArchimedeaOS",
-    description:
-      "Distribution Arch Linux orientée Purple Team pour disposer d'un environnement cohérent pendant les exercices red/blue.",
-    tags: ["Purple Team", "Arch Linux", "Distribution"],
-    href: "https://github.com/ArchimedeaOS-Development",
-    external: true,
-    status: "System build",
-    note: "Base d'outillage unifiée pour labs et expérimentations offensives.",
-  },
-  {
-    title: "Nihil",
-    description:
-      "Environnement de pentest complet avec images Docker et stack de labo pour tests d'intrusion reproductibles.",
-    tags: ["Pentest", "Docker", "Python"],
-    href: "https://github.com/TheNullPigeons",
-    external: true,
-    status: "Lab stack",
-    note: "Pensé pour prototyper vite, casser vite, reconstruire proprement.",
-  },
-  {
     title: "BashHound-CE",
     description:
       "Collecteur Active Directory pour BloodHound Community Edition, écrit entièrement en Bash.",
     tags: ["BloodHound", "AD", "Bash", "Red Team"],
     href: "https://github.com/0xbbuddha/BashHound-CE",
     external: true,
-    status: "Open source",
+    status: "AD collector",
     note: "Une exploration technique sur LDAP, ASN.1 et les graphes AD sans dépendance lourde.",
   },
   {
-    title: "Hermes",
+    title: "GoFenrir",
     description:
-      "Agent Mythic C2 Linux écrit en Python avec check-in, tasking et primitives de contrôle opérateur.",
-    tags: ["Mythic C2", "Python", "Red Team"],
-    href: "https://github.com/0xbbuddha/hermes",
+      "Framework d'énumération et d'attaque Active Directory en Go, inspiré de NetExec et distribué en binaire unique via Manticore.",
+    tags: ["Active Directory", "Go", "Red Team"],
+    href: "https://github.com/0xbbuddha/GoFenrir",
     external: true,
-    status: "Agent C2",
-    note: "Projet orienté compréhension interne du fonctionnement d'un implant et de son protocole.",
+    status: "AD framework",
+    note: "Portable et sans dépendances - un binaire unique pour couvrir l'essentiel de la reconnaissance AD.",
+  },
+  {
+    title: "Ensh",
+    description:
+      "Bibliothèque réseau offensive en Bash pur - sans binaire, sans compilation - ciblant Active Directory et les opérations red team.",
+    tags: ["Red Team", "Bash", "Active Directory"],
+    href: "https://github.com/0xbbuddha/Ensh",
+    external: true,
+    status: "Bash offensive lib",
+    note: "Reproduire des comportements réseau AD offensifs en Bash pur pour des contextes sans compilation.",
+  },
+  {
+    title: "Wazuh-cli",
+    description:
+      "CLI et dashboard TUI temps réel pour l'API REST Wazuh - gestion d'agents, alertes, vulnérabilités et réponses actives depuis le terminal.",
+    tags: ["SOC", "Wazuh", "Go"],
+    href: "https://github.com/0xbbuddha/Wazuh-cli",
+    external: true,
+    status: "SIEM CLI",
+    note: "Gérer un environnement Wazuh complet en ligne de commande sans passer par l'interface web.",
+  },
+  {
+    title: "Aphrodite",
+    description:
+      "Agent Mythic C2 cross-platform écrit en Nim, tournant sur Linux et Windows. Hephaestus (loader Nim dédié) reçoit le shellcode via donut, le chiffre et l'injecte en mémoire.",
+    tags: ["Mythic C2", "Nim", "Red Team"],
+    href: "https://github.com/0xbbuddha/Aphrodite",
+    external: true,
+    status: "Mythic agent",
+    note: "Loader dédié Hephaestus (https://github.com/0xbbuddha/Hephaestus) - projet orienté design d'implant et internals du protocole C2.",
+  },
+  {
+    title: "Notion",
+    description:
+      "Profile Mythic C2 utilisant l'API Notion comme canal covert - Living off Trusted Sites intégré à Mythic.",
+    tags: ["Mythic C2", "LoTS", "Python"],
+    href: "https://github.com/0xbbuddha/Notion",
+    external: true,
+    status: "C2 profile",
+    note: "Détourner un SaaS de confiance comme transport C2 pour passer sous les radars réseau.",
+    group: "Profiles C2 Mythic",
+  },
+  {
+    title: "Chess.com",
+    description:
+      "Profile Mythic C2 utilisant Chess.com comme canal covert - payloads encodés en positions FEN stockés en parties PGN, impersonation TLS Chrome via curl_cffi.",
+    tags: ["Mythic C2", "LoTS", "Python"],
+    href: "https://github.com/0xbbuddha/Chess.com",
+    external: true,
+    status: "C2 profile",
+    note: "Encoder les payloads en positions FEN pour cacher les communications C2 dans du trafic chess légitime.",
+    group: "Profiles C2 Mythic",
   },
   {
     title: "PantheonLab",
@@ -154,13 +187,33 @@ export const projects: ProjectEntry[] = [
     note: "Un terrain de jeu pour documenter des chaînes d'attaque crédibles sans perdre la reproductibilité.",
   },
   {
+    title: "Nihil",
+    description:
+      "Environnement de pentest complet avec images Docker et stack de labo pour tests d'intrusion reproductibles.",
+    tags: ["Pentest", "Docker", "Python"],
+    href: "https://github.com/TheNullPigeons",
+    external: true,
+    status: "Pentest lab",
+    note: "Pensé pour prototyper vite, casser vite, reconstruire proprement.",
+  },
+  {
+    title: "ArchimedeaOS",
+    description:
+      "Distribution Arch Linux orientée Purple Team pour disposer d'un environnement cohérent pendant les exercices red/blue.",
+    tags: ["Purple Team", "Arch Linux", "Distribution"],
+    href: "https://github.com/ArchimedeaOS-Development",
+    external: true,
+    status: "Purple Team OS",
+    note: "Base d'outillage unifiée pour labs et expérimentations offensives.",
+  },
+  {
     title: "FreeMalwares",
     description:
       "Projet en C dédié à l'étude pédagogique de techniques d'obfuscation et d'évasion en environnement contrôlé.",
     tags: ["C", "Maldev", "Educatif"],
     href: "https://github.com/FreeMalwares",
     external: true,
-    status: "Research",
+    status: "Maldev research",
     note: "Approche strictement éducative pour comprendre les mécanismes, pas pour les industrialiser.",
   },
 ];
@@ -632,8 +685,11 @@ const staticRailContexts: Record<string, RailContext> = {
     anchors: [
       { href: "#overview", label: "Overview" },
       { href: "#whoami", label: "whoami" },
+      { href: "#formation", label: "Formation" },
       { href: "#projects", label: "Projects" },
       { href: "#skills", label: "Skills" },
+      { href: "#certifications", label: "Certifications" },
+      { href: "#contributions", label: "Contributions" },
     ],
     facts: [],
     related: [
