@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useLanguage } from "@/components/LanguageProvider";
 
-const CHESS_USER = "EnPassantRoot";
+const CHESS_USER = "PtiteWaguri";
 const HEADERS = {
   "User-Agent":
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
