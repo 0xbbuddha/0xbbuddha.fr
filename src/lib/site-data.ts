@@ -286,6 +286,50 @@ export const articles: ArticleEntry[] = [
 
 export const writeups: WriteupEntry[] = [
   {
+    slug: "breizh-kybeurre-demi-sel",
+    title: "Kybeurre demi-sel",
+    type: "ctf",
+    platform: "BreizhCTF 2026",
+    ctfEvent: "BreizhCTF 2026",
+    date: "2026-05-22",
+    excerpt:
+      "Secret binaire dans {0,1}^50 et bruit negligeable : l'embedding de Kannan + LLL retrouve le secret en quelques secondes depuis 50 echantillons LWE.",
+    focus: "Crypto / Lattice",
+  },
+  {
+    slug: "breizh-kvmillesime",
+    title: "KVMillesime - Mise en fut",
+    type: "ctf",
+    platform: "BreizhCTF 2026",
+    ctfEvent: "BreizhCTF 2026",
+    date: "2026-05-22",
+    excerpt:
+      "Hyperviseur KVM modifie qui compte les borrows d'une soustraction bit a bit et renvoie le total en telemetrie. 75 requetes pour reconstruire la cle 128 bits.",
+    focus: "Crypto / Side-channel",
+  },
+  {
+    slug: "breizh-tremendous-2",
+    title: "Tremendous 2",
+    type: "ctf",
+    platform: "BreizhCTF 2026",
+    ctfEvent: "BreizhCTF 2026",
+    date: "2026-05-22",
+    excerpt:
+      "RSA textbook + oracle de parite via /api/verify. Dichotomie sur 1024 bits pour retrouver le mot de passe admin sans connaitre la cle privee.",
+    focus: "Crypto / RSA oracle",
+  },
+  {
+    slug: "breizh-trust-issues",
+    title: "Trust Issues",
+    type: "ctf",
+    platform: "BreizhCTF 2026",
+    ctfEvent: "BreizhCTF 2026",
+    date: "2026-05-22",
+    excerpt:
+      "APK Android avec cle HMAC hardcodee dans le binaire et verification PIN uniquement cote client. jadx + 30 lignes de Python pour appeler /admin/flag directement.",
+    focus: "Mobile / APK reverse",
+  },
+  {
     slug: "pipehop",
     title: "PipeHop",
     type: "ctf",
