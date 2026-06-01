@@ -317,7 +317,7 @@ splice(file_fd, &off, pipe_fds[1], NULL, 4096, SPLICE_F_MOVE);`}
           <p className="text-muted-foreground mb-3">
             <code className="rounded bg-muted px-1">vmsplice(2)</code> fait l&apos;inverse :
             il mappe de la mémoire utilisateur dans un pipe. Dans les exploits dirty frag,
-            je l&apos;utilise pour injecter l&apos;en-tête du paquet (header ESP ou RxRPC)
+            il sert à injecter l&apos;en-tête du paquet (header ESP ou RxRPC)
             dans le pipe avant la page fichier, de sorte que le noyau voie un paquet réseau
             cohérent suivi du payload qui est en réalité du page cache.
           </p>
@@ -499,7 +499,7 @@ static int xfrm_input(struct sk_buff *skb, ...)
             ESP d&apos;un paquet, le noyau met à jour cet état en écrivant{" "}
             <code className="rounded bg-muted px-1">seq_hi</code> dans le buffer de données du
             skb - qui est en fait le page cache du fichier. En choisissant soigneusement cette
-            valeur pour chaque SA, je contrôle exactement quels 4 octets seront écrits, et où.
+            valeur pour chaque SA, l&apos;attaquant contrôle exactement quels 4 octets seront écrits, et où.
           </p>
           <CodeBlock title="Installer 48 SAs - chaque seq_hi encode 4 octets du shellcode">
 {`// 48 SAs pour écrire 192 octets (4 octets par SA)
@@ -645,8 +645,8 @@ splice(pipe_read, NULL, sock,       NULL, 4096, 0)
             <code className="rounded bg-muted px-1">salt(4) || IV(8) || counter_be32</code>.
             Le counter block à la position 2 est{" "}
             <code className="rounded bg-muted px-1">salt || IV || 0x00000002</code>.
-            En variant l&apos;IV, je contrôle le keystream, et donc ce qui sera XOR-é dans
-            la page cache. Je construis une table de correspondance via{" "}
+            En variant l&apos;IV, on contrôle le keystream, et donc ce qui sera XOR-é dans
+            la page cache. L&apos;exploit construit une table de correspondance via{" "}
             <code className="rounded bg-muted px-1">AF_ALG</code> : pour chaque valeur de
             keystream possible (0x00 à 0xFF), quelle valeur d&apos;IV la produit ? Les 256
             valeurs sont couvertes dans les 65536 premiers nonces.
@@ -692,7 +692,7 @@ nonce    = table[needed]
 
           <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">Pourquoi probabiliste</h3>
           <p className="text-muted-foreground mb-3">
-            Contrairement aux variantes précédentes, je ne peux pas choisir exactement ce
+            Contrairement aux variantes précédentes, l&apos;exploit ne peut pas choisir exactement ce
             qui sera écrit à chaque trigger. La clé de session rxgk est générée aléatoirement
             à chaque essai via{" "}
             <code className="rounded bg-muted px-1">add_key(&quot;rxrpc&quot;, ...)</code>.
