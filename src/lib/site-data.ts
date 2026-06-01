@@ -253,6 +253,16 @@ export const skillCategories: SkillCategory[] = [
 
 export const articles: ArticleEntry[] = [
   {
+    slug: "dirty-frag-pagecache",
+    title: "Dirty Frag : quand le noyau Linux ecrit dans ses propres fichiers",
+    category: "Kernel Security",
+    tags: ["Linux", "LPE", "Kernel", "XFRM", "RxRPC", "CVE"],
+    date: "2026-06-01",
+    excerpt:
+      "Quatre CVE 2026, quatre chemins differents, un seul primitif : splice() + dechiffrement en place = ecriture arbitraire dans le page cache de n'importe quel fichier lisible. Analyse de la famille dirty frag.",
+    focus: "Kernel LPE",
+  },
+  {
     slug: "aphrodite",
     title: "J'ai codé mon propre agent Mythic en Nim",
     category: "Red Team",
