@@ -7,6 +7,7 @@ export type ProjectEntry = {
   status: string;
   note: string;
   group?: string;
+  side: "red" | "blue";
 };
 
 export type SkillCategory = {
@@ -104,6 +105,7 @@ export const socialLinks = [
 ];
 
 export const projects: ProjectEntry[] = [
+  // ── Red Team ──────────────────────────────────────────────────────────────
   {
     title: "BashHound-CE",
     description:
@@ -113,6 +115,7 @@ export const projects: ProjectEntry[] = [
     external: true,
     status: "AD collector",
     note: "Une exploration technique sur LDAP, ASN.1 et les graphes AD sans dépendance lourde.",
+    side: "red",
   },
   {
     title: "GoFenrir",
@@ -123,6 +126,7 @@ export const projects: ProjectEntry[] = [
     external: true,
     status: "AD framework",
     note: "Portable et sans dépendances - un binaire unique pour couvrir l'essentiel de la reconnaissance AD.",
+    side: "red",
   },
   {
     title: "Ensh",
@@ -133,16 +137,7 @@ export const projects: ProjectEntry[] = [
     external: true,
     status: "Bash offensive lib",
     note: "Reproduire des comportements réseau AD offensifs en Bash pur pour des contextes sans compilation.",
-  },
-  {
-    title: "Wazuh-cli",
-    description:
-      "CLI et dashboard TUI temps réel pour l'API REST Wazuh - gestion d'agents, alertes, vulnérabilités et réponses actives depuis le terminal.",
-    tags: ["SOC", "Wazuh", "Go"],
-    href: "https://github.com/0xbbuddha/Wazuh-cli",
-    external: true,
-    status: "SIEM CLI",
-    note: "Gérer un environnement Wazuh complet en ligne de commande sans passer par l'interface web.",
+    side: "red",
   },
   {
     title: "Aphrodite",
@@ -153,6 +148,7 @@ export const projects: ProjectEntry[] = [
     external: true,
     status: "Mythic agent",
     note: "Loader dédié Hephaestus (https://github.com/0xbbuddha/Hephaestus) - projet orienté design d'implant et internals du protocole C2.",
+    side: "red",
   },
   {
     title: "Notion",
@@ -164,6 +160,7 @@ export const projects: ProjectEntry[] = [
     status: "C2 profile",
     note: "Détourner un SaaS de confiance comme transport C2 pour passer sous les radars réseau.",
     group: "Profiles C2 Mythic",
+    side: "red",
   },
   {
     title: "Chess.com",
@@ -175,6 +172,7 @@ export const projects: ProjectEntry[] = [
     status: "C2 profile",
     note: "Encoder les payloads en positions FEN pour cacher les communications C2 dans du trafic chess légitime.",
     group: "Profiles C2 Mythic",
+    side: "red",
   },
   {
     title: "PantheonLab",
@@ -185,6 +183,7 @@ export const projects: ProjectEntry[] = [
     external: true,
     status: "Training lab",
     note: "Un terrain de jeu pour documenter des chaînes d'attaque crédibles sans perdre la reproductibilité.",
+    side: "red",
   },
   {
     title: "Nihil",
@@ -195,16 +194,7 @@ export const projects: ProjectEntry[] = [
     external: true,
     status: "Pentest lab",
     note: "Pensé pour prototyper vite, casser vite, reconstruire proprement.",
-  },
-  {
-    title: "ArchimedeaOS",
-    description:
-      "Distribution Arch Linux orientée Purple Team pour disposer d'un environnement cohérent pendant les exercices red/blue.",
-    tags: ["Purple Team", "Arch Linux", "Distribution"],
-    href: "https://github.com/ArchimedeaOS-Development",
-    external: true,
-    status: "Purple Team OS",
-    note: "Base d'outillage unifiée pour labs et expérimentations offensives.",
+    side: "red",
   },
   {
     title: "FreeMalwares",
@@ -215,6 +205,41 @@ export const projects: ProjectEntry[] = [
     external: true,
     status: "Maldev research",
     note: "Approche strictement éducative pour comprendre les mécanismes, pas pour les industrialiser.",
+    side: "red",
+  },
+  // ── Blue Team ─────────────────────────────────────────────────────────────
+  {
+    title: "Wazuh-cli",
+    description:
+      "CLI et dashboard TUI temps réel pour l'API REST Wazuh - gestion d'agents, alertes, vulnérabilités et réponses actives depuis le terminal.",
+    tags: ["SOC", "Wazuh", "Go"],
+    href: "https://github.com/0xbbuddha/Wazuh-cli",
+    external: true,
+    status: "SIEM CLI",
+    note: "Gérer un environnement Wazuh complet en ligne de commande sans passer par l'interface web.",
+    side: "blue",
+  },
+  {
+    title: "WazuhHound",
+    description:
+      "Collecteur OpenGraph BloodHound CE pour Wazuh - mappe agents, groupes, nœuds de cluster, RBAC et utilisateurs OpenSearch depuis l'API REST Wazuh dans un graphe compatible BloodHound, exposant chemins d'escalade de privilèges et topologie d'infrastructure.",
+    tags: ["SOC", "Wazuh", "BloodHound", "OpenGraph"],
+    href: "https://github.com/0xbbuddha/WazuhHound",
+    external: true,
+    status: "BloodHound collector",
+    note: "Auditer l'infrastructure Wazuh/OpenSearch avec des requêtes Cypher - même workflow que BloodHound AD.",
+    side: "blue",
+  },
+  {
+    title: "ArchimedeaOS",
+    description:
+      "Distribution Arch Linux orientée Purple Team pour disposer d'un environnement cohérent pendant les exercices red/blue.",
+    tags: ["Purple Team", "Arch Linux", "Distribution"],
+    href: "https://github.com/ArchimedeaOS-Development",
+    external: true,
+    status: "Purple Team OS",
+    note: "Base d'outillage unifiée pour labs et expérimentations offensives.",
+    side: "blue",
   },
 ];
 

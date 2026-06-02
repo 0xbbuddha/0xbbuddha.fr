@@ -71,6 +71,11 @@ export default function HomePage() {
       note: "Manage a full Wazuh environment from the command line without going through the web UI.",
       status: "SIEM CLI",
     },
+    WazuhHound: {
+      description: "BloodHound CE OpenGraph collector for Wazuh - maps agents, groups, cluster nodes, RBAC and OpenSearch users from the Wazuh REST API into a BloodHound-compatible graph, exposing privilege escalation paths and full infrastructure topology.",
+      note: "Audit your Wazuh/OpenSearch infrastructure with Cypher queries - same BloodHound workflow as AD.",
+      status: "BloodHound collector",
+    },
     Aphrodite: {
       description: "Cross-platform Mythic C2 agent written in Nim, running on Linux and Windows. Hephaestus (dedicated Nim loader) receives shellcode via donut, encrypts it and injects it into a target process.",
       note: "Dedicated loader Hephaestus (https://github.com/0xbbuddha/Hephaestus) - focused on implant design and C2 protocol internals.",
@@ -358,13 +363,21 @@ export default function HomePage() {
         {/* ── projects ── */}
         <TerminalBlock id="projects" title="ls ./projects/">
           <p className="mb-4 text-primary">$ ls -la ./projects/</p>
-          <div className="space-y-5">
-            {(() => {
+          <div className="space-y-8">
+            {(["red", "blue"] as const).map((side) => {
               type Block =
                 | { type: "single"; project: typeof projects[0]; index: number }
                 | { type: "group"; group: string; items: Array<{ project: typeof projects[0]; index: number }> };
 
-              const blocks = projects.reduce<Block[]>((acc, project, i) => {
+              const sideProjects = projects.filter((p) => p.side === side);
+              const sideLabel = side === "red"
+                ? (lang === "fr" ? "Red Team" : "Red Team")
+                : (lang === "fr" ? "Blue Team" : "Blue Team");
+              const sideColor = side === "red" ? "text-primary" : "text-blue-400";
+              const sideBorder = side === "red" ? "border-primary/30" : "border-blue-400/30";
+              const sideBg = side === "red" ? "bg-primary/5" : "bg-blue-400/5";
+
+              const blocks = sideProjects.reduce<Block[]>((acc, project, i) => {
                 if (project.group) {
                   const last = acc[acc.length - 1];
                   if (last?.type === "group" && last.group === project.group) {
@@ -378,77 +391,86 @@ export default function HomePage() {
                 return acc;
               }, []);
 
-              return blocks.map((block) => {
-                if (block.type === "group") {
-                  return (
-                    <div key={block.group}>
-                      <p className="mb-2 text-primary/60"># {block.group}</p>
-                      <div className="grid grid-cols-2 gap-3">
-                        {block.items.map(({ project }) => (
-                          <div key={project.title} className="rounded border border-border/50 p-3">
-                            <div className="flex items-start justify-between gap-2">
-                              <div className="min-w-0">
-                                <span className="font-semibold text-foreground">{project.title}</span>
-                                <span className="ml-2 text-primary text-xs">
-                                  {lang === "fr" ? project.status : (projectEn[project.title]?.status ?? project.status)}
-                                </span>
-                              </div>
+              return (
+                <div key={side}>
+                  <p className={`mb-4 text-xs font-semibold uppercase tracking-widest ${sideColor}/60`}>
+                    # {sideLabel}
+                  </p>
+                  <div className="space-y-5">
+                    {blocks.map((block) => {
+                      if (block.type === "group") {
+                        return (
+                          <div key={block.group}>
+                            <p className={`mb-2 ${sideColor}/50`}># {block.group}</p>
+                            <div className="grid grid-cols-2 gap-3">
+                              {block.items.map(({ project }) => (
+                                <div key={project.title} className={`rounded border ${sideBorder} ${sideBg} p-3`}>
+                                  <div className="flex items-start justify-between gap-2">
+                                    <div className="min-w-0">
+                                      <span className="font-semibold text-foreground">{project.title}</span>
+                                      <span className={`ml-2 ${sideColor} text-xs`}>
+                                        {lang === "fr" ? project.status : (projectEn[project.title]?.status ?? project.status)}
+                                      </span>
+                                    </div>
+                                    <a
+                                      href={project.href}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className={`shrink-0 text-muted-foreground/50 transition-colors hover:${sideColor}`}
+                                    >
+                                      <ArrowUpRight className="size-3.5" />
+                                    </a>
+                                  </div>
+                                  <p className="mt-1.5 leading-5 text-foreground/80 text-xs">
+                                    {lang === "fr" ? project.description : (projectEn[project.title]?.description ?? project.description)}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      }
+
+                      const { project, index } = block;
+                      return (
+                        <div key={project.title} className="flex gap-3">
+                          <span className="mt-px shrink-0 text-muted-foreground/60">
+                            [{String(index + 1).padStart(2, "0")}]
+                          </span>
+                          <div className="min-w-0 flex-1">
+                            <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                              <span className="font-semibold text-foreground">{project.title}</span>
+                              <span className="text-muted-foreground/50">#</span>
+                              <span className={sideColor}>
+                                {lang === "fr" ? project.status : (projectEn[project.title]?.status ?? project.status)}
+                              </span>
                               <a
                                 href={project.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="shrink-0 text-muted-foreground/50 transition-colors hover:text-primary"
+                                className={`ml-auto shrink-0 text-muted-foreground/50 transition-colors hover:${sideColor}`}
+                                aria-label={lang === "fr" ? `Ouvrir ${project.title}` : `Open ${project.title}`}
                               >
                                 <ArrowUpRight className="size-3.5" />
                               </a>
                             </div>
-                            <p className="mt-1.5 leading-5 text-foreground/80 text-xs">
+                            <p className="mt-1 text-muted-foreground">
+                              {project.tags.join("  ·  ")}
+                            </p>
+                            <p className="mt-1.5 leading-5 text-foreground/85">
                               {lang === "fr" ? project.description : (projectEn[project.title]?.description ?? project.description)}
                             </p>
+                            <p className="mt-1 italic leading-5 text-muted-foreground">
+                              {lang === "fr" ? project.note : (projectEn[project.title]?.note ?? project.note)}
+                            </p>
                           </div>
-                        ))}
-                      </div>
-                    </div>
-                  );
-                }
-
-                const { project, index } = block;
-                return (
-                  <div key={project.title} className="flex gap-3">
-                    <span className="mt-px shrink-0 text-muted-foreground/60">
-                      [{String(index + 1).padStart(2, "0")}]
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                        <span className="font-semibold text-foreground">{project.title}</span>
-                        <span className="text-muted-foreground/50">#</span>
-                        <span className="text-primary">
-                          {lang === "fr" ? project.status : (projectEn[project.title]?.status ?? project.status)}
-                        </span>
-                        <a
-                          href={project.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="ml-auto shrink-0 text-muted-foreground/50 transition-colors hover:text-primary"
-                          aria-label={lang === "fr" ? `Ouvrir ${project.title}` : `Open ${project.title}`}
-                        >
-                          <ArrowUpRight className="size-3.5" />
-                        </a>
-                      </div>
-                      <p className="mt-1 text-muted-foreground">
-                        {project.tags.join("  ·  ")}
-                      </p>
-                      <p className="mt-1.5 leading-5 text-foreground/85">
-                        {lang === "fr" ? project.description : (projectEn[project.title]?.description ?? project.description)}
-                      </p>
-                      <p className="mt-1 italic leading-5 text-muted-foreground">
-                        {lang === "fr" ? project.note : (projectEn[project.title]?.note ?? project.note)}
-                      </p>
-                    </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                );
-              });
-            })()}
+                </div>
+              );
+            })}
           </div>
           <p className="mt-4 animate-pulse text-primary/50">█</p>
         </TerminalBlock>
