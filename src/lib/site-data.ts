@@ -278,6 +278,16 @@ export const skillCategories: SkillCategory[] = [
 
 export const articles: ArticleEntry[] = [
   {
+    slug: "marshall-ble-re",
+    title: "Reverse engineering du protocole BLE Marshall",
+    category: "Reverse Engineering",
+    tags: ["BLE", "GATT", "Go", "Wails", "BlueZ"],
+    date: "2026-06-07",
+    excerpt:
+      "De l'APK Android a une appli Linux fonctionnelle : decompilation Kotlin, authentification BLE Just Works, encodage EQ en 3 octets, et gestion multi-appareils par detection de caracteristiques.",
+    focus: "Protocol RE",
+  },
+  {
     slug: "dirty-frag-pagecache",
     title: "Dirty Frag : quand le noyau Linux ecrit dans ses propres fichiers",
     category: "Kernel Security",
