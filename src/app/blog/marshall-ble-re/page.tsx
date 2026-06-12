@@ -8,6 +8,7 @@ import {
   Package,
   Layers,
   Music,
+  Fingerprint,
 } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 
@@ -120,6 +121,7 @@ export default function ArticleMarshallBLEPage() {
             <li>L&apos;application Linux - CLI et GUI</li>
             <li>Gestion multi-appareils</li>
             <li>La documentation du protocole</li>
+            <li>Pour aller plus loin : observations sécurité</li>
           </ol>
         </section>
 
@@ -401,11 +403,13 @@ func registerAgent(conn *dbus.Conn) error {
             caractéristiques Zound propriétaires en revanche nécessitent du RE.
           </p>
           <p className="text-muted-foreground">
-            Le chipset utilisé par le Motif II ANC est un{" "}
-            <strong>Airoha AB1565</strong>, un SoC audio BT haut de gamme qu&apos;on
-            retrouve dans beaucoup d&apos;écouteurs sans fil premium. Le Zound SDK
-            s&apos;abstrait complètement du chipset, donc le protocole est
-            indépendant du hardware.
+            Le chipset du Motif II ANC est un <strong>SoC Airoha</strong> - je le
+            déduis d&apos;une chaîne <code className="rounded bg-muted px-1">AirohaBLE</code>{" "}
+            cachée dans certains UUID propriétaires (voir section 9), pas d&apos;un
+            teardown. Le modèle exact (l&apos;AB1565, une puce BT 5.2 avec ANC, est
+            un candidat plausible) je ne l&apos;ai pas confirmé en ouvrant les
+            écouteurs. Quoi qu&apos;il en soit, le SDK Zound s&apos;abstrait du
+            chipset, donc le protocole reste indépendant du hardware.
           </p>
         </section>
 
@@ -654,6 +658,181 @@ Exemples :
             depuis zéro. Le repo est séparé de l&apos;appli pour être
             réutilisable indépendamment.
           </p>
+        </section>
+
+        {/* 9. Pour aller plus loin : sécurité */}
+        <section>
+          <h2 className="mb-4 flex items-center gap-2 font-mono text-xl font-semibold">
+            <Fingerprint className="size-5 text-primary" />
+            9. Pour aller plus loin : quelques observations sécurité
+          </h2>
+          <p className="text-muted-foreground mb-3">
+            Une fois le protocole compris, difficile de ne pas regarder ce que ça
+            implique côté sécurité. J&apos;ai écrit quelques petits outils pour
+            sonder mes propres appareils. Trois observations, avec des niveaux de
+            certitude différents - je préfère être honnête sur ce qui est prouvé
+            et ce qui reste à confirmer.
+          </p>
+
+          <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
+            Observation 1 - traçables passivement, sans connexion
+          </h3>
+          <p className="text-muted-foreground mb-3">
+            Un simple scan BLE passif suffit à repérer mes Marshall, sans jamais
+            m&apos;y connecter. Et surtout : le Motif II expose une{" "}
+            <strong>adresse Bluetooth publique fixe</strong> sur son transport
+            classique, plus un <strong>company ID fabricant</strong>{" "}
+            (<code className="rounded bg-muted px-1">0x065a</code>, enregistré au
+            Bluetooth SIG sous <strong>Marshall Group AB</strong> - l&apos;entité
+            qui a succédé à Zound Industries) dans ses manufacturer data. Une
+            adresse qui ne change jamais, c&apos;est un identifiant de traçage
+            permanent.
+          </p>
+          <CodeBlock title="Scan passif - mes appareils + le voisinage">
+{`[!] 00:25:D1:41:DF:69  MOTIF II A.N.C.       RSSI 0dBm
+      adresse    : PUBLIC (traçable en permanence)
+      ZOUND      : nom produit Marshall/Zound: MOTIF
+[!] C8:E0:09:EA:5B:AF  MOTIF II A.N.C. [LE]  RSSI -59dBm
+      adresse    : STATIC-RANDOM (traçable jusqu'au reboot)
+      vendor IDs : 0x065a
+    7E:F5:69:6B:52:BB  (anonyme)             RSSI -60dBm
+      adresse    : RPA (rotative, privacy ok)
+      vendor IDs : 0x004c`}
+          </CodeBlock>
+          <p className="text-muted-foreground mb-3">
+            Le contraste est net dans le même scan : tous les appareils Apple
+            autour (vendor <code className="rounded bg-muted px-1">0x004c</code>)
+            tournent leur adresse via des RPA (Resolvable Private Addresses) pour
+            empêcher justement ce tracking. Marshall, lui, diffuse une MAC fixe et
+            le nom du produit en clair. Un capteur BLE passif à l&apos;entrée
+            d&apos;un lieu peut détecter &quot;cette personne porte des Motif
+            II&quot; et la suivre par son adresse - sans connexion, sans
+            consentement.
+          </p>
+          <InfoBox>
+            Comment je classe la traçabilité : pour une adresse aléatoire, ce sont
+            les deux bits de poids fort du premier octet qui tranchent (spec
+            Bluetooth Core). <code className="rounded bg-muted px-1">11</code> =
+            static-random (stable jusqu&apos;au reboot),{" "}
+            <code className="rounded bg-muted px-1">01</code> = RPA (rotative),{" "}
+            <code className="rounded bg-muted px-1">00</code> = non-resolvable. Une
+            adresse publique, elle, est gravée à vie.
+          </InfoBox>
+
+          <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
+            Observation 2 - le serveur GATT ne déclare aucun chiffrement
+          </h3>
+          <p className="text-muted-foreground mb-3">
+            En énumérant les permissions de chaque caractéristique, j&apos;ai été
+            surpris : sur 41 caractéristiques, <strong>16 sont déclarées
+            écrivables sans le moindre flag de chiffrement</strong>. Pas un seul{" "}
+            <code className="rounded bg-muted px-1">encrypt-authenticated-write</code>,
+            pas un <code className="rounded bg-muted px-1">secure-write</code>.
+            Tout est en <code className="rounded bg-muted px-1">read, write,
+            notify</code> brut - y compris les caractéristiques de contrôle
+            propriétaires : ANC, EQ, contrôle audio, verrouillage tactile.
+          </p>
+          <p className="text-muted-foreground mb-3">
+            Nuance honnête sur ce décompte : sur ces 16, certaines sont écrivables
+            par <em>conception</em> - notamment les caractéristiques{" "}
+            <code className="rounded bg-muted px-1">fe2c12xx</code> qui
+            appartiennent à <strong>Google Fast Pair</strong> (le service{" "}
+            <code className="rounded bg-muted px-1">0xFE2C</code>, où l&apos;écriture
+            de l&apos;Account Key fait partie du protocole d&apos;association). Ce
+            qui m&apos;intéresse, ce sont les caractéristiques de contrôle Zound
+            propriétaires, qui pilotent le comportement de l&apos;appareil et
+            n&apos;ont, elles, aucune raison évidente d&apos;être ouvertes.
+          </p>
+          <CodeBlock title="Permissions GATT déclarées (extrait)">
+{`[!] 00000013-... (ANC config)  flags: read, write, notify
+[!] 00000017-... (EQ)          flags: read, write, notify
+[!] 00000009-... (AudioCtrl)   flags: read, write, notify
+[!] 00000014-... (TouchLock)   flags: read, write, notify
+[*] 41 caracteristiques, 16 ecrivables sans auth forte declaree`}
+          </CodeBlock>
+          <p className="text-muted-foreground mb-3">
+            Détail amusant au passage : certaines caractéristiques propriétaires
+            ont un UUID dont les octets, décodés en ASCII, se lisent{" "}
+            <code className="rounded bg-muted px-1">CHAR-.0AirohaBLE</code>{" "}
+            (le <code className="rounded bg-muted px-1">.</code> est un octet non
+            imprimable, le <code className="rounded bg-muted px-1">0</code> un
+            compteur qui s&apos;incrémente d&apos;une caractéristique à l&apos;autre).
+            Le fondeur Airoha se trahit jusque dans ses identifiants.
+          </p>
+          <InfoBox>
+            Attention à l&apos;interprétation : ces flags sont ce que le serveur
+            GATT <em>déclare</em>. Ça ne prouve pas encore qu&apos;un appareil non
+            appairé puisse réellement écrire - le firmware pourrait imposer le
+            bonding à un niveau plus haut. Le tester proprement demande un
+            initiateur qui n&apos;a <strong>jamais</strong> été appairé (un second
+            adaptateur, un ESP32...). Le faire depuis ma machine, qui a déjà été
+            appairée, ne prouverait rien. C&apos;est la suite logique de ce
+            travail.
+          </InfoBox>
+
+          <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
+            Observation 3 - commandes stateless, reconnexion silencieuse
+          </h3>
+          <p className="text-muted-foreground mb-3">
+            Les commandes du protocole sont déterministes et sans état :{" "}
+            <code className="rounded bg-muted px-1">[0x01, 0x00, presetId]</code>{" "}
+            veut toujours dire la même chose, aucun nonce, aucun compteur, aucun
+            challenge. Et une fois le bond établi, BlueZ le conserve même après
+            déconnexion. Concrètement : j&apos;ai déconnecté mes écouteurs de
+            l&apos;ordinateur, puis un petit programme local s&apos;est{" "}
+            <strong>reconnecté tout seul</strong> avec le bond stocké et a changé
+            le mode ANC - sans aucun prompt, sans interaction.
+          </p>
+          <p className="text-muted-foreground mb-3">
+            Le périmètre exact de cette dernière observation, je veux être clair
+            dessus : ça démontre qu&apos;un process local déjà appairé peut piloter
+            l&apos;appareil en silence, pas qu&apos;un attaquant distant le peut.
+            La distinction compte, et c&apos;est justement là que des attaques
+            documentées comme <strong>BLESA</strong> (BLE Spoofing Attack, WOOT
+            2020) deviennent intéressantes : elles ciblent précisément la phase de
+            reconnexion, où beaucoup de clients ne ré-authentifient pas le serveur.
+          </p>
+
+          <h3 className="mt-6 mb-3 font-mono text-lg font-semibold">
+            La suite : tester pour de vrai
+          </h3>
+          <p className="text-muted-foreground mb-3">
+            Pour transformer ces observations en vraies conclusions, le bon
+            outillage existe et est documenté. Je note ça ici autant pour moi que
+            pour qui voudrait creuser :
+          </p>
+          <ul className="list-disc list-inside space-y-2 text-sm text-muted-foreground mb-4">
+            <li>
+              <strong>GATTacker</strong> / <strong>BtleJuice</strong> - frameworks
+              de MITM BLE : cloner le périphérique, intercepter et rejouer/modifier
+              les writes GATT.
+            </li>
+            <li>
+              <strong>nRF52840 sniffer</strong> ou <strong>Ubertooth</strong> +
+              Wireshark - capturer le trafic over-the-air pour un vrai replay, pas
+              un rejeu depuis un client déjà bondé.
+            </li>
+            <li>
+              <strong>crackle</strong> (Mike Ryan) - casser le pairing BLE legacy
+              et déchiffrer le trafic.
+            </li>
+            <li>
+              <strong>ESP32 / nRF52840</strong> comme client GATT jamais appairé -
+              le test décisif pour l&apos;observation 2.
+            </li>
+            <li>
+              Côté académique : Becker et al.,{" "}
+              <em>Tracking Anonymized Bluetooth Devices</em> (PETS 2019) - la
+              référence sur le tracking par adresse, qui recoupe l&apos;observation 1.
+            </li>
+          </ul>
+          <InfoBox>
+            Tout ça a été fait sur mon propre matériel, dans un but de
+            compréhension et de documentation du protocole. Aucun de ces outils
+            n&apos;a été pointé sur les appareils de qui que ce soit d&apos;autre -
+            et c&apos;est la seule façon correcte d&apos;aborder ce genre de
+            recherche.
+          </InfoBox>
         </section>
 
         {/* Conclusion */}
