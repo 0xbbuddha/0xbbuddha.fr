@@ -237,9 +237,11 @@ export default function HomePage() {
   const certifications = {
     fr: [
       { name: "CRTO", status: "in coming" },
+      { name: "HTB ProLab : Mythical", status: "validé · Red Team Operator I" },
     ],
     en: [
       { name: "CRTO", status: "upcoming" },
+      { name: "HTB ProLab: Mythical", status: "completed · Red Team Operator I" },
     ],
   };
 

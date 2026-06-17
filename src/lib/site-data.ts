@@ -26,7 +26,7 @@ export type ArticleEntry = {
   focus: string;
 };
 
-export type WriteupType = "htb" | "ctf";
+export type WriteupType = "htb" | "ctf" | "prolab";
 export type HTBDifficulty = "Easy" | "Medium" | "Hard" | "Insane";
 export type MachineOS = "Linux" | "Windows";
 
@@ -44,6 +44,8 @@ export type WriteupEntry = {
   os?: MachineOS;
   // CTF specific
   ctfEvent?: string;
+  // ProLab specific (tier/track HTB, ex: "Red Team Operator I")
+  tier?: string;
 };
 
 export type NavigationItem = {
@@ -455,10 +457,22 @@ export const writeups: WriteupEntry[] = [
       "SMB guest, linked server MSSQL, capture de credentials par DNS et exécution PowerShell dans un service SOAP.",
     focus: "AD path",
   },
+  {
+    slug: "mythical",
+    title: "Mythical",
+    type: "prolab",
+    platform: "HackTheBox ProLabs",
+    tier: "Red Team Operator I",
+    date: "2026-06-16",
+    excerpt:
+      "Opération red team à travers un C2 Mythic déjà en place : flag Backup via un partage rsync, ESC4→ESC1 avec bypass du Full Enforcement Mode (extension SID) pour le flag Certified, pivot cross-forest et abus MSSQL TRUSTWORTHY jusqu'au flag Mythical Master sur le second domaine.",
+    focus: "C2 / ADCS / Cross-forest",
+  },
 ];
 
 export const htbWriteups = writeups.filter((w) => w.type === "htb");
 export const ctfWriteups = writeups.filter((w) => w.type === "ctf");
+export const prolabWriteups = writeups.filter((w) => w.type === "prolab");
 
 export type NavigationGroup = {
   titleKey: string;
@@ -502,6 +516,19 @@ function buildCTFTree(): NavigationItem[] {
   }));
 }
 
+function buildProlabTree(): NavigationItem[] {
+  const tiers = [...new Set(prolabWriteups.map((w) => w.tier ?? w.platform))];
+  return tiers.map((tier): NavigationItem => ({
+    label: tier,
+    children: prolabWriteups
+      .filter((w) => (w.tier ?? w.platform) === tier)
+      .map((w): NavigationItem => ({
+        href: `/writeups/${w.slug}`,
+        label: w.title,
+      })),
+  }));
+}
+
 export const navigationGroups: NavigationGroup[] = [
   {
     titleKey: "startHere",
@@ -524,6 +551,12 @@ export const navigationGroups: NavigationGroup[] = [
         label: "CTF",
         badge: String(ctfWriteups.length).padStart(2, "0"),
         children: buildCTFTree(),
+      },
+      {
+        href: "/writeups/prolab",
+        label: "ProLab",
+        badge: String(prolabWriteups.length).padStart(2, "0"),
+        children: buildProlabTree(),
       },
     ],
   },
@@ -1842,7 +1875,7 @@ const staticRailContexts: Record<string, RailContext> = {
     facts: [],
     related: [
       { href: "/writeups/ctf", label: "CTF", meta: "Compétitions et challenges" },
-      { href: "/red-team", label: "Red Team Notes", meta: "Méthodologie" },
+      { href: "/writeups/prolab", label: "ProLab", meta: "Labs red team HTB" },
     ],
   },
   "/writeups/ctf": {
@@ -1854,6 +1887,17 @@ const staticRailContexts: Record<string, RailContext> = {
     related: [
       { href: "/writeups/htb", label: "HackTheBox", meta: "Machines par difficulté" },
       { href: "/blog", label: "Blog", meta: "Articles techniques" },
+    ],
+  },
+  "/writeups/prolab": {
+    eyebrow: "Writeups ProLab",
+    title: "HackTheBox ProLabs",
+    summary: "Scénarios red team multi-machines, triés par tier.",
+    anchors: [{ href: "#prolab", label: "Labs" }],
+    facts: [],
+    related: [
+      { href: "/writeups/htb", label: "HackTheBox", meta: "Machines par difficulté" },
+      { href: "/red-team", label: "Red Team Notes", meta: "Méthodologie" },
     ],
   },
   "/blog": {
@@ -1894,8 +1938,10 @@ export function getRailContext(pathname: string): RailContext {
 
   const writeup = writeups.find((w) => pathname === `/writeups/${w.slug}`);
   if (writeup) {
-    const backHref = writeup.type === "htb" ? "/writeups/htb" : "/writeups/ctf";
-    const backLabel = writeup.type === "htb" ? "← HackTheBox" : "← CTF";
+    const backHref =
+      writeup.type === "htb" ? "/writeups/htb" : writeup.type === "ctf" ? "/writeups/ctf" : "/writeups/prolab";
+    const backLabel =
+      writeup.type === "htb" ? "← HackTheBox" : writeup.type === "ctf" ? "← CTF" : "← ProLab";
     return {
       eyebrow: "Writeup",
       title: writeup.title,

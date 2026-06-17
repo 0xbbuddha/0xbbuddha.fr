@@ -21,6 +21,7 @@ const fr = {
       myTools: "My Tools",
       htb: "HackTheBox",
       ctf: "CTF",
+      prolab: "ProLab",
       blog: "Blog",
     },
   },
@@ -44,6 +45,13 @@ const fr = {
       description:
         "Writeups de challenges CTF et compétitions de hacking.",
       noEntries: "Aucun writeup CTF pour l'instant.",
+    },
+    prolab: {
+      eyebrow: "Writeups ProLab",
+      title: "HackTheBox ProLabs",
+      description:
+        "Scénarios red team multi-machines, triés par tier (Operator, Adversary...).",
+      noEntries: "Aucun ProLab dans cette catégorie.",
     },
   },
   blog: {
@@ -124,6 +132,7 @@ const en = {
       myTools: "My Tools",
       htb: "HackTheBox",
       ctf: "CTF",
+      prolab: "ProLab",
       blog: "Blog",
     },
   },
@@ -147,6 +156,13 @@ const en = {
       description:
         "Writeups for CTF challenges and hacking competitions.",
       noEntries: "No CTF writeups yet.",
+    },
+    prolab: {
+      eyebrow: "Writeups ProLab",
+      title: "HackTheBox ProLabs",
+      description:
+        "Multi-machine red team scenarios, sorted by tier (Operator, Adversary...).",
+      noEntries: "No ProLab in this category yet.",
     },
   },
   blog: {

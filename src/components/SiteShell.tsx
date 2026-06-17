@@ -258,6 +258,7 @@ function navLabel(href: string, label: string, t: Tr): string {
     "/my-tools": t.nav.items.myTools,
     "/writeups/htb": t.nav.items.htb,
     "/writeups/ctf": t.nav.items.ctf,
+    "/writeups/prolab": t.nav.items.prolab,
     "/blog": t.nav.items.blog,
   };
   return map[href] ?? label;
