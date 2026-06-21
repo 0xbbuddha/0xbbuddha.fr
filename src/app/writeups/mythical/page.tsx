@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Terminal, Database, Shield, Key, Lock, Network, Users } from "lucide-react";
 import { PageHeader } from "@/components/PageHeader";
 import { RevealFlagBlock } from "@/components/RevealFlag";
@@ -35,23 +37,49 @@ export const metadata = {
 export default function WriteupMythicalPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
-      <PageHeader
-        eyebrow="Writeup ProLab"
-        title="Mythical"
-        description="Petit ProLab orienté red team. On démarre déjà avec un beacon Mythic actif sur un poste interne, suite à une campagne de social engineering simulée. Au programme : opérations C2, ADCS (ESC4->ESC1), contournement du Full Enforcement Mode, pivot cross-forest via une clé de confiance et abus MSSQL jusqu'à SYSTEM."
-        breadcrumbs={[
-          { label: "README", href: "/" },
-          { label: "Writeups", href: "/writeups" },
-          { label: "Mythical" },
-        ]}
-        stats={[
-          { label: "Platform", value: "HackTheBox ProLabs" },
-          { label: "Tier", value: "Red Team Operator I" },
-          { label: "Domaines", value: "mythical-us.vl / mythical-eu.vl" },
-          { label: "Flags", value: "Backup / Certified / Mythical Master" },
-          { label: "Date", value: "2026-06-16" },
-        ]}
-      />
+      <header className="mb-8 border-b border-border pb-6">
+        <div className="flex items-start justify-between gap-6">
+          <div className="min-w-0 flex-1">
+            <nav className="mb-3 flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
+              <Link href="/" className="transition-colors hover:text-foreground">README</Link>
+              <span className="text-muted-foreground/40">›</span>
+              <Link href="/writeups" className="transition-colors hover:text-foreground">Writeups</Link>
+              <span className="text-muted-foreground/40">›</span>
+              <span className="text-foreground/70">Mythical</span>
+            </nav>
+            <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">Writeup ProLab</p>
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Mythical</h1>
+            <p className="mt-3 text-sm leading-7 text-muted-foreground">
+              Petit ProLab orienté red team. On démarre déjà avec un beacon Mythic actif sur un poste interne,
+              suite à une campagne de social engineering simulée. Au programme : opérations C2, ADCS (ESC4-&gt;ESC1),
+              contournement du Full Enforcement Mode, pivot cross-forest via une clé de confiance et abus MSSQL
+              jusqu&apos;à SYSTEM.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
+              {[
+                { label: "Platform", value: "HackTheBox ProLabs" },
+                { label: "Tier", value: "Red Team Operator I" },
+                { label: "Domaines", value: "mythical-us.vl / mythical-eu.vl" },
+                { label: "Flags", value: "Backup / Certified / Mythical Master" },
+                { label: "Date", value: "2026-06-16" },
+              ].map((s) => (
+                <div key={s.label} className="text-xs text-muted-foreground">
+                  <span className="text-muted-foreground/60">{s.label}: </span>
+                  <span>{s.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <Image
+            src="/ic-mythical-overview.png"
+            alt="Mythical ProLab"
+            width={160}
+            height={105}
+            className="hidden shrink-0 rounded-xl sm:block"
+            priority
+          />
+        </div>
+      </header>
 
       <article className="mt-8 space-y-10">
 
@@ -509,3 +537,4 @@ Domain            : MYTHICAL-EU
     </div>
   );
 }
+
