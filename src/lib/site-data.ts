@@ -458,6 +458,18 @@ export const writeups: WriteupEntry[] = [
     focus: "AD path",
   },
   {
+    slug: "abducted",
+    title: "Abducted",
+    type: "htb",
+    platform: "HackTheBox",
+    difficulty: "Medium",
+    os: "Linux",
+    date: "2026-06-22",
+    excerpt:
+      "CVE-2026-4480 : injection de commande dans le print subsystem Samba via le pipe spoolss, sans credentials. Mot de passe rclone décodé et réutilisé, puis force user + wide links SMB pour planter une clé SSH. Privesc via drop-in systemd et polkit.",
+    focus: "CVE-2026-4480 / rclone / wide links / polkit",
+  },
+  {
     slug: "mythical",
     title: "Mythical",
     type: "prolab",
