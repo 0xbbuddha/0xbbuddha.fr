@@ -470,6 +470,19 @@ export const writeups: WriteupEntry[] = [
     focus: "CVE-2026-4480 / rclone / wide links / polkit",
   },
   {
+    slug: "pingpong",
+    title: "PingPong",
+    type: "htb",
+    platform: "HackTheBox",
+    difficulty: "Insane",
+    os: "Windows",
+    date: "2026-06-23",
+    excerpt:
+      "Dual-forest AD Insane : ESC13 (OID issuance policy) pour injecter un SID de groupe dans le PAC et obtenir WinRM, tunnel Ligolo-ng vers DC2, ownership cross-forest pour lire le blob gMSA, RBCD S4U2Proxy vers MSSQL, GodPotato SYSTEM, VSS ntds.dit, puis ESC4+ESC1 cross-forest sur un template ADCS pour devenir Administrator.",
+    focus: "ESC13 / ESC4+ESC1 / gMSA / RBCD / Cross-forest",
+    spoiler: true,
+  },
+  {
     slug: "mythical",
     title: "Mythical",
     type: "prolab",
