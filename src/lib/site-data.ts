@@ -493,6 +493,17 @@ export const writeups: WriteupEntry[] = [
       "Opération red team à travers un C2 Mythic déjà en place : flag Backup via un partage rsync, ESC4→ESC1 avec bypass du Full Enforcement Mode (extension SID) pour le flag Certified, pivot cross-forest et abus MSSQL TRUSTWORTHY jusqu'au flag Mythical Master sur le second domaine.",
     focus: "C2 / ADCS / Cross-forest",
   },
+  {
+    slug: "unintended",
+    title: "Unintended",
+    type: "prolab",
+    platform: "HackTheBox Mini ProLabs",
+    tier: "Red Team Operator I",
+    date: "2026-07-18",
+    excerpt:
+      "Secrets oubliés dans l'historique Gitea, pivot SOCKS via SFTP jusqu'à MySQL et PostgreSQL/Mattermost, credentials réutilisés entre Gitea/Mattermost/domaine, privesc Docker triviale sur BACKUP, forensic d'un backup Samba AD hors-ligne jusqu'au Domain Admin, et abus d'une instance Duplicati live pour lire un fichier root sans jamais shell root.",
+    focus: "Gitea / Pivoting / Docker / Samba AD forensics / Duplicati",
+  },
 ];
 
 export const htbWriteups = writeups.filter((w) => w.type === "htb");
