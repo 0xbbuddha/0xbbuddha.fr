@@ -1,5 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Network, GitBranch, Database, Key, Shield, Server, Lock } from "lucide-react";
-import { PageHeader } from "@/components/PageHeader";
 import { RevealFlagBlock } from "@/components/RevealFlag";
 
 function CodeBlock({
@@ -35,23 +36,51 @@ export const metadata = {
 export default function WriteupUnintendedPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-10 lg:py-10">
-      <PageHeader
-        eyebrow="Writeup ProLab"
-        title="Unintended"
-        description="Mini ProLab orienté Active Directory vu depuis un angle Linux. Migration AD bâclée, secrets qui traînent dans un historique Git, credentials réutilisés entre Gitea, Mattermost et le domaine, privesc Docker triviale, un forensic amusant d'un backup Samba AD hors-ligne jusqu'au Domain Admin, et abus d'une instance Duplicati toujours en vie pour lire un fichier root sans jamais shell root."
-        breadcrumbs={[
-          { label: "README", href: "/" },
-          { label: "Writeups", href: "/writeups" },
-          { label: "Unintended" },
-        ]}
-        stats={[
-          { label: "Platform", value: "HackTheBox Mini ProLabs" },
-          { label: "Domaine", value: "unintended.vl" },
-          { label: "Hôtes", value: "DC / BACKUP / WEB" },
-          { label: "Flags", value: "Touchdown / Web / Backup Admin / Unintended Master" },
-          { label: "Date", value: "2026-07-18" },
-        ]}
-      />
+      <header className="mb-8 border-b border-border pb-6">
+        <div className="flex items-start justify-between gap-6">
+          <div className="min-w-0 flex-1">
+            <nav className="mb-3 flex flex-wrap items-center gap-1 text-xs text-muted-foreground">
+              <Link href="/" className="transition-colors hover:text-foreground">README</Link>
+              <span className="text-muted-foreground/40">›</span>
+              <Link href="/writeups" className="transition-colors hover:text-foreground">Writeups</Link>
+              <span className="text-muted-foreground/40">›</span>
+              <span className="text-foreground/70">Unintended</span>
+            </nav>
+            <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">Writeup ProLab</p>
+            <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Unintended</h1>
+            <p className="mt-3 text-sm leading-7 text-muted-foreground">
+              Mini ProLab orienté Active Directory vu depuis un angle Linux. Migration AD bâclée, secrets qui
+              traînent dans un historique Git, credentials réutilisés entre Gitea, Mattermost et le domaine,
+              privesc Docker triviale, un forensic amusant d&apos;un backup Samba AD hors-ligne jusqu&apos;au
+              Domain Admin, et abus d&apos;une instance Duplicati toujours en vie pour lire un fichier root sans
+              jamais shell root.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
+              {[
+                { label: "Platform", value: "HackTheBox Mini ProLabs" },
+                { label: "Tier", value: "Red Team Operator I" },
+                { label: "Domaine", value: "unintended.vl" },
+                { label: "Hôtes", value: "DC / BACKUP / WEB" },
+                { label: "Flags", value: "Touchdown / Web / Backup Admin / Unintended Master" },
+                { label: "Date", value: "2026-07-18" },
+              ].map((s) => (
+                <div key={s.label} className="text-xs text-muted-foreground">
+                  <span className="text-muted-foreground/60">{s.label}: </span>
+                  <span>{s.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <Image
+            src="/ic-unintended-overview.png"
+            alt="Unintended ProLab"
+            width={160}
+            height={105}
+            className="hidden shrink-0 rounded-xl sm:block"
+            priority
+          />
+        </div>
+      </header>
 
       <article className="mt-8 space-y-10">
 
