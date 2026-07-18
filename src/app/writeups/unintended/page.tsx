@@ -236,7 +236,7 @@ theabbs: Thank you soo much... (kidding)
 [...] name + birthyear is a good password then? :joy:`}
           </CodeBlock>
           <p className="mt-2 text-muted-foreground">
-            Le pattern se vérifie en cassant le hash bcrypt d&apos;Abbie — mais ce mot de passe Mattermost n&apos;est
+            Le pattern se vérifie en cassant le hash bcrypt d&apos;Abbie - mais ce mot de passe Mattermost n&apos;est
             <strong> pas</strong> son mot de passe de domaine : celui-ci reste le mot de passe temporaire, jamais
             changé malgré la promesse.
           </p>
@@ -339,7 +339,7 @@ smbclient -U Administrator --password=36fe241ea0eaa533d5fac8bd7fb6f8a3 --pw-nt-h
           <p className="text-muted-foreground">
             Le conteneur FTP de BACKUP contient aussi les blocs d&apos;une sauvegarde Duplicati (non chiffrée,
             <code className="rounded bg-muted px-1 mx-1">--no-encryption</code>) de la configuration de
-            Duplicati lui-même — une sauvegarde qui se sauvegarde elle-même. En parsant à la main le
+            Duplicati lui-même - une sauvegarde qui se sauvegarde elle-même. En parsant à la main le
             <code className="rounded bg-muted px-1 mx-1">filelist.json</code> du <code className="rounded bg-muted px-1">.dlist.zip</code>
             (sans <code className="rounded bg-muted px-1">duplicati-cli</code>, juste <code className="rounded bg-muted px-1">unzip</code>),
             je retrouve et restitue <code className="rounded bg-muted px-1">Duplicati-server.sqlite</code> à partir

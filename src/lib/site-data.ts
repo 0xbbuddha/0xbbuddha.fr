@@ -504,6 +504,17 @@ export const writeups: WriteupEntry[] = [
       "Secrets oubliés dans l'historique Gitea, pivot SOCKS via SFTP jusqu'à MySQL et PostgreSQL/Mattermost, credentials réutilisés entre Gitea/Mattermost/domaine, privesc Docker triviale sur BACKUP, forensic d'un backup Samba AD hors-ligne jusqu'au Domain Admin, et abus d'une instance Duplicati live pour lire un fichier root sans jamais shell root.",
     focus: "Gitea / Pivoting / Docker / Samba AD forensics / Duplicati",
   },
+  {
+    slug: "tengu",
+    title: "Tengu",
+    type: "prolab",
+    platform: "HackTheBox Mini ProLabs",
+    tier: "Red Team Operator I",
+    date: "2026-07-18",
+    excerpt:
+      "RCE Node-RED non authentifiée en réécrivant un flow, secret de chiffrement en clair pour des creds MSSQL, pivot ligolo-ng vers un AD interne, hash MSSQL cracké via CrackStation, abus d'un gMSA par délégation contrainte, GodPotato pour SYSTEM sur SQL, puis LaZagne/DPAPI et Kerberos jusqu'à un compte Tier-0 protégé pour prendre le Domain Controller.",
+    focus: "Node-RED RCE / ligolo-ng / gMSA / Delegation contrainte / DPAPI",
+  },
 ];
 
 export const htbWriteups = writeups.filter((w) => w.type === "htb");
