@@ -244,8 +244,8 @@ export default function HomePage() {
     en: [
       { name: "CRTO", status: "upcoming" },
       { name: "HTB ProLab: Mythical", status: "completed · Red Team Operator I" },
-      { name: "HTB Mini ProLab: Unintended", status: "completed · Red Team Operator I" },
-      { name: "HTB Mini ProLab: Tengu", status: "completed · Red Team Operator I" },
+      { name: "HTB ProLab: Unintended", status: "completed · Red Team Operator I" },
+      { name: "HTB ProLab: Tengu", status: "completed · Red Team Operator I" },
     ],
   };
 
