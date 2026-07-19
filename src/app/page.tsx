@@ -240,12 +240,14 @@ export default function HomePage() {
       { name: "HTB ProLab : Mythical", status: "validé · Red Team Operator I" },
       { name: "HTB ProLab : Unintended", status: "validé · Red Team Operator I" },
       { name: "HTB ProLab : Tengu", status: "validé · Red Team Operator I" },
+      { name: "HTB ProLab : Dante", status: "validé · Red Team Operator I" },
     ],
     en: [
       { name: "CRTO", status: "upcoming" },
-      { name: "HTB ProLab: Mythical", status: "completed · Red Team Operator I" },
-      { name: "HTB ProLab: Unintended", status: "completed · Red Team Operator I" },
-      { name: "HTB ProLab: Tengu", status: "completed · Red Team Operator I" },
+      { name: "HTB ProLab : Mythical", status: "completed · Red Team Operator I" },
+      { name: "HTB ProLab : Unintended", status: "completed · Red Team Operator I" },
+      { name: "HTB ProLab : Tengu", status: "completed · Red Team Operator I" },
+      { name: "HTB ProLab : Dante", status: "completed · Red Team Operator I" },
     ],
   };
 
