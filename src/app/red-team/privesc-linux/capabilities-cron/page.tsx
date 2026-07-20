@@ -10,6 +10,7 @@ export default function LinuxCapabilitiesCronPage() {
     { cmd: "cat /etc/crontab && ls -la /etc/cron* 2>/dev/null", why: lang === "fr" ? "Identifier tâches cron et scripts modifiables." : "Identify cron jobs and writable scripts." },
     { cmd: "find / -writable -type d 2>/dev/null | head", why: lang === "fr" ? "Trouver chemins écrasables pour hijack d'exécution." : "Find writable paths for execution hijacking." },
     { cmd: "nxc ssh $TARGET -u $USER -p $PASS -x 'getcap -r / 2>/dev/null'", why: lang === "fr" ? "Enum capabilities à distance via accès SSH." : "Enumerate capabilities remotely through SSH access." },
+    { cmd: "python3 -c \"import sys; print(sys.path)\"", why: lang === "fr" ? "Library/module hijacking : si un script root (cron/systemd) importe un module non standard (ex: `import call`) qui échoue, tout répertoire inscriptible du sys.path permet de déposer le module et de le faire exécuter en root. Piège : placer le payload au niveau module (exécuté à l'import), pas dans une fonction qui ne sera jamais appelée si le script plante avant." : "Library/module hijacking: if a root script (cron/systemd) imports a non-standard module (e.g. `import call`) that fails, any writable directory in sys.path lets you drop the module and get it executed as root. Gotcha: put the payload at module level (runs on import), not inside a function that never gets called if the script crashes earlier." },
   ];
 
   return (

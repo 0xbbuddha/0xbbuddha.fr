@@ -8,20 +8,36 @@ export default function PivotingPage() {
   const { lang } = useLanguage();
   const sections = [
     {
-      href: "/red-team/pivoting/tunneling",
-      name: "Tunneling",
+      href: "/red-team/pivoting/ligolo",
+      name: "Ligolo-NG",
       description:
         lang === "fr"
-          ? "Catégories de tunnels pour l'accès aux segments internes."
-          : "Tunnel categories for internal segment access.",
+          ? "Tunnel TUN kernel-space, routing de subnets internes et double pivot."
+          : "Kernel-space TUN tunnel, internal subnet routing and double pivot.",
     },
     {
-      href: "/red-team/pivoting/routing",
-      name: "Routing",
+      href: "/red-team/pivoting/multi-hop",
+      name: "Multi-Hop",
       description:
         lang === "fr"
-          ? "Catégories de routage et rebond inter-réseaux."
-          : "Routing and cross-network relay categories.",
+          ? "Double/triple pivot Ligolo-ng, Sliver et SSH, et filtrage par IP source."
+          : "Double/triple pivot with Ligolo-ng, Sliver and SSH, and source-IP filtering.",
+    },
+    {
+      href: "/red-team/pivoting/chisel",
+      name: "Chisel",
+      description:
+        lang === "fr"
+          ? "Tunnel HTTP/SOCKS quand ligolo n'est pas une option (pas de TUN, environnement restreint)."
+          : "HTTP/SOCKS tunnel when ligolo isn't an option (no TUN, restricted environment).",
+    },
+    {
+      href: "/red-team/pivoting/sliver",
+      name: "Sliver C2",
+      description:
+        lang === "fr"
+          ? "Pivoting via les implants Sliver : portfwd, SOCKS et mesh entre agents."
+          : "Pivoting via Sliver implants: portfwd, SOCKS and mesh between agents.",
     },
   ];
 

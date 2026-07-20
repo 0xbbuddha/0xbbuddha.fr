@@ -36,9 +36,11 @@ import {
   GitFork,
   Github,
   Globe,
+  Hammer,
   HardDrive,
   Key,
   KeyRound,
+  KeySquare,
   LayoutGrid,
   Linkedin,
   Lock,
@@ -62,15 +64,20 @@ import {
   ShieldAlert,
   ShieldOff,
   Signal,
+  Skull,
   Layers,
   Sparkles,
   Target,
   Terminal,
   Timer,
   Trash2,
+  TreePine,
   Trophy,
+  Ticket,
   Unlock,
+  Vault,
   Users,
+  Waypoints,
   Wifi,
   Wrench,
   X,
@@ -194,6 +201,10 @@ function iconForHref(href: string) {
   // depth 3 - Post-accès
   if (href === "/red-team/ad-exploit/post-exploitation/lateral-movement") return ArrowLeftRight;
   if (href === "/red-team/ad-exploit/post-exploitation/procedures") return ClipboardList;
+  if (href === "/red-team/ad-exploit/post-exploitation/forest-trust-attacks") return TreePine;
+  if (href === "/red-team/ad-exploit/post-exploitation/pass-the-hash") return KeySquare;
+  if (href === "/red-team/ad-exploit/post-exploitation/pass-the-ticket") return Ticket;
+  if (href === "/red-team/ad-exploit/post-exploitation/dpapi") return Vault;
   if (href === "/red-team/ad-exploit/post-exploitation/win-privesc") return Zap;
   // depth 4 - PrivEsc Windows
   if (href === "/red-team/ad-exploit/post-exploitation/win-privesc/potato-attacks") return Flame;
@@ -219,6 +230,9 @@ function iconForHref(href: string) {
   if (href === "/red-team/esc/shadow-credentials") return Ghost;
   // depth 2 - Pivoting sub-pages
   if (href === "/red-team/pivoting/ligolo") return Cable;
+  if (href === "/red-team/pivoting/multi-hop") return Waypoints;
+  if (href === "/red-team/pivoting/chisel") return Hammer;
+  if (href === "/red-team/pivoting/sliver") return Skull;
   // C2
   if (href === "/red-team/c2") return Signal;
   if (href === "/red-team/c2/mythic") return Bot;
@@ -233,6 +247,9 @@ function iconForHref(href: string) {
   if (href === "/red-team/defense-evasion/cobalt-strike/process-opsec") return Activity;
   // Pentest Web
   if (href === "/red-team/pentest-web") return Code2;
+  if (href === "/red-team/pentest-web/unauth-rce") return Bug;
+  if (href === "/red-team/pentest-web/auth-bypass") return Unlock;
+  if (href === "/red-team/pentest-web/info-disclosure") return Eye;
   // Arch Linux
   if (href === "/arch-linux") return ArchLinuxIcon;
   if (href === "/arch-linux/pacman") return Package;

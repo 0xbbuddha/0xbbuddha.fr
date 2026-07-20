@@ -627,6 +627,8 @@ export const navigationGroups: NavigationGroup[] = [
                 { href: "/red-team/ad-exploit/information-gathering/password-misconfigs", label: "Exposed Secrets" },
                 { href: "/red-team/ad-exploit/information-gathering/laps-enum", label: "LAPS" },
                 { href: "/red-team/ad-exploit/information-gathering/kerberos-auth", label: "Kerberos" },
+                { href: "/red-team/ad-exploit/information-gathering/linux-ad", label: "Linux/Unix in AD" },
+                { href: "/red-team/ad-exploit/information-gathering/pre-win2000", label: "Pre-Win2000" },
               ],
             },
             {
@@ -639,6 +641,7 @@ export const navigationGroups: NavigationGroup[] = [
                 { href: "/red-team/ad-exploit/pre-exploitation/wsus", label: "WSUS" },
                 { href: "/red-team/ad-exploit/pre-exploitation/password-misconfigs", label: "GPP & Secrets" },
                 { href: "/red-team/ad-exploit/pre-exploitation/coercion", label: "Coercion" },
+                { href: "/red-team/ad-exploit/pre-exploitation/exchange", label: "Exchange" },
               ],
             },
             {
@@ -672,7 +675,11 @@ export const navigationGroups: NavigationGroup[] = [
               label: "Post-Exploitation",
               children: [
                 { href: "/red-team/ad-exploit/post-exploitation/lateral-movement", label: "Lateral Movement" },
-                { href: "/red-team/ad-exploit/post-exploitation/procedures", label: "Cleanup" },
+                { href: "/red-team/ad-exploit/post-exploitation/procedures", label: "Persistence & Cleanup" },
+                { href: "/red-team/ad-exploit/post-exploitation/forest-trust-attacks", label: "Forest & Trust" },
+                { href: "/red-team/ad-exploit/post-exploitation/pass-the-hash", label: "Pass-the-Hash" },
+                { href: "/red-team/ad-exploit/post-exploitation/pass-the-ticket", label: "Pass-the-Ticket" },
+                { href: "/red-team/ad-exploit/post-exploitation/dpapi", label: "DPAPI" },
                 {
                   href: "/red-team/ad-exploit/post-exploitation/win-privesc",
                   label: "Windows PrivEsc",
@@ -743,6 +750,9 @@ export const navigationGroups: NavigationGroup[] = [
           label: "Pivoting",
           children: [
             { href: "/red-team/pivoting/ligolo", label: "Ligolo-NG" },
+            { href: "/red-team/pivoting/multi-hop", label: "Multi-Hop" },
+            { href: "/red-team/pivoting/chisel", label: "Chisel" },
+            { href: "/red-team/pivoting/sliver", label: "Sliver C2" },
           ],
         },
         {
@@ -785,7 +795,15 @@ export const navigationGroups: NavigationGroup[] = [
   },
   {
     titleKey: "pentestWeb",
-    items: [{ href: "/red-team/pentest-web", label: "Pentest Web Notes" }],
+    items: [{
+      href: "/red-team/pentest-web",
+      label: "Pentest Web Notes",
+      children: [
+        { href: "/red-team/pentest-web/unauth-rce", label: "Unauthenticated RCE" },
+        { href: "/red-team/pentest-web/auth-bypass", label: "Auth Bypass" },
+        { href: "/red-team/pentest-web/info-disclosure", label: "Info Disclosure" },
+      ],
+    }],
   },
   {
     titleKey: "archLinux",
@@ -1153,7 +1171,43 @@ const staticRailContexts: Record<string, RailContext> = {
     facts: [],
     related: [
       { href: "/red-team/pivoting/ligolo", label: "Ligolo-NG", meta: "Pivoting" },
+      { href: "/red-team/pivoting/multi-hop", label: "Multi-Hop", meta: "Pivoting" },
+      { href: "/red-team/pivoting/chisel", label: "Chisel", meta: "Pivoting" },
+      { href: "/red-team/pivoting/sliver", label: "Sliver C2", meta: "Pivoting" },
       { href: "/red-team/ad-exploit", label: "AD Exploit", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/pivoting/chisel": {
+    eyebrow: "Pivoting",
+    title: "Chisel",
+    summary: "Tunnel HTTP/SOCKS quand ligolo n'est pas une option (pas de TUN, environnement restreint).",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/pivoting/ligolo", label: "Ligolo-NG", meta: "Pivoting" },
+      { href: "/red-team/pivoting", label: "← Pivoting", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/pivoting/sliver": {
+    eyebrow: "Pivoting",
+    title: "Sliver C2",
+    summary: "Pivoting via les implants Sliver : portfwd, SOCKS et mesh entre agents.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/pivoting/multi-hop", label: "Multi-Hop", meta: "Pivoting" },
+      { href: "/red-team/pivoting", label: "← Pivoting", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/pivoting/multi-hop": {
+    eyebrow: "Pivoting",
+    title: "Multi-Hop",
+    summary: "Double/triple pivot Ligolo-ng, Sliver, SSH et filtrage par IP source.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/pivoting/ligolo", label: "Ligolo-NG", meta: "Pivoting" },
+      { href: "/red-team/pivoting", label: "← Pivoting", meta: "Red Team Notes" },
     ],
   },
   "/red-team/c2": {
@@ -1203,12 +1257,46 @@ const staticRailContexts: Record<string, RailContext> = {
   "/red-team/pentest-web": {
     eyebrow: "Red Team Notes",
     title: "Pentest Web",
-    summary: "Notes offensives web : injections, auth bypass, API.",
+    summary: "Notes offensives web : RCE non authentifié, auth bypass, fuite d'infos.",
     anchors: [],
     facts: [],
     related: [
-      { href: "/red-team/ad-exploit", label: "AD Exploit", meta: "Red Team Notes" },
-      { href: "/cheatsheets", label: "Cheatsheets", meta: "Références rapides" },
+      { href: "/red-team/pentest-web/unauth-rce", label: "Unauthenticated RCE", meta: "Pentest Web" },
+      { href: "/red-team/pentest-web/auth-bypass", label: "Auth Bypass", meta: "Pentest Web" },
+      { href: "/red-team/pentest-web/info-disclosure", label: "Info Disclosure", meta: "Pentest Web" },
+    ],
+  },
+  "/red-team/pentest-web/unauth-rce": {
+    eyebrow: "Pentest Web",
+    title: "Unauthenticated RCE",
+    summary: "API admin exposées sans auth (Node-RED) et panels exécutant en root/SYSTEM (Webmin).",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/pentest-web/auth-bypass", label: "Auth Bypass", meta: "Pentest Web" },
+      { href: "/red-team/pentest-web", label: "← Pentest Web", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/pentest-web/auth-bypass": {
+    eyebrow: "Pentest Web",
+    title: "Auth Bypass",
+    summary: "Bypass de self-test loopback (WordPress) et rejeu de nonce (Duplicati).",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/pentest-web/unauth-rce", label: "Unauthenticated RCE", meta: "Pentest Web" },
+      { href: "/red-team/pentest-web", label: "← Pentest Web", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/pentest-web/info-disclosure": {
+    eyebrow: "Pentest Web",
+    title: "Info Disclosure",
+    summary: "Secrets qui survivent dans l'historique Git après un commit de suppression.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/pentest-web/unauth-rce", label: "Unauthenticated RCE", meta: "Pentest Web" },
+      { href: "/red-team/pentest-web", label: "← Pentest Web", meta: "Red Team Notes" },
     ],
   },
   "/arch-linux": {
@@ -1617,12 +1705,13 @@ const staticRailContexts: Record<string, RailContext> = {
   "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse": {
     eyebrow: "ACL & GPO",
     title: "ACL Abuse",
-    summary: "GenericAll, WriteDacl, owner takeover et shadow credentials.",
+    summary: "GenericAll, WriteDacl, owner takeover, shadow credentials et chaînes d'attaque.",
     anchors: [
       { href: "#recon", label: "Recon" },
       { href: "#generic", label: "GenericAll" },
       { href: "#dacl", label: "WriteDacl" },
       { href: "#group", label: "AddMember" },
+      { href: "#chains", label: "Attack Chains" },
     ],
     facts: [],
     related: [
@@ -1654,7 +1743,7 @@ const staticRailContexts: Record<string, RailContext> = {
     facts: [],
     related: [
       { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Credential Attacks", meta: "Exploitation" },
-      { href: "/red-team/ad-exploit/exploitation/server-operators", label: "Server Operators", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/server-operators", label: "Server Operators", meta: "Win PrivEsc" },
     ],
   },
   "/red-team/ad-exploit/exploitation/mssql-attacks": {
@@ -1814,7 +1903,7 @@ const staticRailContexts: Record<string, RailContext> = {
   "/red-team/ad-exploit/post-exploitation/procedures": {
     eyebrow: "Post-Exploitation",
     title: "Procedures & Cleanup",
-    summary: "Persistance discrète et nettoyage OPSEC après compromission.",
+    summary: "Golden/Silver/Diamond Ticket, Skeleton Key, DCShadow, BadSuccessor et nettoyage OPSEC.",
     anchors: [
       { href: "#persist", label: "Persistence" },
       { href: "#cleanup", label: "Cleanup" },
@@ -1822,7 +1911,68 @@ const staticRailContexts: Record<string, RailContext> = {
     facts: [],
     related: [
       { href: "/red-team/ad-exploit/post-exploitation/lateral-movement", label: "Lateral Movement", meta: "Post-Exploitation" },
+      { href: "/red-team/ad-exploit/post-exploitation/forest-trust-attacks", label: "Forest & Trust", meta: "Post-Exploitation" },
       { href: "/red-team/ad-exploit/exploitation/acl-gpo/acl-abuse", label: "ACL Abuse", meta: "ACL & GPO" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/forest-trust-attacks": {
+    eyebrow: "Post-Exploitation",
+    title: "Forest & Trust Attacks",
+    summary: "SID History, DACL inter-domaine et délégation contrainte à travers un trust.",
+    anchors: [
+      { href: "#recon", label: "Trust Recon" },
+      { href: "#sidhistory", label: "SID History" },
+      { href: "#cross-domain", label: "Cross-Domain" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/procedures", label: "Procedures & Cleanup", meta: "Post-Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/kerberos-attacks", label: "Kerberos Attacks", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/pass-the-hash": {
+    eyebrow: "Post-Exploitation",
+    title: "Pass-the-Hash",
+    summary: "Réutiliser un hash NTLM sur SMB, WinRM, RDP et MSSQL, et ses limites.",
+    anchors: [
+      { href: "#obtain", label: "Obtain" },
+      { href: "#reuse", label: "Reuse" },
+      { href: "#limits", label: "Limits" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/pass-the-ticket", label: "Pass-the-Ticket", meta: "Post-Exploitation" },
+      { href: "/red-team/ad-exploit/post-exploitation/lateral-movement", label: "Lateral Movement", meta: "Post-Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/pass-the-ticket": {
+    eyebrow: "Post-Exploitation",
+    title: "Pass-the-Ticket",
+    summary: "Voler, convertir et rejouer des tickets Kerberos, y compris Overpass-the-Hash.",
+    anchors: [
+      { href: "#obtain", label: "Obtain" },
+      { href: "#reuse", label: "Reuse" },
+      { href: "#why", label: "PTT vs PTH" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/pass-the-hash", label: "Pass-the-Hash", meta: "Post-Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/kerberos-attacks", label: "Kerberos Attacks", meta: "Exploitation" },
+    ],
+  },
+  "/red-team/ad-exploit/post-exploitation/dpapi": {
+    eyebrow: "Post-Exploitation",
+    title: "DPAPI & Credential Manager",
+    summary: "Masterkeys, Credential Manager et vault, avec ou sans mot de passe.",
+    anchors: [
+      { href: "#collect", label: "Collect" },
+      { href: "#local", label: "Local Decryption" },
+      { href: "#backupkey", label: "Domain Backup Key" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/post-exploitation/win-privesc/credential-dumping", label: "Credential Dumping", meta: "Win PrivEsc" },
+      { href: "/red-team/ad-exploit/post-exploitation/pass-the-hash", label: "Pass-the-Hash", meta: "Post-Exploitation" },
     ],
   },
   "/red-team/ad-exploit/post-exploitation/win-privesc": {

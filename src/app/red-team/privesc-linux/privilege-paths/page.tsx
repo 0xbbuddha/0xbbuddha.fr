@@ -24,6 +24,9 @@ export default function PrivescLinuxPrivilegePathsPage() {
         <Link href="/red-team/privesc-linux/capabilities-cron" className="block hover:text-foreground">
           - Capabilities & Cron
         </Link>
+        <Link href="/red-team/privesc-linux/docker-privesc" className="block hover:text-foreground">
+          - Docker
+        </Link>
       </div>
     </div>
   );

@@ -8,11 +8,6 @@ export default function PrivescLinuxPage() {
   const { lang } = useLanguage();
   const sections = [
     {
-      href: "/red-team/privesc-linux/local-enum",
-      name: "Local Enum",
-      description: lang === "fr" ? "Base d'énumération locale avant exploitation." : "Local enumeration baseline before exploitation.",
-    },
-    {
       href: "/red-team/privesc-linux/privilege-paths",
       name: "Privilege Paths",
       description: lang === "fr" ? "Sous-catégories d'escalade : sudo/suid, capabilities et cron." : "Escalation sub-categories: sudo/suid, capabilities, and cron.",

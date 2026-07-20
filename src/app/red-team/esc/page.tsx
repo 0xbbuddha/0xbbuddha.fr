@@ -8,11 +8,6 @@ export default function ESCPage() {
   const { lang } = useLanguage();
   const sections = [
     {
-      href: "/red-team/esc/enum",
-      name: "ADCS Enum",
-      description: lang === "fr" ? "Catégories d'énumération des templates et CAs." : "Enumeration categories for templates and CAs.",
-    },
-    {
       href: "/red-team/esc/abuse-paths",
       name: "Abuse Paths",
       description: lang === "fr" ? "Catégories d'abus ESC et shadow credentials." : "Abuse categories for ESC and shadow credentials.",
