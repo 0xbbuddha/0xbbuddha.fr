@@ -241,6 +241,7 @@ export default function HomePage() {
       { name: "HTB ProLab : Unintended", status: "validé · Red Team Operator I" },
       { name: "HTB ProLab : Tengu", status: "validé · Red Team Operator I" },
       { name: "HTB ProLab : Dante", status: "validé · Red Team Operator I" },
+      { name: "HTB ProLab : OffShore", status: "validé · Red Team Operator II"},
     ],
     en: [
       { name: "CRTO", status: "upcoming" },
@@ -248,6 +249,7 @@ export default function HomePage() {
       { name: "HTB ProLab : Unintended", status: "completed · Red Team Operator I" },
       { name: "HTB ProLab : Tengu", status: "completed · Red Team Operator I" },
       { name: "HTB ProLab : Dante", status: "completed · Red Team Operator I" },
+      { name: "HTB ProLab : OffShore", status: "completed · Red Team Operator II"},
     ],
   };
 
