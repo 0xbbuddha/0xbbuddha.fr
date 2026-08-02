@@ -13,6 +13,7 @@ import {
   Ban,
   BookText,
   Bot,
+  Braces,
   Bug,
   Cable,
   ChevronRight,
@@ -33,6 +34,7 @@ import {
   Flag,
   Flame,
   Ghost,
+  GitBranch,
   GitFork,
   Github,
   Globe,
@@ -250,6 +252,8 @@ function iconForHref(href: string) {
   if (href === "/red-team/pentest-web/unauth-rce") return Bug;
   if (href === "/red-team/pentest-web/auth-bypass") return Unlock;
   if (href === "/red-team/pentest-web/info-disclosure") return Eye;
+  if (href === "/red-team/pentest-web/ssti") return Braces;
+  if (href === "/red-team/pentest-web/gitea-abuse") return GitBranch;
   // Arch Linux
   if (href === "/arch-linux") return ArchLinuxIcon;
   if (href === "/arch-linux/pacman") return Package;

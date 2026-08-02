@@ -802,6 +802,8 @@ export const navigationGroups: NavigationGroup[] = [
         { href: "/red-team/pentest-web/unauth-rce", label: "Unauthenticated RCE" },
         { href: "/red-team/pentest-web/auth-bypass", label: "Auth Bypass" },
         { href: "/red-team/pentest-web/info-disclosure", label: "Info Disclosure" },
+        { href: "/red-team/pentest-web/ssti", label: "SSTI" },
+        { href: "/red-team/pentest-web/gitea-abuse", label: "Gitea Abuse" },
       ],
     }],
   },
@@ -1296,6 +1298,37 @@ const staticRailContexts: Record<string, RailContext> = {
     facts: [],
     related: [
       { href: "/red-team/pentest-web/unauth-rce", label: "Unauthenticated RCE", meta: "Pentest Web" },
+      { href: "/red-team/pentest-web", label: "← Pentest Web", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/pentest-web/ssti": {
+    eyebrow: "Pentest Web",
+    title: "SSTI / Template Injection",
+    summary: "Détection multi-moteurs et bypass du sandbox Handlebars par injection d'AST.",
+    anchors: [
+      { href: "#detect", label: "Detection" },
+      { href: "#handlebars-ast", label: "Handlebars AST" },
+      { href: "#other", label: "Other Engines" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/pentest-web/unauth-rce", label: "Unauthenticated RCE", meta: "Pentest Web" },
+      { href: "/red-team/pentest-web", label: "← Pentest Web", meta: "Red Team Notes" },
+    ],
+  },
+  "/red-team/pentest-web/gitea-abuse": {
+    eyebrow: "Pentest Web",
+    title: "Gitea Abuse",
+    summary: "SPNEGO, reset de mot de passe sans ancien, bypass de branch protection et RCE via Actions.",
+    anchors: [
+      { href: "#spnego", label: "SPNEGO" },
+      { href: "#password-reset", label: "Password Reset" },
+      { href: "#pr-bypass", label: "PR Bypass" },
+      { href: "#actions-rce", label: "Actions RCE" },
+    ],
+    facts: [],
+    related: [
+      { href: "/red-team/pentest-web/info-disclosure", label: "Info Disclosure", meta: "Pentest Web" },
       { href: "/red-team/pentest-web", label: "← Pentest Web", meta: "Red Team Notes" },
     ],
   },
