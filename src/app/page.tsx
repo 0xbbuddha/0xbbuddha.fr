@@ -37,7 +37,7 @@ export default function HomePage() {
   const { lang, t } = useLanguage();
 
   const localizedProfile = {
-    role: lang === "fr" ? siteProfile.currentRole : "SOC Engineer @ Aukfood",
+    role: lang === "fr" ? siteProfile.currentRole : "Offensive Security @ Almond",
     study: lang === "fr" ? siteProfile.currentStudy : "Cybersecurity MSc @ Oteria",
     territory: lang === "fr" ? siteProfile.territory : "France",
     focus:
@@ -47,7 +47,7 @@ export default function HomePage() {
     intro:
       lang === "fr"
         ? siteProfile.intro
-        : "Cybersecurity MSc student at Oteria and SOC Engineer apprentice at Aukfood. I use this place to document projects, field notes, and what I learn while building tools.",
+        : "Cybersecurity MSc student at Oteria and Offensive Security apprentice at Almond. I use this place to document projects, field notes, and what I learn while building tools.",
   };
 
   const projectEn: Record<string, { description: string; note: string; status: string }> = {
@@ -234,6 +234,44 @@ export default function HomePage() {
     },
   ];
 
+  const experience = [
+    {
+      key: "almond",
+      company: "Almond",
+      role: "Security Auditor | Penetration Tester",
+      period: lang === "fr" ? "Sept. 2026 - aujourd'hui" : "Sept. 2026 - present",
+      location: lang === "fr" ? "Rennes, Bretagne, France" : "Rennes, Brittany, France",
+      contract: lang === "fr" ? "Alternance" : "Apprenticeship",
+      current: true,
+      tasks: [
+        "Internal and external penetration testing: web, Active Directory, network and infrastructure",
+        "Architecture and configuration audits: systems, servers, network equipment, firewalls and hypervisors",
+        "Source code audits and application vulnerability research",
+        "Identification, analysis and qualification of vulnerabilities and security risks",
+        "Audit report writing and remediation recommendations",
+        "Development and automation of internal security tooling to support audit and pentest activities",
+      ],
+    },
+    {
+      key: "aukfood",
+      company: "Aukfood",
+      role: "SOC Analyst | SOC Builder | Open-Source R&D",
+      period: lang === "fr" ? "Sept. 2024 - août 2026" : "Sept. 2024 - Aug. 2026",
+      location: "La Roche-sur-Yon, Vendée, France",
+      contract: lang === "fr" ? "Alternance" : "Apprenticeship",
+      current: false,
+      tasks: [
+        "Design and deployment of an open-source SOC (Wazuh, MISP, CrowdSec, Tracecat...)",
+        "Linux system administration (hardening, monitoring, services, logs)",
+        "Integration and maintenance of free and open-source solutions",
+        "Development of detection rules, parsers and response playbooks",
+        "Automation of attack scenarios and security testing",
+        "Contribution to the rollout of a Purple Team approach",
+        "Client security support and false positive handling",
+      ],
+    },
+  ];
+
   const certifications = {
     fr: [
       { name: "CRTO", status: "in coming" },
@@ -254,6 +292,7 @@ export default function HomePage() {
   };
 
   const [openYear, setOpenYear] = useState<string | null>(null);
+  const [openJob, setOpenJob] = useState<string | null>(null);
 
   const whoami = [
     { key: "handle",    value: siteProfile.handle,        accent: true },
@@ -359,6 +398,52 @@ export default function HomePage() {
                       {year.modules.map((m) => (
                         <p key={m} className="text-muted-foreground">
                           - <span className="text-foreground">{m}</span>
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-4 animate-pulse text-primary/50">█</p>
+        </TerminalBlock>
+
+        {/* ── experience ── */}
+        <TerminalBlock id="experience" title="cat /etc/experience.conf">
+          <p className="mb-4 text-primary">$ cat /etc/experience.conf</p>
+          <div className="space-y-1">
+            {experience.map((job) => {
+              const isOpen = openJob === job.key;
+              return (
+                <div key={job.key}>
+                  <button
+                    onClick={() => setOpenJob(isOpen ? null : job.key)}
+                    className="flex w-full items-start gap-2 py-1 text-left text-primary/80 transition-colors hover:text-primary"
+                  >
+                    <ChevronDown
+                      className={`mt-0.5 size-3.5 shrink-0 transition-transform ${isOpen ? "rotate-0" : "-rotate-90"}`}
+                    />
+                    <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <span># {job.company}</span>
+                      <span className="font-normal text-muted-foreground/50">::</span>
+                      <span className="font-normal text-foreground">{job.role}</span>
+                      <span className="font-normal text-muted-foreground/60">{job.period}</span>
+                      {job.current && (
+                        <span className="rounded border border-primary/30 bg-primary/5 px-1.5 py-px text-[10px] font-normal uppercase tracking-widest text-primary">
+                          {lang === "fr" ? "en cours" : "current"}
+                        </span>
+                      )}
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="ml-5 mb-2 mt-1 space-y-1 border-l border-border pl-4">
+                      <p className="text-muted-foreground/60">
+                        {job.location}  ·  {job.contract}
+                      </p>
+                      {job.tasks.map((task) => (
+                        <p key={task} className="leading-6 text-muted-foreground">
+                          - <span className="text-foreground">{task}</span>
                         </p>
                       ))}
                     </div>

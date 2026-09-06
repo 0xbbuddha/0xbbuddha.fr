@@ -81,9 +81,9 @@ export const siteProfile = {
   tagline:
     "Base de connaissances personnelle autour de la sécu offensive, du tooling, des writeups et des notes de terrain.",
   intro:
-    "Étudiant en Mastère cybersécurité à Oteria et alternant en SOC Engineer chez Aukfood. J'y range mes projets, mes retours d'expérience et ce que j'apprends en construisant des outils.",
+    "Étudiant en Mastère cybersécurité à Oteria et alternant en Offensive Security chez Almond. J'y range mes projets, mes retours d'expérience et ce que j'apprends en construisant des outils.",
   currentStudy: "Mastère cybersécurité @ Oteria",
-  currentRole: "SOC Engineer @ Aukfood",
+  currentRole: "Offensive Security @ Almond",
   territory: "France",
   focus: [
     "Red / Purple Team tooling",
@@ -875,6 +875,7 @@ const staticRailContexts: Record<string, RailContext> = {
       { href: "#overview", label: "Overview" },
       { href: "#whoami", label: "whoami" },
       { href: "#formation", label: "Formation" },
+      { href: "#experience", label: "Experience" },
       { href: "#projects", label: "Projects" },
       { href: "#skills", label: "Skills" },
       { href: "#certifications", label: "Certifications" },
