@@ -31,6 +31,7 @@ import {
   Eye,
   FileKey,
   FileText,
+  Fingerprint,
   Flag,
   Flame,
   Ghost,
@@ -262,6 +263,7 @@ function iconForHref(href: string) {
   if (href === "/arch-linux/kernel-recovery") return AlertTriangle;
   if (href === "/arch-linux/hp-printer") return Printer;
   if (href === "/arch-linux/kernel-setup") return Cpu;
+  if (href === "/arch-linux/fingerprint") return Fingerprint;
   // Misc
   if (href === "/music") return Music;
   if (href === "/chess") return Crown;

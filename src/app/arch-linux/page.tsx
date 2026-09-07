@@ -44,6 +44,13 @@ export default function ArchLinuxPage() {
         : "Set up an HP printer with HPLIP and CUPS.",
     },
     {
+      href: "/arch-linux/fingerprint",
+      name: "Fingerprint",
+      description: lang === "fr"
+        ? "Lecteur ELAN 04f3:0c6e avec le driver elanpress, PAM et écran de verrouillage."
+        : "ELAN 04f3:0c6e reader with the elanpress driver, PAM and lock screen.",
+    },
+    {
       href: "/arch-linux/kernel-setup",
       name: "Kernel Setup",
       description: lang === "fr"
