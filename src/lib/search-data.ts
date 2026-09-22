@@ -14,6 +14,23 @@ export type SearchEntry = {
 
 const staticEntries: SearchEntry[] = [
   {
+    id: "tool-rpcclient-ng",
+    type: "tool",
+    title: "rpcclient-ng",
+    href: "/my-tools/rpcclient-ng",
+    summary: "Offensive MS-RPC client for AD (SAMR/LSA/srvsvc): recon, sweep and write ops, a Go rewrite of rpcclient.",
+    tags: ["tool", "ad", "msrpc", "samr", "lsa", "kerberos", "rpcclient", "rpcclient-ng"],
+  },
+  {
+    id: "cmd-rpcclient-ng-sweep",
+    type: "command",
+    title: "rpcclient-ng sweep",
+    href: "/my-tools/rpcclient-ng",
+    summary: "Cross-referenced AD recon report in one command.",
+    command: "rpcclient-ng -d $DOMAIN -u $USER -p $PASS -c sweep $TARGET",
+    tags: ["command", "rpcclient-ng", "recon", "sweep", "ad"],
+  },
+  {
     id: "tool-gofenrir",
     type: "tool",
     title: "GoFenrir",

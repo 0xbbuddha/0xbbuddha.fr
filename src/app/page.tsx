@@ -61,10 +61,25 @@ export default function HomePage() {
       note: "Portable and dependency-free - one binary to cover the essentials of AD recon.",
       status: "AD framework",
     },
-    Ensh: {
+    Bashket: {
       description: "Offensive network protocol library written in pure Bash - no binaries, no compilation - targeting Active Directory and red team operations.",
       note: "Replicate offensive AD network behaviors in pure Bash for contexts where compilation is not possible.",
       status: "Bash offensive lib",
+    },
+    "rpcclient-ng": {
+      description: "Offensive MS-RPC client for Active Directory (recon + abuse), a Go rewrite of rpcclient: SAMR/LSA/srvsvc, sweep and write ops as a single static binary.",
+      note: "Reworking rpcclient for offensive use: automatic fallbacks, decoded flags and a one-command recon report.",
+      status: "AD MS-RPC client",
+    },
+    Mugen: {
+      description: "Open-source post-exploitation C2 framework, a community fork of Havoc (GPL-3.0): Go teamserver, Demon agent (Windows) and Tengu agent (Linux).",
+      note: "Community continuation of Havoc after it moved to a commercial license.",
+      status: "C2 framework",
+    },
+    "c0ffee-audio": {
+      description: "Reverse-engineering the BLE/GATT protocol of Marshall Bluetooth speakers to control them on Linux (ANC, EQ, battery).",
+      note: "Making Marshall audio hardware controllable outside the official apps, with a documented protocol.",
+      status: "Hardware RE",
     },
     "Wazuh-cli": {
       description: "CLI and live TUI dashboard for the Wazuh REST API - agent management, alerts, vulnerabilities and active responses from the terminal.",
@@ -459,18 +474,16 @@ export default function HomePage() {
         <TerminalBlock id="projects" title="ls ./projects/">
           <p className="mb-4 text-primary">$ ls -la ./projects/</p>
           <div className="space-y-8">
-            {(["red", "blue"] as const).map((side) => {
+            {(["red", "reverse", "blue"] as const).map((side) => {
               type Block =
                 | { type: "single"; project: typeof projects[0]; index: number }
                 | { type: "group"; group: string; items: Array<{ project: typeof projects[0]; index: number }> };
 
               const sideProjects = projects.filter((p) => p.side === side);
-              const sideLabel = side === "red"
-                ? (lang === "fr" ? "Red Team" : "Red Team")
-                : (lang === "fr" ? "Blue Team" : "Blue Team");
-              const sideColor = side === "red" ? "text-primary" : "text-blue-400";
-              const sideBorder = side === "red" ? "border-primary/30" : "border-blue-400/30";
-              const sideBg = side === "red" ? "bg-primary/5" : "bg-blue-400/5";
+              const sideLabel = side === "red" ? "Red Team" : side === "blue" ? "Blue Team" : "Reverse";
+              const sideColor = side === "red" ? "text-primary" : side === "blue" ? "text-blue-400" : "text-purple-400";
+              const sideBorder = side === "red" ? "border-primary/30" : side === "blue" ? "border-blue-400/30" : "border-purple-400/30";
+              const sideBg = side === "red" ? "bg-primary/5" : side === "blue" ? "bg-blue-400/5" : "bg-purple-400/5";
 
               const blocks = sideProjects.reduce<Block[]>((acc, project, i) => {
                 if (project.group) {
@@ -494,34 +507,34 @@ export default function HomePage() {
                   <div className="space-y-5">
                     {blocks.map((block) => {
                       if (block.type === "group") {
+                        const cards = block.items.map(({ project }) => (
+                          <div key={project.title} className={`rounded border ${sideBorder} ${sideBg} p-3`}>
+                            <div className="flex items-start justify-between gap-2">
+                              <div className="min-w-0">
+                                <span className="font-semibold text-foreground">{project.title}</span>
+                                <span className={`ml-2 ${sideColor} text-xs`}>
+                                  {lang === "fr" ? project.status : (projectEn[project.title]?.status ?? project.status)}
+                                </span>
+                              </div>
+                              <a
+                                href={project.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`shrink-0 text-muted-foreground/50 transition-colors hover:${sideColor}`}
+                              >
+                                <ArrowUpRight className="size-3.5" />
+                              </a>
+                            </div>
+                            <p className="mt-1.5 leading-5 text-foreground/80 text-xs">
+                              {lang === "fr" ? project.description : (projectEn[project.title]?.description ?? project.description)}
+                            </p>
+                          </div>
+                        ));
+
                         return (
                           <div key={block.group}>
                             <p className={`mb-2 ${sideColor}/50`}># {block.group}</p>
-                            <div className="grid grid-cols-2 gap-3">
-                              {block.items.map(({ project }) => (
-                                <div key={project.title} className={`rounded border ${sideBorder} ${sideBg} p-3`}>
-                                  <div className="flex items-start justify-between gap-2">
-                                    <div className="min-w-0">
-                                      <span className="font-semibold text-foreground">{project.title}</span>
-                                      <span className={`ml-2 ${sideColor} text-xs`}>
-                                        {lang === "fr" ? project.status : (projectEn[project.title]?.status ?? project.status)}
-                                      </span>
-                                    </div>
-                                    <a
-                                      href={project.href}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className={`shrink-0 text-muted-foreground/50 transition-colors hover:${sideColor}`}
-                                    >
-                                      <ArrowUpRight className="size-3.5" />
-                                    </a>
-                                  </div>
-                                  <p className="mt-1.5 leading-5 text-foreground/80 text-xs">
-                                    {lang === "fr" ? project.description : (projectEn[project.title]?.description ?? project.description)}
-                                  </p>
-                                </div>
-                              ))}
-                            </div>
+                            <div className="grid grid-cols-2 gap-3">{cards}</div>
                           </div>
                         );
                       }
@@ -566,6 +579,42 @@ export default function HomePage() {
                 </div>
               );
             })}
+            {(() => {
+              const others = projects.filter((p) => p.side === "other");
+              if (others.length === 0) return null;
+              return (
+                <details className="rounded border border-border/40 px-3 py-2">
+                  <summary className="cursor-pointer select-none text-xs text-muted-foreground/60">
+                    # Others ({others.length})
+                  </summary>
+                  <div className="mt-3 grid grid-cols-2 gap-3">
+                    {others.map((project) => (
+                      <div key={project.title} className="rounded border border-border/40 bg-muted/5 p-3">
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <span className="font-semibold text-foreground">{project.title}</span>
+                            <span className="ml-2 text-xs text-muted-foreground/70">
+                              {lang === "fr" ? project.status : (projectEn[project.title]?.status ?? project.status)}
+                            </span>
+                          </div>
+                          <a
+                            href={project.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="shrink-0 text-muted-foreground/50 transition-colors hover:text-foreground"
+                          >
+                            <ArrowUpRight className="size-3.5" />
+                          </a>
+                        </div>
+                        <p className="mt-1.5 text-xs leading-5 text-foreground/80">
+                          {lang === "fr" ? project.description : (projectEn[project.title]?.description ?? project.description)}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </details>
+              );
+            })()}
           </div>
           <p className="mt-4 animate-pulse text-primary/50">█</p>
         </TerminalBlock>

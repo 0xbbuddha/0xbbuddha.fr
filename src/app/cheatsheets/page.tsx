@@ -8,6 +8,15 @@ export default function CheatsheetPage() {
   const { lang, t } = useLanguage();
   const sheets = [
     {
+      href: "/my-tools/rpcclient-ng",
+      name: "rpcclient-ng",
+      description:
+        lang === "fr"
+          ? "Client MS-RPC offensif pour l'AD : SAMR/LSA/srvsvc, recon, sweep et write ops."
+          : "Offensive MS-RPC client for AD: SAMR/LSA/srvsvc, recon, sweep and write ops.",
+      tags: ["AD", "MS-RPC", "SAMR", "Kerberos"],
+    },
+    {
       href: "/cheatsheets/netexec",
       name: "NetExec",
       description:

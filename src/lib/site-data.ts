@@ -7,7 +7,7 @@ export type ProjectEntry = {
   status: string;
   note: string;
   group?: string;
-  side: "red" | "blue";
+  side: "red" | "blue" | "reverse" | "other";
 };
 
 export type SkillCategory = {
@@ -109,6 +109,17 @@ export const socialLinks = [
 export const projects: ProjectEntry[] = [
   // ── Red Team ──────────────────────────────────────────────────────────────
   {
+    title: "rpcclient-ng",
+    description:
+      "Client MS-RPC offensif pour l'Active Directory (recon + abuse), réécriture Go de rpcclient : SAMR/LSA/srvsvc, sweep et write ops en binaire statique.",
+    tags: ["Active Directory", "Go", "MS-RPC", "Red Team"],
+    href: "https://github.com/0xbbuddha/rpcclient-ng",
+    external: true,
+    status: "AD MS-RPC client",
+    note: "Reprendre rpcclient et le repenser pour l'offensif : fallback automatique, flags décodés et rapport de recon en une commande.",
+    side: "red",
+  },
+  {
     title: "BashHound-CE",
     description:
       "Collecteur Active Directory pour BloodHound Community Edition, écrit entièrement en Bash.",
@@ -131,7 +142,7 @@ export const projects: ProjectEntry[] = [
     side: "red",
   },
   {
-    title: "Ensh",
+    title: "Bashket",
     description:
       "Bibliothèque réseau offensive en Bash pur - sans binaire, sans compilation - ciblant Active Directory et les opérations red team.",
     tags: ["Red Team", "Bash", "Active Directory"],
@@ -177,14 +188,14 @@ export const projects: ProjectEntry[] = [
     side: "red",
   },
   {
-    title: "PantheonLab",
+    title: "Mugen",
     description:
-      "Lab immersif AD + Linux sur le thème de la mythologie grecque, avec déploiement Ansible/Vagrant et documentation.",
-    tags: ["Lab", "Active Directory", "Vagrant", "Ansible"],
-    href: "https://0xbbuddha.github.io/pantheon-lab.github.io/index.html",
+      "Framework C2 de post-exploitation open-source, fork communautaire de Havoc (GPL-3.0) : teamserver Go, agent Demon (Windows) et Tengu (Linux).",
+    tags: ["C2", "Post-Exploitation", "Go", "Red Team"],
+    href: "https://github.com/MugenFramework/Mugen",
     external: true,
-    status: "Training lab",
-    note: "Un terrain de jeu pour documenter des chaînes d'attaque crédibles sans perdre la reproductibilité.",
+    status: "C2 framework",
+    note: "Reprise communautaire de Havoc après son passage en licence commerciale.",
     side: "red",
   },
   {
@@ -199,6 +210,17 @@ export const projects: ProjectEntry[] = [
     side: "red",
   },
   {
+    title: "PantheonLab",
+    description:
+      "Lab immersif AD + Linux sur le thème de la mythologie grecque, avec déploiement Ansible/Vagrant et documentation.",
+    tags: ["Lab", "Active Directory", "Vagrant", "Ansible"],
+    href: "https://0xbbuddha.github.io/pantheon-lab.github.io/index.html",
+    external: true,
+    status: "Training lab",
+    note: "Un terrain de jeu pour documenter des chaînes d'attaque crédibles sans perdre la reproductibilité.",
+    side: "other",
+  },
+  {
     title: "FreeMalwares",
     description:
       "Projet en C dédié à l'étude pédagogique de techniques d'obfuscation et d'évasion en environnement contrôlé.",
@@ -207,7 +229,18 @@ export const projects: ProjectEntry[] = [
     external: true,
     status: "Maldev research",
     note: "Approche strictement éducative pour comprendre les mécanismes, pas pour les industrialiser.",
-    side: "red",
+    side: "other",
+  },
+  {
+    title: "ArchimedeaOS",
+    description:
+      "Distribution Arch Linux orientée Purple Team pour disposer d'un environnement cohérent pendant les exercices red/blue.",
+    tags: ["Purple Team", "Arch Linux", "Distribution"],
+    href: "https://github.com/ArchimedeaOS-Development",
+    external: true,
+    status: "Purple Team OS",
+    note: "Base d'outillage unifiée pour labs et expérimentations offensives.",
+    side: "other",
   },
   // ── Blue Team ─────────────────────────────────────────────────────────────
   {
@@ -232,16 +265,17 @@ export const projects: ProjectEntry[] = [
     note: "Auditer l'infrastructure Wazuh/OpenSearch avec des requêtes Cypher - même workflow que BloodHound AD.",
     side: "blue",
   },
+  // ── Reverse ───────────────────────────────────────────────────────────────
   {
-    title: "ArchimedeaOS",
+    title: "c0ffee-audio",
     description:
-      "Distribution Arch Linux orientée Purple Team pour disposer d'un environnement cohérent pendant les exercices red/blue.",
-    tags: ["Purple Team", "Arch Linux", "Distribution"],
-    href: "https://github.com/ArchimedeaOS-Development",
+      "Reverse-engineering du protocole BLE/GATT des enceintes Bluetooth Marshall pour les piloter sous Linux (ANC, EQ, batterie).",
+    tags: ["Reverse", "BLE", "Bluetooth", "Go"],
+    href: "https://github.com/c0ffee-audio",
     external: true,
-    status: "Purple Team OS",
-    note: "Base d'outillage unifiée pour labs et expérimentations offensives.",
-    side: "blue",
+    status: "Hardware RE",
+    note: "Rendre le matériel audio Marshall contrôlable hors des apps officielles, protocole documenté.",
+    side: "reverse",
   },
 ];
 
@@ -836,6 +870,7 @@ export const navigationGroups: NavigationGroup[] = [
           href: "/my-tools",
           label: "My Tools",
           children: [
+            { href: "/my-tools/rpcclient-ng", label: "rpcclient-ng" },
             { href: "/my-tools/gofenrir", label: "GoFenrir" },
             { href: "/my-tools/bashhound-ce", label: "BashHound-CE" },
           ],

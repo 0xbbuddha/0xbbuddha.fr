@@ -8,6 +8,15 @@ export default function MyToolsPage() {
   const { lang, t } = useLanguage();
   const tools = [
     {
+      href: "/my-tools/rpcclient-ng",
+      name: "rpcclient-ng",
+      description:
+        lang === "fr"
+          ? "Client MS-RPC offensif pour l'Active Directory (recon + abuse), réécriture Go de rpcclient."
+          : "Offensive MS-RPC client for Active Directory (recon + abuse), a Go rewrite of rpcclient.",
+      status: "Stable",
+    },
+    {
       href: "/my-tools/gofenrir",
       name: "GoFenrir",
       description:
