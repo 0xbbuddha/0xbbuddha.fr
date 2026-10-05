@@ -289,7 +289,7 @@ export default function NetexecPage() {
         { cmd: "nxc smb $TARGET -u $USER -p $PASS --groups", why: "Liste les groupes du domaine et leurs membres." },
         { cmd: "nxc smb $TARGET -u $USER -p $PASS --local-groups", why: "Enumere les groupes locaux de la machine cible." },
         { cmd: "nxc smb $TARGET -u $USER -p $PASS --rid-brute", why: "Brute-force des RID pour decouvrir des comptes meme sans acces annuaire." },
-        { cmd: "nxc smb $TARGET -u $USER -p $PASS --sessions", why: "Affiche les sessions SMB actives sur la cible." },
+        { cmd: "nxc smb $TARGET -u $USER -p $PASS --smb-sessions", why: "Affiche les sessions SMB actives sur la cible (le flag --sessions a ete renomme --smb-sessions)." },
         { cmd: "nxc smb $TARGET -u $USER -p $PASS --loggedon-users", why: "Identifie les utilisateurs actuellement connectes sur la machine." },
         { cmd: "nxc smb $TARGET -u $USER -p $PASS --pass-pol", why: "Recupere la politique de mot de passe du domaine (lockout threshold, etc.)." },
         { cmd: "nxc smb $TARGET -u $USER -p $PASS --gen-relay-list relay.txt", why: "Genere une liste d'hotes SMB ne forcant pas la signature (cibles relay)." },
@@ -375,7 +375,7 @@ export default function NetexecPage() {
       commands: [
         { cmd: "nxc ldap $TARGET -u $USER -p $PASS -M adcs", why: "Enumere les Certificate Authority et templates ADCS, signale les mauvaises configs ESC." },
         { cmd: "nxc ldap $TARGET -u $USER -p $PASS -M maq", why: "Verifie le Machine Account Quota (combien de comptes machine on peut creer)." },
-        { cmd: "nxc ldap $TARGET -u $USER -p $PASS --laps", why: "Lit les mots de passe LAPS v1/v2 si les ACL le permettent." },
+        { cmd: "nxc ldap $TARGET -u $USER -p $PASS -M laps", why: "Lit les mots de passe LAPS v1/v2 via le module laps (le flag --laps n'existe plus qu'en SMB). Cibler une machine : -o COMPUTER=WIN-*." },
         { cmd: "nxc ldap $TARGET -u $USER -p $PASS --gmsa", why: "Enumere les Group Managed Service Accounts et leurs attributs." },
         { cmd: "nxc ldap $TARGET -u $USER -p $PASS --gmsa-convert-id", why: "Convertit un ID gMSA en nom lisible." },
         { cmd: "nxc ldap $TARGET -u $USER -p $PASS --gmsa-decrypt-lsa", why: "Dechiffre les secrets gMSA stockes dans LSA si les droits le permettent." },
