@@ -367,6 +367,19 @@ export const articles: ArticleEntry[] = [
 
 export const writeups: WriteupEntry[] = [
   {
+    slug: "layover",
+    title: "Layover",
+    type: "htb",
+    platform: "HackTheBox",
+    difficulty: "Medium",
+    os: "Linux",
+    date: "2026-10-06",
+    excerpt:
+      "Assumed breach RDP sur un jumpbox LXD, jonction d'un WiFi ouvert puis sniffing passif (groupe wireshark) pour capter des creds en clair, RCE authentifiée sur Craft CMS 5.9.8 (GHSA-9c4j-cjw3-r3xx) via le pivot, déchiffrement d'un mot de passe SMTP avec la security key, et enfin LPE CUPS 2.4.16 (CVE-2026-34990) par race condition vers sudoers.",
+    focus: "WiFi pivot / Craft RCE / CUPS LPE",
+    spoiler: true,
+  },
+  {
     slug: "breizh-kybeurre-demi-sel",
     title: "Kybeurre demi-sel",
     type: "ctf",
