@@ -698,6 +698,7 @@ export const navigationGroups: NavigationGroup[] = [
                 { href: "/red-team/ad-exploit/exploitation/credential-attacks", label: "Cred Dump" },
                 { href: "/red-team/ad-exploit/exploitation/kerberos-attacks", label: "Kerberos" },
                 { href: "/red-team/ad-exploit/exploitation/delegation-attacks", label: "Delegation" },
+                { href: "/red-team/ad-exploit/exploitation/dollar-ticket", label: "Dollar Ticket" },
                 { href: "/red-team/ad-exploit/exploitation/domain-privesc", label: "Domain PrivEsc" },
                 { href: "/red-team/ad-exploit/exploitation/bloodyad-attacks", label: "bloodyAD" },
                 {
@@ -1905,7 +1906,20 @@ const staticRailContexts: Record<string, RailContext> = {
     facts: [],
     related: [
       { href: "/red-team/ad-exploit/exploitation/delegation-attacks", label: "Delegation Attacks", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/exploitation/dollar-ticket", label: "Dollar Ticket", meta: "Exploitation" },
       { href: "/red-team/ad-exploit/information-gathering/maq-abuse", label: "MAQ Abuse", meta: "Information Gathering" },
+    ],
+  },
+  "/red-team/ad-exploit/exploitation/dollar-ticket": {
+    eyebrow: "Exploitation",
+    title: "Dollar Ticket",
+    summary: "Confusion de principal Kerberos (AD Linux / Samba) : un compte machine <user>$ est mappé sur l'utilisateur Unix <user> via auth_to_local.",
+    anchors: [],
+    facts: [],
+    related: [
+      { href: "/red-team/ad-exploit/exploitation/maq-abuse", label: "MAQ Abuse", meta: "Exploitation" },
+      { href: "/red-team/ad-exploit/information-gathering/linux-ad", label: "Linux in AD", meta: "Information Gathering" },
+      { href: "/red-team/ad-exploit/exploitation/kerberos-attacks", label: "Kerberos Attacks", meta: "Exploitation" },
     ],
   },
   "/red-team/ad-exploit/exploitation/account-operators": {

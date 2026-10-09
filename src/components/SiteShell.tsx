@@ -195,6 +195,7 @@ function iconForHref(href: string) {
   if (href === "/red-team/ad-exploit/exploitation/laps-abuse") return Unlock;
   if (href === "/red-team/ad-exploit/exploitation/process-injection") return Activity;
   if (href === "/red-team/ad-exploit/exploitation/maq-abuse") return Cpu;
+  if (href === "/red-team/ad-exploit/exploitation/dollar-ticket") return Ticket;
   if (href === "/red-team/ad-exploit/exploitation/account-operators") return Users;
   if (href === "/red-team/ad-exploit/exploitation/print-server-operators") return Printer;
   if (href === "/red-team/ad-exploit/exploitation/ad-recycle-bin") return Trash2;
