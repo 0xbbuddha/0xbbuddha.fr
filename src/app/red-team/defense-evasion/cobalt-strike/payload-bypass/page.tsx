@@ -114,7 +114,7 @@ $ok = $var_wpm.Invoke([IntPtr]::New(-1), $var_buffer, $v_code, $v_code.Count, [I
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">Cobalt Strike</p>
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">Cobalt Strike</p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Payload Bypass</h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
           {lang === "fr"
@@ -125,7 +125,7 @@ $ok = $var_wpm.Invoke([IntPtr]::New(-1), $var_buffer, $v_code, $v_code.Count, [I
 
       {sections.map((section) => (
         <section key={section.id} id={section.id} className="mb-10">
-          <h2 className="mb-4 font-mono text-xs uppercase tracking-widest text-primary">
+          <h2 className="mb-4 font-mono text-xs tracking-wide text-primary">
             {section.title}
           </h2>
           <div className="space-y-4">

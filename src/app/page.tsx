@@ -331,7 +331,7 @@ export default function HomePage() {
           priority
         />
         <div className="min-w-0">
-          <p className="mb-1 text-[10px] font-mono uppercase tracking-widest text-primary">
+          <p className="mb-1 text-[10px] font-mono tracking-wide text-primary">
             {t.home.eyebrow}
           </p>
           <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
@@ -445,7 +445,7 @@ export default function HomePage() {
                       <span className="font-normal text-foreground">{job.role}</span>
                       <span className="font-normal text-muted-foreground/60">{job.period}</span>
                       {job.current && (
-                        <span className="rounded border border-primary/30 bg-primary/5 px-1.5 py-px text-[10px] font-normal uppercase tracking-widest text-primary">
+                        <span className="rounded border border-primary/30 bg-primary/5 px-1.5 py-px text-[10px] font-normal tracking-wide text-primary">
                           {lang === "fr" ? "en cours" : "current"}
                         </span>
                       )}
@@ -501,7 +501,7 @@ export default function HomePage() {
 
               return (
                 <div key={side}>
-                  <p className={`mb-4 text-xs font-semibold uppercase tracking-widest ${sideColor}/60`}>
+                  <p className={`mb-4 text-xs font-semibold tracking-wide ${sideColor}/60`}>
                     # {sideLabel}
                   </p>
                   <div className="space-y-5">

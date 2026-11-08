@@ -221,7 +221,7 @@ export default function BashHoundCEPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">
           My Tools
         </p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
@@ -235,7 +235,7 @@ export default function BashHoundCEPage() {
       </header>
 
       <section id="install" className="mb-6 rounded-sm border border-border p-5">
-        <h2 className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{installation.title}</h2>
+        <h2 className="mb-3 font-mono text-xs tracking-wide text-primary">{installation.title}</h2>
         <div className="space-y-4">
           {installation.commands.map((item) => (
             <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
@@ -244,7 +244,7 @@ export default function BashHoundCEPage() {
       </section>
 
       <section id="syntax" className="mb-6 rounded-sm border border-border p-5">
-        <h2 className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{basics.title}</h2>
+        <h2 className="mb-3 font-mono text-xs tracking-wide text-primary">{basics.title}</h2>
         <div className="space-y-4">
           {basics.commands.map((item) => (
             <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />
@@ -255,7 +255,7 @@ export default function BashHoundCEPage() {
       <section className="space-y-4">
         {sections.map((section) => (
           <article key={section.title} id={section.groupId} className="rounded-sm border border-border p-5">
-            <h2 className="font-mono text-xs uppercase tracking-widest text-primary">{section.title}</h2>
+            <h2 className="font-mono text-xs tracking-wide text-primary">{section.title}</h2>
             <div className="mt-3 space-y-4">
               {section.commands.map((item) => (
                 <CheatsheetCommandCard key={item.cmd} cmd={item.cmd} why={translateWhy(item.why)} lang={lang} />

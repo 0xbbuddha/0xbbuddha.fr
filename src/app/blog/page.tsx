@@ -11,7 +11,7 @@ export default function BlogPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6" id="archive">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">
           {t.blog.eyebrow}
         </p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
@@ -67,7 +67,7 @@ export default function BlogPage() {
       </div>
 
       <section className="mt-10 border-t border-border pt-8" id="topics">
-        <h2 className="mb-3 text-[11px] font-mono uppercase tracking-widest text-muted-foreground/50">
+        <h2 className="mb-3 text-[11px] font-mono tracking-wide text-muted-foreground/50">
           {t.blog.topics}
         </h2>
         <div className="flex flex-wrap gap-2">

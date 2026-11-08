@@ -114,7 +114,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg`;
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">Arch Linux</p>
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">Arch Linux</p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">GRUB Rescue</h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
           {lang === "fr"
@@ -125,7 +125,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg`;
 
       {sections.map((section) => (
         <section key={section.id} id={section.id} className="mb-10">
-          <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">
+          <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">
             {section.title}
           </h2>
           {section.note && (

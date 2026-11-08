@@ -22,7 +22,7 @@ export default function HTBPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">
           {t.writeups.htb.eyebrow}
         </p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
@@ -46,7 +46,7 @@ export default function HTBPage() {
         <div className="space-y-10">
           {byDifficulty.map(({ diff, byOS }) => (
             <section key={diff} id={diff.toLowerCase()}>
-              <h2 className="mb-4 text-[11px] font-mono uppercase tracking-widest text-muted-foreground/60">
+              <h2 className="mb-4 text-[11px] font-mono tracking-wide text-muted-foreground/60">
                 {diff}
               </h2>
               <div className="space-y-6">
@@ -60,7 +60,7 @@ export default function HTBPage() {
                         <Link
                           key={entry.slug}
                           href={`/writeups/${entry.slug}`}
-                          className="group flex items-start gap-4 py-4"
+                          className="group flex items-start gap-4 py-4 transition-opacity active:opacity-60"
                         >
                           <div className="min-w-0 flex-1">
                             <div className="mb-1 flex flex-wrap items-center gap-x-2 text-xs text-muted-foreground">

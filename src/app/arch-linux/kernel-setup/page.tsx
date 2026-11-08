@@ -295,7 +295,7 @@ sudo sbctl sign -s /boot/vmlinuz-linux`;
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">Arch Linux</p>
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">Arch Linux</p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Kernel Setup</h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
           {lang === "fr"
@@ -308,11 +308,11 @@ sudo sbctl sign -s /boot/vmlinuz-linux`;
           <table className="w-full text-xs">
             <thead>
               <tr className="border-b border-border/60 bg-muted/20">
-                <th className="px-3 py-2 text-left font-mono text-[10px] uppercase tracking-widest text-primary">Kernel</th>
-                <th className="px-3 py-2 text-left font-mono text-[10px] uppercase tracking-widest text-primary">
+                <th className="px-3 py-2 text-left font-mono text-[10px] tracking-wide text-primary">Kernel</th>
+                <th className="px-3 py-2 text-left font-mono text-[10px] tracking-wide text-primary">
                   {lang === "fr" ? "Usage" : "Use case"}
                 </th>
-                <th className="px-3 py-2 text-left font-mono text-[10px] uppercase tracking-widest text-primary">Scheduler</th>
+                <th className="px-3 py-2 text-left font-mono text-[10px] tracking-wide text-primary">Scheduler</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border/40">
@@ -345,7 +345,7 @@ sudo sbctl sign -s /boot/vmlinuz-linux`;
       {/* ── Installation & GRUB ── */}
       {installSections.map((section) => (
         <section key={section.id} id={section.id} className="mb-10">
-          <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">
+          <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">
             {section.title}
           </h2>
           {section.note && (
@@ -361,7 +361,7 @@ sudo sbctl sign -s /boot/vmlinuz-linux`;
 
       {/* ── Secure Boot header ── */}
       <div className="mb-8 mt-12 border-t border-border pt-8">
-        <p className="mb-1 text-[11px] font-mono uppercase tracking-widest text-primary">Secure Boot</p>
+        <p className="mb-1 text-[11px] font-mono tracking-wide text-primary">Secure Boot</p>
         <h2 className="text-lg font-semibold tracking-tight text-foreground">sbctl</h2>
         <p className="mt-2 text-xs leading-6 text-muted-foreground">
           {lang === "fr"
@@ -372,11 +372,11 @@ sudo sbctl sign -s /boot/vmlinuz-linux`;
 
       {/* ── Étape 0 : BIOS Setup Mode ── */}
       <section id="sb-bios-setup" className="mb-10">
-        <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">
+        <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">
           {lang === "fr" ? "Étape 0 - BIOS : Setup Mode" : "Step 0 - BIOS: Setup Mode"}
         </h2>
         <div className="mt-4 rounded-sm border border-border/60 p-4">
-          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-primary">
+          <p className="mb-3 font-mono text-[10px] tracking-wide text-primary">
             {lang === "fr" ? "Étape manuelle dans le BIOS/UEFI" : "Manual step in BIOS/UEFI"}
           </p>
           <ol className="space-y-1.5 text-xs text-muted-foreground">
@@ -396,7 +396,7 @@ sudo sbctl sign -s /boot/vmlinuz-linux`;
       {/* ── Étapes Secure Boot ── */}
       {secureSections.map((section) => (
         <section key={section.id} id={section.id} className="mb-10">
-          <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">
+          <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">
             {section.title}
           </h2>
           {section.note && (
@@ -412,11 +412,11 @@ sudo sbctl sign -s /boot/vmlinuz-linux`;
 
       {/* ── Étape finale : BIOS re-enable ── */}
       <section id="sb-bios-enable" className="mb-10">
-        <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">
+        <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">
           {lang === "fr" ? "Étape finale - BIOS : Activer Secure Boot" : "Final step - BIOS: Enable Secure Boot"}
         </h2>
         <div className="mt-4 rounded-sm border border-border/60 p-4">
-          <p className="mb-3 font-mono text-[10px] uppercase tracking-widest text-primary">
+          <p className="mb-3 font-mono text-[10px] tracking-wide text-primary">
             {lang === "fr" ? "Étape manuelle dans le BIOS/UEFI" : "Manual step in BIOS/UEFI"}
           </p>
           <ol className="space-y-1.5 text-xs text-muted-foreground">
@@ -434,14 +434,14 @@ sudo sbctl sign -s /boot/vmlinuz-linux`;
 
       {/* ── Problèmes connus ── */}
       <div className="mb-8 mt-12 border-t border-border pt-8">
-        <p className="mb-1 text-[11px] font-mono uppercase tracking-widest text-primary">
+        <p className="mb-1 text-[11px] font-mono tracking-wide text-primary">
           {lang === "fr" ? "Problèmes connus" : "Known issues"}
         </p>
       </div>
 
       {issueSections.map((section) => (
         <section key={section.id} id={section.id} className="mb-10">
-          <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">
+          <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">
             {section.title}
           </h2>
           {section.note && (
@@ -457,7 +457,7 @@ sudo sbctl sign -s /boot/vmlinuz-linux`;
 
       {/* ── Recovery ── */}
       <section id="recovery" className="mb-10 mt-12 border-t border-border pt-8">
-        <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">Recovery</h2>
+        <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">Recovery</h2>
         <div className="mt-4 rounded-sm border border-border/60 p-4">
           <p className="text-xs text-muted-foreground">
             {lang === "fr"

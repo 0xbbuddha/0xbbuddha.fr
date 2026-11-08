@@ -18,7 +18,7 @@ export default function ProLabPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6" id="prolab">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">
           {t.writeups.prolab.eyebrow}
         </p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
@@ -42,7 +42,7 @@ export default function ProLabPage() {
         <div className="space-y-10">
           {byTier.map(({ tier, writeups: entries }) => (
             <section key={tier}>
-              <h2 className="mb-4 text-[11px] font-mono uppercase tracking-widest text-muted-foreground/60">
+              <h2 className="mb-4 text-[11px] font-mono tracking-wide text-muted-foreground/60">
                 {tier}
               </h2>
               <div className="divide-y divide-border">

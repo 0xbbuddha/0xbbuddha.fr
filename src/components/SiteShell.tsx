@@ -449,7 +449,7 @@ function NavigationContent({
       <nav className="min-h-0 flex-1 space-y-5 overflow-x-hidden overflow-y-auto pb-2">
         {navigationGroups.map((group) => (
           <div key={group.titleKey}>
-            <p className="mb-1 px-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50">
+            <p className="mb-1 px-2 text-[10px] font-mono tracking-wide text-muted-foreground/50">
               {groupTitle(group.titleKey, t)}
             </p>
             <div className="space-y-px">
@@ -490,7 +490,7 @@ function NavigationContent({
         <button
           type="button"
           onClick={() => setLang(lang === "fr" ? "en" : "fr")}
-          className="flex items-center gap-1.5 rounded-sm border border-border px-2 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
+          className="flex items-center gap-1.5 rounded-sm border border-border px-2 py-1 font-mono text-[10px] tracking-wide text-muted-foreground transition-colors hover:border-primary/50 hover:text-primary"
         >
           {t.common.langToggle}
         </button>
@@ -509,7 +509,7 @@ function RightRail({ pathname }: { pathname: string }) {
     <div className="space-y-6 text-sm">
       {rail.anchors.length > 0 && (
         <div>
-          <p className="mb-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50">
+          <p className="mb-2 text-[10px] font-mono tracking-wide text-muted-foreground/50">
             {t.shell.onThisPage}
           </p>
           <div className="space-y-0.5">
@@ -529,7 +529,7 @@ function RightRail({ pathname }: { pathname: string }) {
 
       {rail.related.length > 0 && (
         <div>
-          <p className="mb-2 text-[10px] font-mono uppercase tracking-widest text-muted-foreground/50">
+          <p className="mb-2 text-[10px] font-mono tracking-wide text-muted-foreground/50">
             {t.shell.related}
           </p>
           <div className="space-y-2">
@@ -562,12 +562,12 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <div className="mx-auto flex min-h-screen max-w-[1400px]">
-        <aside className="sticky top-0 hidden h-screen w-72 shrink-0 overflow-hidden border-r border-border px-5 py-6 lg:flex lg:flex-col">
+        <aside className="sticky top-0 hidden h-screen w-72 shrink-0 overflow-hidden border-r border-border/70 bg-background/70 px-5 py-6 backdrop-blur-xl lg:flex lg:flex-col">
           <NavigationContent pathname={pathname} />
         </aside>
 
         <div className="min-w-0 flex-1">
-          <div className="sticky top-0 z-40 flex items-center justify-between border-b border-border bg-background/90 px-4 py-3 backdrop-blur-sm lg:hidden">
+          <div className="sticky top-0 z-40 flex items-center justify-between border-b border-border/70 bg-background/70 px-4 py-3 backdrop-blur-xl lg:hidden">
             <Link href="/" className="flex items-center gap-2.5">
               <Image
                 src="/avatar_rounded.png"
@@ -594,7 +594,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <main key={pathname} className="min-w-0 animate-page-in">{children}</main>
         </div>
 
-        <aside className="sticky top-0 hidden h-screen w-48 shrink-0 border-l border-border px-5 py-8 xl:block">
+        <aside className="sticky top-0 hidden h-screen w-48 shrink-0 border-l border-border/70 bg-background/70 px-5 py-8 backdrop-blur-xl xl:block">
           <RightRail pathname={pathname} />
         </aside>
       </div>

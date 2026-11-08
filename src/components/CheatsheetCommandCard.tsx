@@ -26,14 +26,14 @@ export function CheatsheetCommandCard({
   return (
     <article className="rounded-sm border border-border/60 p-3">
       <div className="mb-2 flex items-center justify-between gap-2">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-primary">
+        <span className="font-mono text-[10px] tracking-wide text-primary">
           {lang === "fr" ? "Copy command" : "Copy command"}
         </span>
         <button
           type="button"
           onClick={doCopy}
           className={cn(
-            "inline-flex items-center gap-1 rounded border border-border px-2 py-1 text-[10px] font-mono uppercase tracking-wider transition-colors",
+            "inline-flex items-center gap-1 rounded border border-border px-2 py-1 text-[10px] font-mono tracking-wide transition-[transform,color,border-color] active:scale-95",
             copied ? "border-primary/60 text-primary" : "text-muted-foreground hover:text-foreground"
           )}
         >

@@ -131,7 +131,7 @@ export default function ArticleAphroditePage() {
 
         {/* Sommaire */}
         <section className="rounded-lg border border-border bg-card p-6">
-          <h2 className="mb-3 font-mono text-sm font-semibold text-primary uppercase tracking-widest">
+          <h2 className="mb-3 font-mono text-sm font-semibold text-primary tracking-wide">
             Sommaire
           </h2>
           <ol className="list-decimal list-inside space-y-1 text-sm text-muted-foreground font-mono">

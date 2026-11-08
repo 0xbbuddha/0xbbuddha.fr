@@ -273,7 +273,7 @@ grep -iE "elanpress|finger|touch|background" /tmp/fprintd.log`;
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">Arch Linux</p>
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">Arch Linux</p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Fingerprint</h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
           {lang === "fr"
@@ -284,7 +284,7 @@ grep -iE "elanpress|finger|touch|background" /tmp/fprintd.log`;
 
       {/* ── Les deux regles de gestuelle ── */}
       <section id="gestures" className="mb-12">
-        <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">
+        <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">
           {lang === "fr" ? "Les deux règles" : "The two rules"}
         </h2>
         <p className="mb-4 font-mono text-[10px] text-muted-foreground/50">
@@ -328,7 +328,7 @@ grep -iE "elanpress|finger|touch|background" /tmp/fprintd.log`;
 
       {sections.map((section) => (
         <section key={section.id} id={section.id} className="mb-10">
-          <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">
+          <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">
             {section.title}
           </h2>
           {section.note && (
@@ -344,7 +344,7 @@ grep -iE "elanpress|finger|touch|background" /tmp/fprintd.log`;
 
       {/* ── Polkit ── */}
       <section id="polkit" className="mb-10 mt-12 border-t border-border pt-8">
-        <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">Polkit</h2>
+        <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">Polkit</h2>
         <div className="mt-4 rounded-sm border border-border/60 p-4">
           <p className="text-xs leading-6 text-muted-foreground">
             {lang === "fr"
@@ -366,7 +366,7 @@ setusername  allow_active = auth_admin_keep  # mot de passe admin`}</code>
 
       {/* ── Maintenance ── */}
       <section id="maintenance" className="mb-10 mt-12 border-t border-border pt-8">
-        <h2 className="mb-1 font-mono text-xs uppercase tracking-widest text-primary">Maintenance</h2>
+        <h2 className="mb-1 font-mono text-xs tracking-wide text-primary">Maintenance</h2>
         <div className="mt-4 rounded-sm border border-border/60 p-4">
           <p className="text-xs leading-6 text-muted-foreground">
             {lang === "fr"

@@ -15,7 +15,7 @@ export default function WinServiceAbusePage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">Privesc Windows</p>
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">Privesc Windows</p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Service Abuse</h1>
       </header>
       <section className="space-y-4">

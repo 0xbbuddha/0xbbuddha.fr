@@ -60,7 +60,7 @@ export function PageHeader({
       )}
 
       {eyebrow && (
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">
           {eyebrow}
         </p>
       )}

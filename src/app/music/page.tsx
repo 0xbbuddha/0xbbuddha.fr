@@ -162,7 +162,7 @@ export default function MusicPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">
           Music
         </p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
@@ -233,7 +233,7 @@ export default function MusicPage() {
 
       {/* Artists */}
       <div className="mt-10">
-        <p className="mb-3 text-[11px] font-mono uppercase tracking-widest text-muted-foreground/50">
+        <p className="mb-3 text-[11px] font-mono tracking-wide text-muted-foreground/50">
           {lang === "fr" ? "Top artistes" : "Top artists"}
         </p>
         <div className="divide-y divide-border">

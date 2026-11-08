@@ -46,7 +46,7 @@ export default function WriteupUnintendedPage() {
               <span className="text-muted-foreground/40">›</span>
               <span className="text-foreground/70">Unintended</span>
             </nav>
-            <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">Writeup ProLab</p>
+            <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">Writeup ProLab</p>
             <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Unintended</h1>
             <p className="mt-3 text-sm leading-7 text-muted-foreground">
               Mini ProLab orienté Active Directory vu depuis un angle Linux. Migration AD bâclée, secrets qui

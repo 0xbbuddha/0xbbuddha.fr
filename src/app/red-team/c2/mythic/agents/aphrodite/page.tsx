@@ -8,7 +8,7 @@ export default function AphroditePage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">Agents</p>
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">Agents</p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">Aphrodite</h1>
         <p className="mt-3 text-sm leading-7 text-muted-foreground">
           {lang === "fr"
@@ -17,7 +17,7 @@ export default function AphroditePage() {
         </p>
       </header>
       <div className="rounded-sm border border-border p-5">
-        <p className="font-mono text-xs uppercase tracking-widest text-primary mb-2">
+        <p className="font-mono text-xs tracking-wide text-primary mb-2">
           {lang === "fr" ? "En cours" : "Work in progress"}
         </p>
         <p className="text-xs leading-6 text-muted-foreground">

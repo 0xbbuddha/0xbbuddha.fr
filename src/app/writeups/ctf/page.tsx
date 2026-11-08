@@ -18,7 +18,7 @@ export default function CTFPage() {
   return (
     <div className="mx-auto max-w-3xl px-6 py-10 lg:px-10">
       <header className="mb-8 border-b border-border pb-6" id="ctf">
-        <p className="mb-2 text-[11px] font-mono uppercase tracking-widest text-primary">
+        <p className="mb-2 text-[11px] font-mono tracking-wide text-primary">
           {t.writeups.ctf.eyebrow}
         </p>
         <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
@@ -42,7 +42,7 @@ export default function CTFPage() {
         <div className="space-y-10">
           {byEvent.map(({ event, writeups: entries }) => (
             <section key={event}>
-              <h2 className="mb-4 text-[11px] font-mono uppercase tracking-widest text-muted-foreground/60">
+              <h2 className="mb-4 text-[11px] font-mono tracking-wide text-muted-foreground/60">
                 {event}
               </h2>
               <div className="divide-y divide-border">
